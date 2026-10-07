@@ -1,0 +1,169 @@
+/* ================================
+   NAVBAR
+================================ */
+
+.navbar {
+  height: 70px;
+
+  background: #1c1c1c;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 25px;
+
+  border-bottom: 1px solid #b99470;
+
+  color: #ffffff;
+
+  font-family: "Montserrat", sans-serif;
+}
+
+/* ================================
+   LEFT SIDE
+================================ */
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.navbar-left h2 {
+  margin: 0;
+
+  font-family: "Cormorant Garamond", serif;
+  font-size: 24px;
+  font-weight: 600;
+
+  color: #ffffff;
+
+  letter-spacing: 0.5px;
+}
+
+.navbar-left span {
+  color: #b99470;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  letter-spacing: 0.3px;
+}
+
+/* ================================
+   RIGHT SIDE
+================================ */
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* ================================
+   ICON BUTTON
+================================ */
+
+.icon-btn {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: transparent;
+
+  border: 1px solid transparent;
+  border-radius: 50%;
+
+  color: #e8e5e1;
+
+  font-size: 18px;
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+
+.icon-btn:hover {
+  color: #b99470;
+
+  background: rgba(185, 148, 112, 0.08);
+
+  border-color: rgba(185, 148, 112, 0.25);
+}
+
+/* ================================
+   PROFILE
+================================ */
+
+.profile {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.profile i {
+  font-size: 25px;
+
+  color: #b99470;
+
+  transition: color 0.3s ease;
+}
+
+.profile:hover i {
+  color: #c19b76;
+}
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 600px) {
+
+  .navbar {
+    height: 65px;
+
+    padding: 0 15px;
+  }
+
+  .navbar-left {
+    gap: 6px;
+  }
+
+  .navbar-left h2 {
+    font-size: 20px;
+  }
+
+  .navbar-left span {
+    display: none;
+  }
+
+  .navbar-right {
+    gap: 10px;
+  }
+
+  .icon-btn {
+    width: 34px;
+    height: 34px;
+
+    font-size: 17px;
+  }
+
+  .profile {
+    gap: 6px;
+    font-size: 13px;
+  }
+
+  .profile i {
+    font-size: 23px;
+  }
+}

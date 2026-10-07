@@ -1,0 +1,900 @@
+/* ============================================
+   WISTERIA IN - GLOBAL CSS
+   Brown / Gold / White / Dark Charcoal Theme
+============================================ */
+
+
+/* ============================================
+   GOOGLE FONTS
+============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
+
+
+/* ============================================
+   RESET
+============================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+
+  font-family: var(--w-font-body);
+
+  background: var(--w-background);
+  color: var(--w-text);
+
+  line-height: 1.5;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* ============================================
+   ROOT
+============================================ */
+
+#root {
+  min-height: 100vh;
+  width: 100%;
+}
+
+
+/* ============================================
+   HEADINGS
+============================================ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+
+  font-family: var(--w-font-heading);
+
+  color: var(--w-dark);
+
+  font-weight: 600;
+
+  line-height: 1.2;
+}
+
+
+h1 {
+  font-size: 36px;
+}
+
+
+h2 {
+  font-size: 30px;
+}
+
+
+h3 {
+  font-size: 25px;
+}
+
+
+h4 {
+  font-size: 21px;
+}
+
+
+h5 {
+  font-size: 18px;
+}
+
+
+h6 {
+  font-size: 16px;
+}
+
+
+/* ============================================
+   PARAGRAPHS
+============================================ */
+
+p {
+  margin: 0;
+
+  color: var(--w-muted);
+
+  line-height: 1.6;
+}
+
+
+/* ============================================
+   LINKS
+============================================ */
+
+a {
+  color: var(--w-gold-dark);
+
+  text-decoration: none;
+
+  transition: var(--w-transition);
+}
+
+
+a:hover {
+  color: var(--w-gold);
+}
+
+
+/* ============================================
+   IMAGES
+============================================ */
+
+img {
+  max-width: 100%;
+  height: auto;
+
+  display: block;
+}
+
+
+/* ============================================
+   BUTTON RESET
+============================================ */
+
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+
+button {
+  cursor: pointer;
+
+  border: none;
+
+  outline: none;
+
+  font-family: var(--w-font-body);
+}
+
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--w-gold);
+  outline-offset: 2px;
+}
+
+
+/* ============================================
+   GLOBAL BUTTON
+============================================ */
+
+.btn {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  min-height: 42px;
+
+  padding: 10px 20px;
+
+  border-radius: var(--w-radius-sm);
+
+  background: var(--w-gold) !important;
+
+  color: var(--w-white) !important;
+
+  border: 1px solid var(--w-gold) !important;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  text-align: center;
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition: var(--w-transition);
+
+  opacity: 1 !important;
+}
+
+
+.btn:hover {
+  background: var(--w-gold-dark) !important;
+
+  color: var(--w-white) !important;
+
+  border-color: var(--w-gold-dark) !important;
+
+  transform: translateY(-1px);
+}
+
+
+/* ============================================
+   PRIMARY BUTTON
+============================================ */
+
+.btn-primary,
+.primary-btn,
+.save-btn,
+.add-btn,
+.submit-btn,
+.login-btn,
+.login-button {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  min-height: 44px;
+
+  padding: 11px 20px;
+
+  background: var(--w-gold) !important;
+
+  color: var(--w-white) !important;
+
+  border: 1px solid var(--w-gold) !important;
+
+  border-radius: var(--w-radius-sm);
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  opacity: 1 !important;
+
+  visibility: visible !important;
+
+  transition: var(--w-transition);
+}
+
+
+.btn-primary:hover,
+.primary-btn:hover,
+.save-btn:hover,
+.add-btn:hover,
+.submit-btn:hover,
+.login-btn:hover,
+.login-button:hover {
+  background: var(--w-gold-dark) !important;
+
+  color: var(--w-white) !important;
+
+  border-color: var(--w-gold-dark) !important;
+
+  transform: translateY(-1px);
+}
+
+
+/* ============================================
+   SECONDARY BUTTON
+============================================ */
+
+.btn-secondary,
+.secondary-btn,
+.dark-btn {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  min-height: 42px;
+
+  padding: 10px 18px;
+
+  background: var(--w-dark) !important;
+
+  color: var(--w-white) !important;
+
+  border: 1px solid var(--w-dark) !important;
+
+  border-radius: var(--w-radius-sm);
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  opacity: 1 !important;
+
+  visibility: visible !important;
+
+  transition: var(--w-transition);
+}
+
+
+.btn-secondary:hover,
+.secondary-btn:hover,
+.dark-btn:hover {
+  background: var(--w-dark-soft) !important;
+
+  color: var(--w-white) !important;
+
+  border-color: var(--w-dark-soft) !important;
+}
+
+
+/* ============================================
+   OUTLINE BUTTON
+============================================ */
+
+.btn-outline,
+.outline-btn,
+.btn-outline-primary {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  min-height: 42px;
+
+  padding: 10px 18px;
+
+  background: var(--w-white) !important;
+
+  color: var(--w-gold-dark) !important;
+
+  border: 1px solid var(--w-gold) !important;
+
+  border-radius: var(--w-radius-sm);
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  opacity: 1 !important;
+
+  visibility: visible !important;
+
+  transition: var(--w-transition);
+}
+
+
+.btn-outline:hover,
+.outline-btn:hover,
+.btn-outline-primary:hover {
+  background: var(--w-gold) !important;
+
+  color: var(--w-white) !important;
+
+  border-color: var(--w-gold) !important;
+}
+
+
+/* ============================================
+   DANGER BUTTON
+============================================ */
+
+.btn-danger,
+.delete-btn,
+.delete-user-btn {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  min-height: 40px;
+
+  padding: 9px 16px;
+
+  background: var(--w-danger) !important;
+
+  color: var(--w-white) !important;
+
+  border: 1px solid var(--w-danger) !important;
+
+  border-radius: var(--w-radius-sm);
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  opacity: 1 !important;
+
+  visibility: visible !important;
+
+  transition: var(--w-transition);
+}
+
+
+.btn-danger:hover,
+.delete-btn:hover,
+.delete-user-btn:hover {
+  background: #963d3d !important;
+
+  color: var(--w-white) !important;
+
+  border-color: #963d3d !important;
+}
+
+
+/* ============================================
+   CANCEL BUTTON
+============================================ */
+
+.cancel-btn,
+.cancel-user-btn {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  min-height: 40px;
+
+  padding: 9px 16px;
+
+  background: var(--w-white) !important;
+
+  color: var(--w-muted) !important;
+
+  border: 1px solid var(--w-border) !important;
+
+  border-radius: var(--w-radius-sm);
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  opacity: 1 !important;
+
+  visibility: visible !important;
+
+  transition: var(--w-transition);
+}
+
+
+.cancel-btn:hover,
+.cancel-user-btn:hover {
+  background: var(--w-background) !important;
+
+  color: var(--w-dark) !important;
+
+  border-color: var(--w-gold) !important;
+}
+
+
+/* ============================================
+   BUTTON ICONS
+============================================ */
+
+button i,
+.btn i {
+  color: inherit;
+
+  font-size: 14px;
+
+  transition: var(--w-transition);
+}
+
+
+button:hover i,
+.btn:hover i {
+  color: inherit;
+}
+
+
+/* ============================================
+   DISABLED BUTTON
+============================================ */
+
+button:disabled,
+.btn:disabled {
+  background: #d8d4cf !important;
+
+  color: #8f8a84 !important;
+
+  border-color: #d8d4cf !important;
+
+  cursor: not-allowed;
+
+  opacity: 0.65 !important;
+
+  transform: none !important;
+}
+
+
+/* ============================================
+   INPUTS
+============================================ */
+
+input,
+textarea,
+select {
+  width: 100%;
+
+  padding: 11px 13px;
+
+  background: var(--w-white);
+
+  color: var(--w-text);
+
+  border: 1px solid var(--w-border);
+
+  border-radius: var(--w-radius-sm);
+
+  outline: none;
+
+  font-size: 13px;
+
+  transition: var(--w-transition);
+}
+
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--w-muted-light);
+}
+
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--w-gold);
+
+  box-shadow: 0 0 0 3px rgba(185, 148, 112, 0.10);
+}
+
+
+/* ============================================
+   SELECT
+============================================ */
+
+select {
+  cursor: pointer;
+
+  appearance: auto;
+}
+
+
+/* ============================================
+   TABLE
+============================================ */
+
+table {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  background: var(--w-white);
+}
+
+
+th {
+  padding: 13px 15px;
+
+  background: var(--w-background);
+
+  color: var(--w-dark);
+
+  border-bottom: 1px solid var(--w-border);
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  text-align: left;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.5px;
+}
+
+
+td {
+  padding: 13px 15px;
+
+  color: var(--w-text-light);
+
+  border-bottom: 1px solid var(--w-border-light);
+
+  font-size: 13px;
+}
+
+
+tr:hover td {
+  background: var(--w-card-hover);
+}
+
+
+/* ============================================
+   CARD
+============================================ */
+
+.card {
+  background: var(--w-card);
+
+  border: 1px solid var(--w-border);
+
+  border-radius: var(--w-radius-lg);
+
+  box-shadow: var(--w-shadow);
+
+  transition: var(--w-transition);
+}
+
+
+.card:hover {
+  box-shadow: var(--w-shadow-hover);
+}
+
+
+/* ============================================
+   BADGES
+============================================ */
+
+.badge {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 5px 10px;
+
+  border-radius: 20px;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  line-height: 1;
+}
+
+
+/* Success */
+
+.badge-success,
+.status-success {
+  background: var(--w-success-bg);
+
+  color: var(--w-success);
+}
+
+
+/* Warning */
+
+.badge-warning,
+.status-warning {
+  background: var(--w-warning-bg);
+
+  color: var(--w-warning);
+}
+
+
+/* Danger */
+
+.badge-danger,
+.status-danger {
+  background: var(--w-danger-bg);
+
+  color: var(--w-danger);
+}
+
+
+/* Info */
+
+.badge-info,
+.status-info {
+  background: var(--w-info-bg);
+
+  color: var(--w-info);
+}
+
+
+/* ============================================
+   SCROLLBAR
+============================================ */
+
+::-webkit-scrollbar {
+  width: 7px;
+
+  height: 7px;
+}
+
+
+::-webkit-scrollbar-track {
+  background: var(--w-background);
+}
+
+
+::-webkit-scrollbar-thumb {
+  background: var(--w-gold);
+
+  border-radius: 10px;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--w-gold-dark);
+}
+
+
+/* ============================================
+   SELECTION
+============================================ */
+
+::selection {
+  background: var(--w-gold);
+
+  color: var(--w-white);
+}
+
+
+/* ============================================
+   UTILITY CLASSES
+============================================ */
+
+.text-gold {
+  color: var(--w-gold-dark) !important;
+}
+
+
+.text-dark {
+  color: var(--w-dark) !important;
+}
+
+
+.text-muted {
+  color: var(--w-muted) !important;
+}
+
+
+.text-white {
+  color: var(--w-white) !important;
+}
+
+
+.bg-gold {
+  background: var(--w-gold) !important;
+}
+
+
+.bg-dark {
+  background: var(--w-dark) !important;
+}
+
+
+.bg-white {
+  background: var(--w-white) !important;
+}
+
+
+/* ============================================
+   HIDDEN / VISIBLE
+============================================ */
+
+.hidden {
+  display: none !important;
+}
+
+
+.visible {
+  display: block !important;
+}
+
+
+/* ============================================
+   CONTAINER
+============================================ */
+
+.container-fluid {
+  width: 100%;
+
+  padding-right: 20px;
+  padding-left: 20px;
+
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+/* ============================================
+   MOBILE
+============================================ */
+
+@media (max-width: 768px) {
+
+  h1 {
+    font-size: 30px;
+  }
+
+  h2 {
+    font-size: 26px;
+  }
+
+  h3 {
+    font-size: 22px;
+  }
+
+  .btn,
+  .btn-primary,
+  .primary-btn,
+  .save-btn,
+  .add-btn,
+  .submit-btn,
+  .login-btn,
+  .login-button {
+    min-height: 42px;
+
+    padding: 10px 16px;
+
+    font-size: 12px;
+  }
+
+  .container-fluid {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+}
+
+
+/* ============================================
+   SMALL MOBILE
+============================================ */
+
+@media (max-width: 480px) {
+
+  h1 {
+    font-size: 26px;
+  }
+
+  h2 {
+    font-size: 23px;
+  }
+
+  h3 {
+    font-size: 20px;
+  }
+
+  .btn,
+  .btn-primary,
+  .primary-btn,
+  .save-btn,
+  .add-btn,
+  .submit-btn,
+  .login-btn,
+  .login-button {
+    width: 100%;
+  }
+}

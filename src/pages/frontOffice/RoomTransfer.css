@@ -1,0 +1,290 @@
+/* =========================================================
+   WISTERIA IN - ROOM TRANSFER
+========================================================= */
+
+.room-transfer-page {
+  width: 100%;
+  box-sizing: border-box;
+  padding-bottom: 40px;
+  color: #321c3d;
+}
+
+/* HEADER */
+
+.room-transfer-header {
+  margin-bottom: 24px;
+}
+
+.room-transfer-header h1 {
+  margin: 0 0 6px;
+  color: #321c3d;
+  font-size: 27px;
+  font-weight: 700;
+}
+
+.room-transfer-header p {
+  margin: 0;
+  color: #817383;
+  font-size: 13px;
+}
+
+/* MAIN GRID */
+
+.room-transfer-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.75fr);
+  gap: 22px;
+}
+
+/* CARD */
+
+.room-transfer-card {
+  background: #ffffff;
+  border: 1px solid #e6ddd3;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(50, 28, 61, 0.06);
+  overflow: hidden;
+}
+
+.room-transfer-card-header {
+  padding: 20px 22px;
+  border-bottom: 1px solid #eee7df;
+}
+
+.room-transfer-card-header h2 {
+  margin: 0;
+  color: #321c3d;
+  font-size: 18px;
+}
+
+.room-transfer-card-header p {
+  margin: 5px 0 0;
+  color: #918492;
+  font-size: 11px;
+}
+
+/* FORM */
+
+.room-transfer-form {
+  padding: 22px;
+}
+
+.room-transfer-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 19px;
+}
+
+.room-transfer-form-group label {
+  color: #4c3a52;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.room-transfer-form-group select,
+.room-transfer-form-group input,
+.room-transfer-form-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ddd3ca;
+  border-radius: 9px;
+  background: #fffdfa;
+  color: #321c3d;
+  font-family: inherit;
+  font-size: 13px;
+  outline: none;
+}
+
+.room-transfer-form-group select,
+.room-transfer-form-group input {
+  height: 44px;
+  padding: 0 13px;
+}
+
+.room-transfer-form-group textarea {
+  min-height: 95px;
+  padding: 12px;
+  resize: vertical;
+}
+
+.room-transfer-form-group select:focus,
+.room-transfer-form-group input:focus,
+.room-transfer-form-group textarea:focus {
+  border-color: #9a78a7;
+  box-shadow: 0 0 0 3px rgba(112, 69, 131, 0.09);
+}
+
+/* ROOM DISPLAY */
+
+.transfer-room-display {
+  display: grid;
+  grid-template-columns: 1fr 40px 1fr;
+  align-items: center;
+  gap: 12px;
+  margin: 22px 0;
+}
+
+.transfer-room-box {
+  min-height: 95px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 15px;
+  border: 1px solid #e5ddd5;
+  border-radius: 11px;
+  background: #faf8f5;
+  text-align: center;
+}
+
+.transfer-room-box small {
+  color: #918492;
+  font-size: 10px;
+}
+
+.transfer-room-box strong {
+  color: #321c3d;
+  font-size: 20px;
+}
+
+.transfer-room-box.current {
+  background: #f8f1e3;
+  border-color: #ead9b5;
+}
+
+.transfer-room-box.current strong {
+  color: #936b1c;
+}
+
+.transfer-room-box.new {
+  background: #f4eef6;
+  border-color: #dac9df;
+}
+
+.transfer-room-box.new strong {
+  color: #704583;
+}
+
+.transfer-arrow {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #f0e8f3;
+  color: #704583;
+  font-size: 17px;
+}
+
+/* BUTTON */
+
+.transfer-submit-btn {
+  width: 100%;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 0;
+  border-radius: 9px;
+  background: #704583;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.transfer-submit-btn:hover {
+  background: #5f3970;
+}
+
+/* HISTORY */
+
+.transfer-history {
+  padding: 5px 20px 20px;
+}
+
+.transfer-history-item {
+  padding: 15px 0;
+  border-bottom: 1px solid #f0ebe5;
+}
+
+.transfer-history-item:last-child {
+  border-bottom: 0;
+}
+
+.transfer-history-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.transfer-history-top strong {
+  color: #321c3d;
+  font-size: 12px;
+}
+
+.transfer-history-date {
+  color: #988b9a;
+  font-size: 10px;
+}
+
+.transfer-history-room {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 7px;
+  color: #66596a;
+  font-size: 11px;
+}
+
+.transfer-history-room span {
+  padding: 4px 7px;
+  border-radius: 5px;
+  background: #f7f2e8;
+  color: #805f22;
+  font-weight: 700;
+}
+
+.transfer-history-room i {
+  color: #a293a6;
+}
+
+/* EMPTY */
+
+.transfer-empty {
+  padding: 45px 20px;
+  text-align: center;
+  color: #958897;
+}
+
+.transfer-empty i {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 35px;
+  color: #c0b3c3;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+  .room-transfer-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 550px) {
+  .transfer-room-display {
+    grid-template-columns: 1fr;
+  }
+
+  .transfer-arrow {
+    margin: 0 auto;
+    transform: rotate(90deg);
+  }
+}

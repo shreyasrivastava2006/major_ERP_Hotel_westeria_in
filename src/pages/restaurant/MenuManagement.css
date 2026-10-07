@@ -1,0 +1,1000 @@
+/* =========================================================
+   WISTERIA IN
+   RESTAURANT - MENU MANAGEMENT
+   Luxury Ivory + Muted Plum + Antique Gold
+========================================================= */
+
+.menu-management-page {
+  width: 100%;
+  min-height: 100%;
+  padding-bottom: 45px;
+  box-sizing: border-box;
+  color: #321c3d;
+}
+
+/* =========================================================
+   HOTEL BAR
+========================================================= */
+
+.mm-hotel-bar {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+  padding: 15px 18px;
+  background: #fffdf9;
+  border: 1px solid #e6ddd3;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(50, 28, 61, 0.05);
+}
+
+.mm-hotel-icon {
+  width: 43px;
+  height: 43px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #f0e8f3;
+  color: #704583;
+  font-size: 18px;
+}
+
+.mm-hotel-bar span {
+  display: block;
+  margin-bottom: 3px;
+  color: #918391;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.mm-hotel-bar strong {
+  display: block;
+  color: #321c3d;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   STATISTICS
+========================================================= */
+
+.mm-stats {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.mm-stat-card {
+  min-width: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid #e6ddd3;
+  border-radius: 16px;
+  box-shadow: 0 7px 22px rgba(50, 28, 61, 0.06);
+}
+
+.mm-stat-icon {
+  width: 47px;
+  height: 47px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 13px;
+  background: #f0e8f3;
+  color: #704583;
+  font-size: 20px;
+}
+
+.mm-stat-icon.available {
+  background: #edf7ef;
+  color: #3d7c4a;
+}
+
+.mm-stat-icon.unavailable {
+  background: #fff0ef;
+  color: #a74a45;
+}
+
+.mm-stat-icon.veg {
+  background: #fbf4e5;
+  color: #a67b25;
+}
+
+.mm-stat-card span {
+  display: block;
+  margin-bottom: 5px;
+  color: #8b7c8f;
+  font-size: 12px;
+}
+
+.mm-stat-card strong {
+  display: block;
+  color: #321c3d;
+  font-size: 23px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   TOP HEADER
+========================================================= */
+
+.mm-top-bar {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.mm-top-bar h2 {
+  margin: 0 0 5px;
+  color: #321c3d;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.mm-top-bar p {
+  margin: 0;
+  color: #8b7c8f;
+  font-size: 13px;
+}
+
+.mm-add-btn {
+  min-height: 43px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 10px;
+  background: #704583;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 5px 14px rgba(112, 69, 131, 0.18);
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.mm-add-btn:hover {
+  background: #5d376e;
+  transform: translateY(-1px);
+  box-shadow: 0 7px 17px rgba(112, 69, 131, 0.24);
+}
+
+.mm-add-btn:active {
+  transform: translateY(0);
+}
+
+/* =========================================================
+   ADD / EDIT FORM
+========================================================= */
+
+.mm-form-card {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 24px;
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid #e6ddd3;
+  border-radius: 17px;
+  box-shadow: 0 8px 24px rgba(50, 28, 61, 0.07);
+}
+
+.mm-form-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 23px;
+  padding-bottom: 17px;
+  border-bottom: 1px solid #eee7df;
+}
+
+.mm-form-header h3 {
+  margin: 0 0 5px;
+  color: #321c3d;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.mm-form-header p {
+  margin: 0;
+  color: #8b7c8f;
+  font-size: 12px;
+}
+
+.mm-close-btn {
+  width: 35px;
+  height: 35px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e0d7cf;
+  border-radius: 9px;
+  background: #fffdfb;
+  color: #6f6273;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.mm-close-btn:hover {
+  background: #f5edf7;
+  border-color: #d9c8df;
+  color: #704583;
+}
+
+.mm-form-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.mm-form-group {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.mm-form-group.mm-full {
+  grid-column: 1 / -1;
+}
+
+.mm-form-group label {
+  color: #4a394f;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.mm-form-group label span {
+  margin-left: 3px;
+  color: #a24b45;
+}
+
+.mm-form-group input,
+.mm-form-group select,
+.mm-form-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ddd3ca;
+  border-radius: 10px;
+  outline: none;
+  background: #fffdfb;
+  color: #321c3d;
+  font-family: inherit;
+  font-size: 13px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.mm-form-group input,
+.mm-form-group select {
+  height: 43px;
+  padding: 0 13px;
+}
+
+.mm-form-group textarea {
+  min-height: 90px;
+  padding: 12px 13px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.mm-form-group input::placeholder,
+.mm-form-group textarea::placeholder {
+  color: #aaa0aa;
+}
+
+.mm-form-group input:focus,
+.mm-form-group select:focus,
+.mm-form-group textarea:focus {
+  border-color: #b99a66;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(201, 162, 74, 0.1);
+}
+
+/* =========================================================
+   PRICE INPUT
+========================================================= */
+
+.mm-price-input {
+  position: relative;
+  width: 100%;
+}
+
+.mm-price-input > span {
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  z-index: 1;
+  transform: translateY(-50%);
+  color: #704583;
+  font-size: 13px;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+.mm-price-input input {
+  padding-left: 30px !important;
+}
+
+/* =========================================================
+   AVAILABILITY CHECKBOX
+========================================================= */
+
+.mm-availability-toggle {
+  grid-column: 1 / -1;
+  padding-top: 3px;
+}
+
+.mm-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #5c4d61;
+  font-size: 13px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.mm-checkbox input {
+  display: none;
+}
+
+.mm-checkmark {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #d5c9bd;
+  border-radius: 6px;
+  background: #ffffff;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.mm-checkbox input:checked + .mm-checkmark {
+  border-color: #704583;
+  background: #704583;
+}
+
+.mm-checkbox input:checked + .mm-checkmark::after {
+  content: "✓";
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   FORM ACTIONS
+========================================================= */
+
+.mm-form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 23px;
+  padding-top: 19px;
+  border-top: 1px solid #eee7df;
+}
+
+.mm-cancel-btn,
+.mm-save-btn {
+  min-height: 42px;
+  padding: 0 18px;
+  border-radius: 9px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.mm-cancel-btn {
+  border: 1px solid #ddd3ca;
+  background: #ffffff;
+  color: #6e6172;
+}
+
+.mm-cancel-btn:hover {
+  border-color: #cfc2b8;
+  background: #faf7f3;
+}
+
+.mm-save-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  background: #704583;
+  color: #ffffff;
+}
+
+.mm-save-btn:hover {
+  background: #5d376e;
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   SEARCH + FILTER
+========================================================= */
+
+.mm-filter-card {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 22px;
+  padding: 15px;
+  background: #ffffff;
+  border: 1px solid #e6ddd3;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(50, 28, 61, 0.05);
+}
+
+.mm-search {
+  position: relative;
+  width: 320px;
+  max-width: 100%;
+  flex-shrink: 0;
+}
+
+.mm-search i {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9a8c9d;
+  pointer-events: none;
+}
+
+.mm-search input {
+  width: 100%;
+  height: 42px;
+  box-sizing: border-box;
+  padding: 0 13px 0 39px;
+  border: 1px solid #ddd3ca;
+  border-radius: 9px;
+  outline: none;
+  background: #fffdfb;
+  color: #321c3d;
+  font-family: inherit;
+  font-size: 13px;
+}
+
+.mm-search input::placeholder {
+  color: #aaa0aa;
+}
+
+.mm-search input:focus {
+  border-color: #b99a66;
+  box-shadow: 0 0 0 3px rgba(201, 162, 74, 0.08);
+}
+
+.mm-filter-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+.mm-filter-buttons button {
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid #e0d7cf;
+  border-radius: 8px;
+  background: #fffdfb;
+  color: #6f6273;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.mm-filter-buttons button:hover {
+  border-color: #d5c5dc;
+  background: #f7f1f8;
+  color: #704583;
+}
+
+.mm-filter-buttons button.active {
+  border-color: #d9c7df;
+  background: #f0e8f3;
+  color: #704583;
+}
+
+/* =========================================================
+   TABLE CARD
+========================================================= */
+
+.mm-table-card {
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #e6ddd3;
+  border-radius: 17px;
+  box-shadow: 0 8px 24px rgba(50, 28, 61, 0.06);
+}
+
+.mm-table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px;
+  border-bottom: 1px solid #eee7df;
+}
+
+.mm-table-header h3 {
+  margin: 0 0 4px;
+  color: #321c3d;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.mm-table-header p {
+  margin: 0;
+  color: #8b7c8f;
+  font-size: 12px;
+}
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.mm-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.mm-table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+}
+
+.mm-table th {
+  padding: 14px 17px;
+  border-bottom: 1px solid #e9e0d8;
+  background: #faf7f3;
+  color: #806f84;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.mm-table td {
+  padding: 15px 17px;
+  border-bottom: 1px solid #f0e9e2;
+  color: #4b3c50;
+  font-size: 13px;
+  vertical-align: middle;
+}
+
+.mm-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.mm-table tbody tr:hover {
+  background: #fffdfa;
+}
+
+.mm-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* =========================================================
+   ITEM CELL
+========================================================= */
+
+.mm-item-cell {
+  min-width: 230px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.mm-item-cell > div:last-child {
+  min-width: 0;
+}
+
+.mm-item-cell strong {
+  display: block;
+  margin-bottom: 4px;
+  overflow: hidden;
+  color: #321c3d;
+  font-size: 13px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mm-item-cell small {
+  display: block;
+  max-width: 270px;
+  overflow: hidden;
+  color: #918391;
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mm-food-dot {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+}
+
+.mm-food-dot span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.mm-food-dot.veg {
+  color: #38804b;
+}
+
+.mm-food-dot.nonveg {
+  color: #a74742;
+}
+
+/* =========================================================
+   CATEGORY
+========================================================= */
+
+.mm-category-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 25px;
+  padding: 0 9px;
+  border-radius: 20px;
+  background: #f0e8f3;
+  color: #704583;
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   TYPE
+========================================================= */
+
+.mm-type {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.mm-type.veg {
+  color: #38804b;
+}
+
+.mm-type.nonveg {
+  color: #a74742;
+}
+
+/* =========================================================
+   PRICE
+========================================================= */
+
+.mm-price {
+  color: #704583;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.mm-status-btn {
+  min-height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 0 10px;
+  border: none;
+  border-radius: 20px;
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.mm-status-btn:hover {
+  transform: translateY(-1px);
+}
+
+.mm-status-btn.available {
+  background: #edf7ef;
+  color: #3d7549;
+}
+
+.mm-status-btn.available:hover {
+  background: #e1f1e4;
+}
+
+.mm-status-btn.unavailable {
+  background: #fff0ef;
+  color: #9c4641;
+}
+
+.mm-status-btn.unavailable:hover {
+  background: #ffe4e2;
+}
+
+/* =========================================================
+   ACTION BUTTONS
+========================================================= */
+
+.mm-actions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.mm-edit-btn,
+.mm-delete-btn {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.mm-edit-btn {
+  border: 1px solid #ded2e3;
+  background: #f6f0f7;
+  color: #704583;
+}
+
+.mm-edit-btn:hover {
+  border-color: #ccb8d4;
+  background: #ede3f0;
+  transform: translateY(-1px);
+}
+
+.mm-delete-btn {
+  border: 1px solid #ecd4d2;
+  background: #fff4f3;
+  color: #a74a45;
+}
+
+.mm-delete-btn:hover {
+  border-color: #dfbebb;
+  background: #ffe9e7;
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.mm-empty {
+  padding: 70px 25px;
+  text-align: center;
+}
+
+.mm-empty > i {
+  display: block;
+  margin-bottom: 15px;
+  color: #b29eaa;
+  font-size: 40px;
+}
+
+.mm-empty h3 {
+  margin: 0 0 7px;
+  color: #321c3d;
+  font-size: 17px;
+}
+
+.mm-empty p {
+  margin: 0 0 20px;
+  color: #8b7c8f;
+  font-size: 13px;
+}
+
+.mm-empty button {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 16px;
+  border: none;
+  border-radius: 9px;
+  background: #704583;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.mm-empty button:hover {
+  background: #5d376e;
+}
+
+/* =========================================================
+   RESPONSIVE - 1100
+========================================================= */
+
+@media (max-width: 1100px) {
+  .mm-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .mm-filter-card {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .mm-search {
+    width: 100%;
+  }
+
+  .mm-filter-buttons {
+    justify-content: flex-start;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE - 800
+========================================================= */
+
+@media (max-width: 800px) {
+  .mm-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mm-form-group.mm-full,
+  .mm-availability-toggle {
+    grid-column: auto;
+  }
+
+  .mm-top-bar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .mm-add-btn {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE - 600
+========================================================= */
+
+@media (max-width: 600px) {
+  .mm-stats {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .mm-stat-card {
+    padding: 17px;
+  }
+
+  .mm-form-card {
+    padding: 18px;
+  }
+
+  .mm-form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .mm-cancel-btn,
+  .mm-save-btn {
+    width: 100%;
+  }
+
+  .mm-filter-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .mm-filter-buttons button {
+    width: 100%;
+  }
+
+  .mm-table-header {
+    padding: 17px;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE - 450
+========================================================= */
+
+@media (max-width: 450px) {
+  .mm-hotel-bar {
+    padding: 12px;
+  }
+
+  .mm-hotel-icon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .mm-top-bar h2 {
+    font-size: 19px;
+  }
+
+  .mm-form-header h3 {
+    font-size: 16px;
+  }
+
+  .mm-filter-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .mm-empty {
+    padding: 55px 18px;
+  }
+}

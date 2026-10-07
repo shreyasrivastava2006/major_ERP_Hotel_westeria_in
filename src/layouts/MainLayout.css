@@ -1,0 +1,155 @@
+/* =========================================
+   WISTERIA IN - MAIN LAYOUT
+========================================= */
+
+.main-layout {
+  min-height: 100vh;
+  min-height: 100dvh;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #f9f9f7;
+  color: #1c1c1c;
+
+  font-family: "Montserrat", sans-serif;
+}
+
+
+/* =========================================
+   LAYOUT BODY
+========================================= */
+
+.layout-body {
+  flex: 1;
+
+  display: flex;
+
+  min-height: 0;
+
+  background: #f9f9f7;
+
+  position: relative;
+}
+
+
+/* =========================================
+   MAIN CONTENT
+========================================= */
+
+.main-content {
+  flex: 1;
+
+  min-width: 0;
+
+  /*
+    Sidebar open = 250px
+    Sidebar collapsed = 76px
+  */
+  margin-left: 250px;
+
+  padding: 25px;
+
+  box-sizing: border-box;
+
+  overflow-x: auto;
+  overflow-y: auto;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(185, 148, 112, 0.08),
+      transparent 35%
+    ),
+    #f9f9f7;
+
+  transition:
+    margin-left 0.25s ease,
+    padding 0.25s ease;
+}
+
+
+/* =========================================
+   COLLAPSED SIDEBAR
+========================================= */
+
+/*
+  Sidebar.jsx is inside .layout-body.
+  When it gets the "sidebar-collapsed" class,
+  main content automatically moves left.
+*/
+
+.layout-body:has(.sidebar-collapsed) .main-content {
+  margin-left: 76px;
+}
+
+
+/* =========================================
+   SCROLLBAR
+========================================= */
+
+.main-content::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+.main-content::-webkit-scrollbar-track {
+  background: #f9f9f7;
+}
+
+.main-content::-webkit-scrollbar-thumb {
+  background: #c19b76;
+  border-radius: 10px;
+}
+
+.main-content::-webkit-scrollbar-thumb:hover {
+  background: #b99470;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+  .main-content {
+    margin-left: 220px;
+
+    padding: 20px 15px;
+  }
+
+  .layout-body:has(.sidebar-collapsed) .main-content {
+    margin-left: 70px;
+  }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+  .main-content {
+    margin-left: 210px;
+
+    padding: 15px 12px;
+  }
+
+  .layout-body:has(.sidebar-collapsed) .main-content {
+    margin-left: 65px;
+  }
+}
+
+
+/* =========================================
+   VERY SMALL SCREEN
+========================================= */
+
+@media (max-width: 480px) {
+
+  .main-content {
+    padding: 15px 10px;
+  }
+}

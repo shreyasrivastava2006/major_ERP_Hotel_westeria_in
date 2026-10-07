@@ -1,0 +1,530 @@
+/* ========================================
+   BILLING PAGE
+======================================== */
+
+.billing-page {
+  width: 100%;
+  box-sizing: border-box;
+  color: #3b2b22;
+}
+
+/* ========================================
+   HEADER
+======================================== */
+
+.billing-header {
+  margin-bottom: 25px;
+}
+
+/* ========================================
+   SELECTED PROPERTY
+======================================== */
+
+.billing-hotel-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+  padding: 15px 18px;
+  background: #ffffff;
+  border: 1px solid #e6ddd3;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(61, 38, 70, 0.05);
+}
+
+.billing-hotel-icon {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: #f0e8f3;
+  color: #704583;
+  font-size: 19px;
+}
+
+.billing-hotel-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.billing-hotel-info span {
+  color: #a67c32;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.billing-hotel-info strong {
+  color: #321c3d;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.billing-hotel-info small {
+  color: #958796;
+  font-size: 11px;
+}
+
+/* ========================================
+   STATS
+======================================== */
+
+.billing-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 25px;
+}
+
+.billing-stat-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid #e8ddd4;
+  border-radius: 14px;
+  box-shadow: 0 5px 20px rgba(59, 43, 34, 0.06);
+  transition: 0.25s ease;
+}
+
+.billing-stat-card:hover {
+  transform: translateY(-3px);
+  border-color: #c9a46c;
+  box-shadow: 0 10px 25px rgba(59, 43, 34, 0.1);
+}
+
+.billing-stat-icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #f5eadf;
+  color: #a87835;
+  font-size: 20px;
+}
+
+.billing-stat-icon.success {
+  background: #e8f5ed;
+  color: #39845a;
+}
+
+.billing-stat-icon.warning {
+  background: #fff3df;
+  color: #b77a1d;
+}
+
+.billing-stat-icon.info {
+  background: #eaf2f8;
+  color: #557d9d;
+}
+
+.billing-stat-card span {
+  display: block;
+  color: #8a7b71;
+  font-size: 11px;
+  margin-bottom: 5px;
+}
+
+.billing-stat-card h2 {
+  margin: 0;
+  color: #33251f;
+  font-size: 21px;
+}
+
+.billing-stat-card small {
+  color: #aaa099;
+  font-size: 10px;
+}
+
+/* ========================================
+   QUICK ACTIONS
+======================================== */
+
+.billing-actions-card {
+  background: #ffffff;
+  border: 1px solid #e8ddd4;
+  border-radius: 14px;
+  padding: 22px;
+  margin-bottom: 25px;
+  box-shadow: 0 5px 20px rgba(59, 43, 34, 0.05);
+}
+
+.billing-section-title {
+  margin-bottom: 18px;
+}
+
+.billing-section-title h2 {
+  margin: 0;
+  font-size: 19px;
+  color: #33251f;
+}
+
+.billing-section-title p {
+  margin: 5px 0 0;
+  color: #8a7b71;
+  font-size: 12px;
+}
+
+.billing-action-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.billing-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #e8ddd4;
+  border-radius: 11px;
+  background: #fffdfb;
+  color: #3b2b22;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.billing-action-btn > i:first-child {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  background: #f5eadf;
+  color: #a87835;
+  font-size: 17px;
+}
+
+.billing-action-btn span {
+  flex: 1;
+}
+
+.billing-action-btn strong {
+  display: block;
+  font-size: 12px;
+}
+
+.billing-action-btn small {
+  display: block;
+  margin-top: 3px;
+  color: #9b8e86;
+  font-size: 10px;
+}
+
+.billing-action-btn > i:last-child {
+  color: #a87835;
+  font-size: 12px;
+}
+
+.billing-action-btn:hover {
+  background: #fdf8f3;
+  border-color: #c9a46c;
+  transform: translateY(-2px);
+}
+
+/* ========================================
+   TABLE
+======================================== */
+
+.billing-table-card {
+  background: #ffffff;
+  border: 1px solid #e8ddd4;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(59, 43, 34, 0.05);
+}
+
+.billing-table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 22px;
+  border-bottom: 1px solid #eee4dc;
+}
+
+.billing-table-header h2 {
+  margin: 0;
+  font-size: 19px;
+  color: #33251f;
+}
+
+.billing-table-header p {
+  margin: 5px 0 0;
+  color: #8a7b71;
+  font-size: 12px;
+}
+
+/* ========================================
+   SEARCH
+======================================== */
+
+.billing-search {
+  position: relative;
+  width: 320px;
+}
+
+.billing-search > i {
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #b08042;
+}
+
+.billing-search input {
+  width: 100%;
+  height: 40px;
+  box-sizing: border-box;
+  padding: 0 38px 0 35px;
+  border: 1px solid #dfd3ca;
+  border-radius: 9px;
+  outline: none;
+  color: #3b2b22;
+  background: #fffdfb;
+}
+
+.billing-search input:focus {
+  border-color: #c9a46c;
+  box-shadow: 0 0 0 3px rgba(201, 164, 108, 0.12);
+}
+
+.billing-search button {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 27px;
+  height: 27px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #8a7b71;
+  cursor: pointer;
+}
+
+.billing-search button:hover {
+  background: #f5eadf;
+  color: #a87835;
+}
+
+/* ========================================
+   RESULT
+======================================== */
+
+.billing-result {
+  padding: 10px 22px;
+  color: #91847b;
+  font-size: 11px;
+  border-bottom: 1px solid #eee4dc;
+}
+
+/* ========================================
+   TABLE WRAPPER
+======================================== */
+
+.billing-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.billing-table {
+  width: 100%;
+  min-width: 850px;
+  border-collapse: collapse;
+}
+
+.billing-table th {
+  padding: 13px 17px;
+  background: #fbf7f3;
+  color: #9a7040;
+  font-size: 10px;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #e8ddd4;
+}
+
+.billing-table td {
+  padding: 14px 17px;
+  color: #75685f;
+  font-size: 12px;
+  border-bottom: 1px solid #eee7e1;
+}
+
+.billing-table tbody tr {
+  transition: 0.2s ease;
+}
+
+.billing-table tbody tr:hover {
+  background: #fffaf6;
+}
+
+.billing-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.billing-invoice {
+  color: #a87835;
+}
+
+.billing-guest {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.billing-guest span {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #f5eadf;
+  color: #a87835;
+  font-weight: 700;
+  font-size: 11px;
+}
+
+.billing-amount {
+  color: #3b2b22;
+}
+
+/* ========================================
+   STATUS
+======================================== */
+
+.billing-status {
+  padding: 6px 10px;
+  border-radius: 20px;
+  border: 1px solid transparent;
+  font-size: 10px;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+}
+
+.billing-status.paid {
+  background: #e8f5ed;
+  color: #39845a;
+}
+
+.billing-status.pending {
+  background: #fff3df;
+  color: #b77a1d;
+}
+
+.billing-status:focus {
+  border-color: #c9a46c;
+}
+
+/* ========================================
+   VIEW
+======================================== */
+
+.billing-view-btn {
+  width: 33px;
+  height: 33px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #dfd3ca;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #a87835;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.billing-view-btn:hover {
+  background: #a87835;
+  border-color: #a87835;
+  color: #ffffff;
+}
+
+/* ========================================
+   EMPTY
+======================================== */
+
+.billing-empty {
+  height: 170px;
+  text-align: center !important;
+}
+
+.billing-empty i,
+.billing-empty strong,
+.billing-empty span {
+  display: block;
+}
+
+.billing-empty i {
+  color: #c9a46c;
+  font-size: 25px;
+  margin-bottom: 8px;
+}
+
+.billing-empty strong {
+  color: #3b2b22;
+  margin-bottom: 5px;
+}
+
+.billing-empty span {
+  color: #9b8e86;
+  font-size: 11px;
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 1100px) {
+  .billing-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .billing-action-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .billing-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .billing-table-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .billing-search {
+    width: 100%;
+  }
+}
+
+@media (max-width: 450px) {
+  .billing-stat-card {
+    padding: 16px;
+  }
+
+  .billing-actions-card,
+  .billing-table-header {
+    padding: 16px;
+  }
+
+  .billing-hotel-bar {
+    padding: 13px;
+  }
+}

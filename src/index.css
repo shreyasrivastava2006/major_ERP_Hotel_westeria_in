@@ -1,0 +1,367 @@
+/* ========================================
+   WISTERIA IN - HOTEL MANAGEMENT ERP
+   Global Application Styles
+   Luxury Brown • Gold • White Theme
+======================================== */
+
+/* ========================================
+   ROOT
+======================================== */
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* ========================================
+   RESET
+======================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ========================================
+   HTML
+======================================== */
+
+html {
+  width: 100%;
+  min-height: 100%;
+
+  scroll-behavior: smooth;
+}
+
+/* ========================================
+   BODY
+======================================== */
+
+body {
+  width: 100%;
+  min-width: 320px;
+  min-height: 100vh;
+
+  font-family:
+    "Montserrat",
+    "Segoe UI",
+    Tahoma,
+    Geneva,
+    Verdana,
+    sans-serif;
+
+  background: var(--w-background);
+
+  color: var(--w-text);
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========================================
+   APP CONTAINER
+======================================== */
+
+.app-container {
+  width: 100%;
+  min-height: 100vh;
+
+  background: var(--w-background);
+}
+
+/* ========================================
+   HEADINGS
+======================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+
+  color: var(--w-text);
+
+  font-family: var(--w-font-heading);
+
+  font-weight: 600;
+
+  line-height: 1.2;
+}
+
+/* ========================================
+   PARAGRAPHS
+======================================== */
+
+p {
+  margin: 0;
+
+  color: var(--w-muted);
+
+  line-height: 1.6;
+}
+
+/* ========================================
+   LINKS
+======================================== */
+
+a {
+  color: inherit;
+
+  text-decoration: none;
+}
+
+/* ========================================
+   BUTTONS
+======================================== */
+
+button {
+  font-family: var(--w-font-body);
+
+  cursor: pointer;
+}
+
+/* ========================================
+   INPUTS
+======================================== */
+
+input,
+textarea,
+select {
+  font-family: var(--w-font-body);
+}
+
+/* ========================================
+   IMAGES
+======================================== */
+
+img {
+  max-width: 100%;
+
+  display: block;
+}
+
+/* ========================================
+   LISTS
+======================================== */
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+/* ========================================
+   SELECTION
+======================================== */
+
+::selection {
+  background: var(--w-gold);
+
+  color: var(--w-white);
+}
+
+/* ========================================
+   FOCUS
+======================================== */
+
+:focus-visible {
+  outline: 2px solid var(--w-gold);
+
+  outline-offset: 3px;
+}
+
+/* ========================================
+   LUXURY CARD
+======================================== */
+
+.luxury-card {
+  background: var(--w-card);
+
+  border: 1px solid var(--w-border);
+
+  border-radius: var(--w-radius-lg);
+
+  box-shadow: var(--w-shadow);
+
+  transition: var(--w-transition);
+}
+
+.luxury-card:hover {
+  border-color: var(--w-gold-light);
+
+  box-shadow: var(--w-shadow-hover);
+
+  transform: translateY(-2px);
+}
+
+/* ========================================
+   COMMON LUXURY BUTTON
+======================================== */
+
+.luxury-btn {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  padding: 10px 20px;
+
+  border: 1px solid var(--w-gold);
+
+  border-radius: var(--w-radius-sm);
+
+  background: linear-gradient(
+    135deg,
+    var(--w-gold),
+    var(--w-gold-dark)
+  );
+
+  color: var(--w-white);
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: var(--w-transition);
+}
+
+.luxury-btn:hover {
+  background: linear-gradient(
+    135deg,
+    var(--w-gold-light),
+    var(--w-gold)
+  );
+
+  transform: translateY(-2px);
+
+  box-shadow: var(--w-shadow-gold);
+}
+
+.luxury-btn:active {
+  transform: translateY(0);
+}
+
+/* ========================================
+   COMMON SEARCH
+======================================== */
+
+.search-input {
+  width: 100%;
+
+  padding: 10px 14px;
+
+  background: var(--w-white);
+
+  border: 1px solid var(--w-border);
+
+  border-radius: var(--w-radius-sm);
+
+  color: var(--w-text);
+
+  outline: none;
+
+  transition: var(--w-transition);
+}
+
+.search-input::placeholder {
+  color: var(--w-muted-light);
+}
+
+.search-input:focus {
+  border-color: var(--w-gold);
+
+  box-shadow:
+    0 0 0 3px rgba(185, 148, 112, 0.12);
+}
+
+/* ========================================
+   STATUS COLORS
+======================================== */
+
+.status-success {
+  color: var(--w-success);
+}
+
+.status-warning {
+  color: var(--w-warning);
+}
+
+.status-danger {
+  color: var(--w-danger);
+}
+
+.status-info {
+  color: var(--w-info);
+}
+
+/* ========================================
+   STATUS BACKGROUNDS
+======================================== */
+
+.status-success-bg {
+  background: var(--w-success-bg);
+}
+
+.status-warning-bg {
+  background: var(--w-warning-bg);
+}
+
+.status-danger-bg {
+  background: var(--w-danger-bg);
+}
+
+.status-info-bg {
+  background: var(--w-info-bg);
+}
+
+/* ========================================
+   SCROLLBAR
+======================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--w-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--w-gold);
+
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--w-gold-dark);
+}
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    min-width: 320px;
+  }
+
+  .luxury-btn {
+    padding: 9px 16px;
+
+    font-size: 13px;
+  }
+}

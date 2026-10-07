@@ -1,0 +1,55 @@
+/* SELECTED HOTEL */
+
+.reports-hotel-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--w-white);
+  border: 1px solid var(--w-border);
+  border-left: 4px solid var(--w-gold);
+  border-radius: var(--w-radius-lg);
+  padding: 14px 18px;
+  margin-bottom: 28px;
+  box-shadow: var(--w-shadow);
+}
+
+.reports-hotel-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--w-radius-md);
+  background: rgba(112, 69, 131, 0.10);
+  color: var(--w-purple);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+}
+
+.reports-hotel-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.reports-hotel-info span {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--w-gold-dark);
+  letter-spacing: 0.8px;
+}
+
+.reports-hotel-info strong {
+  font-size: 15px;
+  color: var(--w-text);
+}
+
+.reports-hotel-info small {
+  color: var(--w-muted);
+  font-size: 12px;
+}
+
+@media (max-width: 600px) {
+  .reports-hotel-bar {
+    align-items: flex-start;
+  }
+}

@@ -1,0 +1,830 @@
+/* =========================================================
+   WISTERIA IN - SUPER ADMIN
+   ADD / EDIT HOTEL
+   Luxury Ivory + Muted Plum + Antique Gold
+========================================================= */
+
+.super-add-hotel-page {
+  width: 100%;
+  box-sizing: border-box;
+  color: #321c3d;
+  padding-bottom: 35px;
+
+  background:
+    radial-gradient(
+      circle at 92% 0%,
+      rgba(201, 162, 74, 0.08),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 0% 45%,
+      rgba(116, 72, 106, 0.045),
+      transparent 30%
+    );
+}
+
+
+/* =========================================================
+   BREADCRUMB
+========================================================= */
+
+.super-add-hotel-breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+
+  margin-bottom: 22px;
+
+  color: #9a8b91;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.super-add-hotel-breadcrumb > i {
+  color: #c9a24a;
+  font-size: 10px;
+}
+
+.super-add-hotel-breadcrumb-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  color: #806d78;
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.super-add-hotel-breadcrumb-link:hover {
+  color: #744c6c;
+  transform: translateY(-1px);
+}
+
+.super-add-hotel-breadcrumb-link i {
+  color: #b38b3e;
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.super-add-hotel-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 25px;
+  margin-bottom: 28px;
+}
+
+.super-add-hotel-eyebrow {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #b38b3e;
+
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+}
+
+.super-add-hotel-header h1 {
+  margin: 0 0 7px;
+
+  color: #321c3d;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 31px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.super-add-hotel-header p {
+  margin: 0;
+
+  max-width: 680px;
+
+  color: #8b7b83;
+
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.super-add-hotel-back-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  min-height: 43px;
+  padding: 0 17px;
+
+  border: 1px solid #ded1c3;
+  border-radius: 10px;
+
+  background: rgba(255, 252, 247, 0.9);
+
+  color: #684b63;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  box-shadow: 0 5px 16px rgba(77, 53, 64, 0.05);
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.super-add-hotel-back-btn:hover {
+  background: #fffaf3;
+  border-color: #c9a24a;
+  color: #321c3d;
+  transform: translateY(-1px);
+}
+
+.super-add-hotel-back-btn i {
+  color: #b38b3e;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.super-add-hotel-form {
+  width: 100%;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.super-add-hotel-card {
+  margin-bottom: 22px;
+  padding: 25px 26px 27px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 253, 249, 0.98),
+      rgba(250, 246, 239, 0.98)
+    );
+
+  border: 1px solid #e5d9ca;
+  border-radius: 16px;
+
+  box-shadow:
+    0 9px 28px rgba(76, 56, 61, 0.055),
+    0 2px 6px rgba(76, 56, 61, 0.025);
+}
+
+
+/* =========================================================
+   CARD HEADER
+========================================================= */
+
+.super-add-hotel-card-header {
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+
+  padding-bottom: 20px;
+  margin-bottom: 22px;
+
+  border-bottom: 1px solid #eadfd3;
+}
+
+.super-add-hotel-card-icon {
+  flex: 0 0 44px;
+
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #e4cf9e;
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fbf1d8,
+      #f4e4bc
+    );
+
+  color: #9c762e;
+
+  font-size: 18px;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.super-add-hotel-card-icon.plum {
+  border-color: #dcc6d4;
+
+  background:
+    linear-gradient(
+      145deg,
+      #f3e8ef,
+      #eadce7
+    );
+
+  color: #76516d;
+}
+
+.super-add-hotel-card-icon.gold {
+  border-color: #e1cb97;
+
+  background:
+    linear-gradient(
+      145deg,
+      #f8edcf,
+      #f0dfb5
+    );
+
+  color: #a17b32;
+}
+
+.super-add-hotel-card-header h2 {
+  margin: 0 0 4px;
+
+  color: #3a2442;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.super-add-hotel-card-header p {
+  margin: 0;
+
+  color: #95858d;
+
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   FORM GRID
+========================================================= */
+
+.super-add-hotel-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 20px 22px;
+}
+
+
+/* =========================================================
+   FORM FIELD
+========================================================= */
+
+.super-add-hotel-field {
+  min-width: 0;
+}
+
+.super-add-hotel-field.full {
+  grid-column: 1 / -1;
+}
+
+.super-add-hotel-field label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #5e4957;
+
+  font-size: 12.5px;
+  font-weight: 650;
+}
+
+.super-add-hotel-field label span {
+  margin-left: 3px;
+
+  color: #b87968;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+.super-add-hotel-input {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  min-height: 47px;
+
+  border: 1px solid #ded2c7;
+  border-radius: 10px;
+
+  background: #fffdf9;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.super-add-hotel-input:hover {
+  border-color: #cdbcae;
+}
+
+.super-add-hotel-input:focus-within {
+  border-color: #c9a24a;
+
+  background: #fffefa;
+
+  box-shadow:
+    0 0 0 3px rgba(201, 162, 74, 0.10);
+}
+
+.super-add-hotel-input > i {
+  flex: 0 0 45px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #b18a46;
+
+  font-size: 15px;
+}
+
+.super-add-hotel-input input {
+  width: 100%;
+  min-width: 0;
+  height: 45px;
+
+  padding: 0 13px 0 0;
+
+  border: 0;
+  outline: none;
+
+  background: transparent;
+
+  color: #3c2941;
+
+  font-family: inherit;
+  font-size: 13px;
+}
+
+.super-add-hotel-input input::placeholder {
+  color: #b3a6a6;
+}
+
+.super-add-hotel-input input:-webkit-autofill {
+  -webkit-text-fill-color: #3c2941;
+  box-shadow: 0 0 0 1000px #fffdf9 inset;
+}
+
+
+/* =========================================================
+   TEXTAREA
+========================================================= */
+
+.super-add-hotel-input.textarea {
+  align-items: flex-start;
+
+  min-height: 112px;
+}
+
+.super-add-hotel-input.textarea > i {
+  padding-top: 15px;
+}
+
+.super-add-hotel-input textarea {
+  width: 100%;
+  min-width: 0;
+
+  padding: 13px 13px 13px 0;
+
+  border: 0;
+  outline: none;
+
+  resize: vertical;
+
+  background: transparent;
+
+  color: #3c2941;
+
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.super-add-hotel-input textarea::placeholder {
+  color: #b3a6a6;
+}
+
+
+/* =========================================================
+   SELECT
+========================================================= */
+
+.super-add-hotel-select {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  min-height: 47px;
+
+  border: 1px solid #ded2c7;
+  border-radius: 10px;
+
+  background: #fffdf9;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.super-add-hotel-select:hover {
+  border-color: #cdbcae;
+}
+
+.super-add-hotel-select:focus-within {
+  border-color: #c9a24a;
+
+  box-shadow:
+    0 0 0 3px rgba(201, 162, 74, 0.10);
+}
+
+.super-add-hotel-select > i {
+  flex: 0 0 45px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #b18a46;
+
+  font-size: 15px;
+}
+
+.super-add-hotel-select select {
+  width: 100%;
+  height: 45px;
+
+  padding: 0 35px 0 0;
+
+  border: 0;
+  outline: none;
+
+  appearance: none;
+
+  background:
+    linear-gradient(
+      45deg,
+      transparent 50%,
+      #9e8b82 50%
+    )
+    calc(100% - 18px) 20px / 5px 5px no-repeat,
+    linear-gradient(
+      135deg,
+      #9e8b82 50%,
+      transparent 50%
+    )
+    calc(100% - 14px) 20px / 5px 5px no-repeat,
+    transparent;
+
+  color: #3c2941;
+
+  font-family: inherit;
+  font-size: 13px;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   ERROR STATES
+========================================================= */
+
+.super-add-hotel-input.has-error,
+.super-add-hotel-select.has-error {
+  border-color: #c47b70;
+  box-shadow:
+    0 0 0 3px rgba(196, 123, 112, 0.08);
+}
+
+.super-add-hotel-field > small {
+  display: block;
+
+  margin-top: 6px;
+
+  color: #b45f55;
+
+  font-size: 11.5px;
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   FORM ACTIONS
+========================================================= */
+
+.super-add-hotel-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 12px;
+
+  padding: 20px 0 5px;
+}
+
+
+/* =========================================================
+   CANCEL BUTTON
+========================================================= */
+
+.super-add-hotel-cancel-btn {
+  min-width: 105px;
+  min-height: 45px;
+
+  padding: 0 20px;
+
+  border: 1px solid #d8ccc0;
+  border-radius: 10px;
+
+  background: #fffdf9;
+
+  color: #705d68;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.super-add-hotel-cancel-btn:hover {
+  border-color: #c3b1a5;
+
+  background: #f8f2eb;
+
+  color: #4c3548;
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   SUBMIT BUTTON
+========================================================= */
+
+.super-add-hotel-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  min-width: 155px;
+  min-height: 45px;
+
+  padding: 0 21px;
+
+  border: 1px solid #b18b3e;
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #b99548,
+      #9e7833
+    );
+
+  color: #fffdf7;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 7px 18px rgba(147, 108, 43, 0.18);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.super-add-hotel-submit-btn:hover {
+  background:
+    linear-gradient(
+      135deg,
+      #c3a15a,
+      #a58139
+    );
+
+  box-shadow:
+    0 10px 22px rgba(147, 108, 43, 0.24);
+
+  transform: translateY(-1px);
+}
+
+.super-add-hotel-submit-btn:active {
+  transform: translateY(0);
+}
+
+.super-add-hotel-submit-btn i {
+  font-size: 15px;
+}
+
+
+/* =========================================================
+   FOCUS / ACCESSIBILITY
+========================================================= */
+
+.super-add-hotel-back-btn:focus-visible,
+.super-add-hotel-cancel-btn:focus-visible,
+.super-add-hotel-submit-btn:focus-visible {
+  outline: 3px solid rgba(201, 162, 74, 0.22);
+  outline-offset: 2px;
+}
+
+.super-add-hotel-input input:focus-visible,
+.super-add-hotel-input textarea:focus-visible,
+.super-add-hotel-select select:focus-visible {
+  outline: none;
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .super-add-hotel-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .super-add-hotel-back-btn {
+    align-self: flex-start;
+  }
+
+  .super-add-hotel-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .super-add-hotel-field.full {
+    grid-column: auto;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .super-add-hotel-page {
+    padding-bottom: 25px;
+  }
+
+  .super-add-hotel-breadcrumb {
+    margin-bottom: 17px;
+    font-size: 12px;
+  }
+
+  .super-add-hotel-header {
+    margin-bottom: 21px;
+    gap: 16px;
+  }
+
+  .super-add-hotel-header h1 {
+    font-size: 25px;
+  }
+
+  .super-add-hotel-header p {
+    font-size: 13px;
+  }
+
+  .super-add-hotel-back-btn {
+    width: 100%;
+  }
+
+  .super-add-hotel-card {
+    padding: 19px 16px 21px;
+
+    border-radius: 13px;
+  }
+
+  .super-add-hotel-card-header {
+    align-items: flex-start;
+
+    gap: 11px;
+
+    padding-bottom: 17px;
+    margin-bottom: 18px;
+  }
+
+  .super-add-hotel-card-icon {
+    flex-basis: 39px;
+
+    width: 39px;
+    height: 39px;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+  }
+
+  .super-add-hotel-card-header h2 {
+    font-size: 18px;
+  }
+
+  .super-add-hotel-card-header p {
+    font-size: 11.5px;
+  }
+
+  .super-add-hotel-grid {
+    gap: 17px;
+  }
+
+  .super-add-hotel-actions {
+    flex-direction: column-reverse;
+
+    width: 100%;
+  }
+
+  .super-add-hotel-cancel-btn,
+  .super-add-hotel-submit-btn {
+    width: 100%;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+  .super-add-hotel-header h1 {
+    font-size: 23px;
+  }
+
+  .super-add-hotel-card {
+    padding: 17px 13px 19px;
+  }
+
+  .super-add-hotel-input > i,
+  .super-add-hotel-select > i {
+    flex-basis: 39px;
+  }
+
+  .super-add-hotel-input input,
+  .super-add-hotel-input textarea,
+  .super-add-hotel-select select {
+    font-size: 12.5px;
+  }
+
+}

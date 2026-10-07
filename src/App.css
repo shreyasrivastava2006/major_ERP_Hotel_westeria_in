@@ -1,0 +1,248 @@
+/* ========================================
+   WISTERIA IN - APP STYLES
+   Luxury Hotel Management ERP
+   ======================================== */
+
+.app {
+  width: 100%;
+  min-height: 100vh;
+
+  background: var(--w-background);
+  color: var(--w-text);
+}
+
+/* ========================================
+   MAIN APPLICATION WRAPPER
+   ======================================== */
+
+.app-container {
+  width: 100%;
+  min-height: 100vh;
+
+  background: var(--w-background);
+}
+
+/* ========================================
+   COMMON SECTION
+   ======================================== */
+
+.app-section {
+  width: 100%;
+  padding: 25px;
+}
+
+/* ========================================
+   LUXURY CARD
+   ======================================== */
+
+.app-card {
+  background: var(--w-card);
+
+  border: 1px solid var(--w-border);
+
+  border-radius: var(--w-radius-lg);
+
+  padding: 20px;
+
+  color: var(--w-text);
+
+  box-shadow: var(--w-shadow);
+
+  transition: var(--w-transition);
+}
+
+.app-card:hover {
+  border-color: var(--w-gold-light);
+
+  box-shadow: var(--w-shadow-hover);
+
+  transform: translateY(-2px);
+}
+
+/* ========================================
+   LUXURY TITLE
+   ======================================== */
+
+.app-title {
+  margin: 0;
+
+  color: var(--w-text);
+
+  font-family: var(--w-font-heading);
+
+  font-size: 28px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.3px;
+}
+
+.app-title::after {
+  content: "";
+
+  display: block;
+
+  width: 42px;
+  height: 2px;
+
+  margin-top: 8px;
+
+  background: var(--w-gold);
+
+  border-radius: 10px;
+}
+
+/* ========================================
+   GOLD ACCENT TEXT
+   ======================================== */
+
+.app-accent {
+  color: var(--w-gold);
+
+  font-weight: 600;
+}
+
+/* ========================================
+   GOLD LUXURY BUTTON
+   ======================================== */
+
+.app-button {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  padding: 10px 20px;
+
+  border: 1px solid var(--w-gold);
+
+  border-radius: var(--w-radius-sm);
+
+  background: linear-gradient(
+    135deg,
+    var(--w-gold),
+    var(--w-gold-dark)
+  );
+
+  color: var(--w-white);
+
+  font-family: var(--w-font-body);
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: var(--w-transition);
+}
+
+.app-button:hover {
+  background: linear-gradient(
+    135deg,
+    var(--w-gold-light),
+    var(--w-gold)
+  );
+
+  transform: translateY(-2px);
+
+  box-shadow: var(--w-shadow-gold);
+}
+
+.app-button:active {
+  transform: translateY(0);
+}
+
+/* ========================================
+   DARK LUXURY SECTION
+   ======================================== */
+
+.app-dark-section {
+  width: 100%;
+
+  padding: 25px;
+
+  background: var(--w-dark);
+
+  color: var(--w-white);
+}
+
+/* ========================================
+   GOLD DIVIDER
+   ======================================== */
+
+.app-divider {
+  width: 100%;
+
+  height: 1px;
+
+  margin: 20px 0;
+
+  background: var(--w-border);
+}
+
+.app-divider-gold {
+  width: 50px;
+
+  height: 2px;
+
+  margin: 10px 0;
+
+  background: var(--w-gold);
+
+  border-radius: 10px;
+}
+
+/* ========================================
+   MOBILE
+   ======================================== */
+
+@media (max-width: 768px) {
+
+  .app-section {
+    padding: 20px 15px;
+  }
+
+  .app-card {
+    padding: 16px;
+  }
+
+  .app-title {
+    font-size: 25px;
+  }
+
+  .app-dark-section {
+    padding: 20px 15px;
+  }
+}
+
+/* ========================================
+   SMALL MOBILE
+   ======================================== */
+
+@media (max-width: 480px) {
+
+  .app-section {
+    padding: 15px 12px;
+  }
+
+  .app-card {
+    padding: 14px;
+  }
+
+  .app-title {
+    font-size: 23px;
+  }
+
+  .app-button {
+    width: 100%;
+
+    padding: 10px 16px;
+  }
+
+  .app-dark-section {
+    padding: 15px 12px;
+  }
+}

@@ -1,0 +1,41 @@
+/* ================================
+   AUTH LAYOUT
+================================ */
+
+.auth-layout {
+  min-height: 100vh;
+  min-height: 100dvh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(185, 148, 112, 0.16),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at bottom left,
+      rgba(193, 155, 118, 0.08),
+      transparent 30%
+    ),
+    #1c1c1c;
+
+  color: #ffffff;
+
+  font-family: "Montserrat", sans-serif;
+}
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 600px) {
+  .auth-layout {
+    padding: 15px;
+  }
+}

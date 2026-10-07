@@ -1,0 +1,263 @@
+/* =========================================
+   OCCUPANCY REPORT
+   WISTERIA IN - STANDARD LUXURY THEME
+========================================= */
+
+.occupancy-report-page {
+  width: 100%;
+  box-sizing: border-box;
+  color: var(--w-text);
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.occupancy-report-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.occupancy-report-header .page-header {
+  margin-bottom: 0;
+}
+
+/* =========================================
+   BACK BUTTON
+========================================= */
+
+.occupancy-back-btn {
+  border: 1px solid var(--w-border);
+  background: var(--w-white);
+  color: var(--w-gold-dark);
+  padding: 11px 17px;
+  border-radius: var(--w-radius-md);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--w-transition);
+  white-space: nowrap;
+}
+
+.occupancy-back-btn:hover {
+  background: var(--w-cream);
+  border-color: var(--w-gold);
+  transform: translateY(-1px);
+  box-shadow: var(--w-shadow-gold);
+}
+
+/* =========================================
+   SUMMARY
+========================================= */
+
+.occupancy-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.occupancy-summary-card {
+  background: var(--w-white);
+  border: 1px solid var(--w-border);
+  padding: 20px;
+  border-radius: var(--w-radius-lg);
+  box-shadow: var(--w-shadow);
+  transition: var(--w-transition);
+}
+
+.occupancy-summary-card:hover {
+  border-color: var(--w-gold-light);
+  transform: translateY(-2px);
+  box-shadow: var(--w-shadow-medium);
+}
+
+.occupancy-summary-card span {
+  display: block;
+  color: var(--w-muted);
+  font-size: 13px;
+}
+
+.occupancy-summary-card strong {
+  display: block;
+  color: var(--w-gold-dark);
+  font-size: 27px;
+  margin-top: 5px;
+}
+
+/* =========================================
+   TABLE CARD
+========================================= */
+
+.occupancy-table-card {
+  background: var(--w-white);
+  border: 1px solid var(--w-border);
+  border-radius: var(--w-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--w-shadow);
+}
+
+.occupancy-table-header {
+  padding: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--w-border);
+}
+
+.occupancy-table-header h2 {
+  margin: 0;
+  color: var(--w-text);
+  font-family: var(--w-font-heading);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.occupancy-table-header p {
+  margin: 5px 0 0;
+  color: var(--w-muted);
+  font-size: 13px;
+}
+
+.occupancy-count {
+  background: rgba(185, 148, 112, 0.12);
+  color: var(--w-gold-dark);
+  border: 1px solid rgba(185, 148, 112, 0.22);
+  padding: 7px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* =========================================
+   TABLE
+========================================= */
+
+.occupancy-table-wrapper {
+  overflow-x: auto;
+}
+
+.occupancy-table {
+  width: 100%;
+  min-width: 800px;
+  border-collapse: collapse;
+}
+
+.occupancy-table th {
+  text-align: left;
+  padding: 14px;
+  background: var(--w-background-soft);
+  color: var(--w-gold-dark);
+  font-size: 12px;
+  font-weight: 700;
+  border-bottom: 1px solid var(--w-border);
+  white-space: nowrap;
+}
+
+.occupancy-table td {
+  padding: 16px 14px;
+  border-bottom: 1px solid var(--w-border-light);
+  color: var(--w-text-light);
+  font-size: 13px;
+}
+
+.occupancy-table td strong {
+  color: var(--w-text);
+}
+
+.occupancy-table tbody tr {
+  transition: background 0.3s ease;
+}
+
+.occupancy-table tbody tr:hover {
+  background: var(--w-card-hover);
+}
+
+/* =========================================
+   OCCUPANCY VALUE
+========================================= */
+
+.occupancy-value {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 150px;
+}
+
+.occupancy-value > span {
+  min-width: 40px;
+  font-weight: 600;
+  color: var(--w-gold-dark);
+}
+
+/* =========================================
+   OCCUPANCY BAR
+========================================= */
+
+.occupancy-bar {
+  width: 90px;
+  height: 7px;
+  background: var(--w-border-light);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.occupancy-fill {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--w-gold-dark),
+    var(--w-gold-light)
+  );
+  border-radius: 10px;
+  transition: width 0.4s ease;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1000px) {
+  .occupancy-summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .occupancy-report-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .occupancy-back-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .occupancy-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .occupancy-table-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 450px) {
+  .occupancy-summary-card {
+    padding: 16px;
+  }
+
+  .occupancy-table-header {
+    padding: 18px;
+  }
+}

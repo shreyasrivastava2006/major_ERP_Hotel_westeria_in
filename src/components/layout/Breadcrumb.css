@@ -1,0 +1,110 @@
+/* =========================================
+   BREADCRUMB
+========================================= */
+
+.breadcrumb-wrapper {
+  width: 100%;
+  margin-bottom: 18px;
+}
+
+.breadcrumb-list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+/* =========================================
+   ITEM
+========================================= */
+
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  color: var(--w-muted, #9f95a5);
+}
+
+/* =========================================
+   HOME
+========================================= */
+
+.breadcrumb-home {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  color: var(--w-muted, #9f95a5);
+  text-decoration: none;
+
+  transition: color 0.2s ease;
+}
+
+.breadcrumb-home i {
+  font-size: 14px;
+}
+
+.breadcrumb-home:hover {
+  color: var(--w-gold, #c9a24a);
+}
+
+/* =========================================
+   ARROW
+========================================= */
+
+.breadcrumb-arrow {
+  font-size: 9px;
+  color: var(--w-muted, #6f6575);
+  margin: 0 3px;
+}
+
+/* =========================================
+   LINK
+========================================= */
+
+.breadcrumb-item a {
+  color: var(--w-muted, #9f95a5);
+  text-decoration: none;
+
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.breadcrumb-item a:hover {
+  color: var(--w-gold, #c9a24a);
+}
+
+/* =========================================
+   ACTIVE
+========================================= */
+
+.breadcrumb-item.active span {
+  color: var(--w-gold, #c9a24a);
+  font-weight: 600;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 768px) {
+  .breadcrumb-wrapper {
+    margin-bottom: 14px;
+  }
+
+  .breadcrumb-item {
+    font-size: 12px;
+  }
+
+  .breadcrumb-arrow {
+    font-size: 8px;
+  }
+}

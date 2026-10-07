@@ -1,0 +1,662 @@
+/* ========================================
+   FRONT OFFICE PAGE
+======================================== */
+
+.front-office-page {
+  width: 100%;
+  max-width: 1250px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* ========================================
+   SELECTED HOTEL
+======================================== */
+
+.front-office-hotel-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
+  padding: 15px 18px;
+  background: #ffffff;
+  border: 1px solid #e6ddd3;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(61, 38, 70, 0.05);
+}
+
+.front-office-hotel-icon {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: #f0e8f3;
+  color: #704583;
+  font-size: 19px;
+}
+
+.front-office-hotel-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.front-office-hotel-info span {
+  color: #a67c32;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.front-office-hotel-info strong {
+  color: #321c3d;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.front-office-hotel-info small {
+  color: #958796;
+  font-size: 11px;
+}
+
+/* ========================================
+   SUMMARY STATS
+======================================== */
+
+.front-office-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.front-office-stat {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid #e6ddd3;
+  border-radius: 15px;
+  transition: transform 0.2s ease, border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.front-office-stat:hover {
+  transform: translateY(-2px);
+  border-color: rgba(112, 69, 131, 0.3);
+  box-shadow: 0 8px 25px rgba(61, 38, 70, 0.07);
+}
+
+.front-office-stat-icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-size: 20px;
+}
+
+.front-office-stat-icon.purple {
+  background: #f0e8f3;
+  color: #704583;
+}
+
+.front-office-stat-icon.gold {
+  background: #f8f0df;
+  color: #b8944e;
+}
+
+.front-office-stat-icon.blue {
+  background: #eaf1f7;
+  color: #5d83a8;
+}
+
+.front-office-stat-icon.green {
+  background: #e8f5ed;
+  color: #3c8b5a;
+}
+
+.front-office-stat > div:last-child {
+  min-width: 0;
+}
+
+.front-office-stat span {
+  display: block;
+  margin-bottom: 3px;
+  color: #7b6d7f;
+  font-size: 12px;
+}
+
+.front-office-stat strong {
+  display: block;
+  color: #321c3d;
+  font-size: 23px;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.front-office-stat small {
+  display: block;
+  margin-top: 3px;
+  color: #958796;
+  font-size: 10px;
+}
+
+/* ========================================
+   COMMON SECTION
+======================================== */
+
+.front-office-section {
+  margin-bottom: 28px;
+  padding: 25px;
+  background: #ffffff;
+  border: 1px solid #e6ddd3;
+  border-radius: 18px;
+  box-shadow: 0 5px 20px rgba(61, 38, 70, 0.04);
+}
+
+.front-office-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 22px;
+}
+
+.front-office-section-header h2 {
+  margin: 0 0 5px;
+  color: #321c3d;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.front-office-section-header p {
+  margin: 0;
+  color: #7b6d7f;
+  font-size: 12px;
+}
+
+.room-status-total,
+.guest-total {
+  padding: 7px 12px;
+  border-radius: 20px;
+  background: #f8f0df;
+  border: 1px solid #ead9b7;
+  color: #80652f;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+/* ========================================
+   QUICK ACTIONS
+======================================== */
+
+.front-office-actions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.front-office-action-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 185px;
+  padding: 20px;
+  border: 1px solid #e6ddd3;
+  border-radius: 14px;
+  background: #faf8f5;
+  text-decoration: none;
+  transition: transform 0.2s ease, border-color 0.2s ease,
+    background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.front-office-action-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(112, 69, 131, 0.3);
+  background: #ffffff;
+  box-shadow: 0 8px 25px rgba(61, 38, 70, 0.07);
+}
+
+.front-office-action-icon {
+  width: 46px;
+  height: 46px;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #f0e8f3;
+  color: #704583;
+  font-size: 20px;
+}
+
+.front-office-action-content {
+  flex: 1;
+}
+
+.front-office-action-content h3 {
+  margin: 0 0 7px;
+  color: #321c3d;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.front-office-action-content p {
+  margin: 0;
+  color: #7b6d7f;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.front-office-action-content span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 15px;
+  color: #704583;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.front-office-action-content span i {
+  transition: transform 0.2s ease;
+}
+
+.front-office-action-card:hover
+.front-office-action-content span i {
+  transform: translateX(4px);
+}
+
+/* ========================================
+   TWO COLUMN PANELS
+======================================== */
+
+.front-office-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.front-office-panel {
+  min-width: 0;
+  background: #ffffff;
+  border: 1px solid #e6ddd3;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(61, 38, 70, 0.04);
+}
+
+.front-office-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 22px 24px;
+  border-bottom: 1px solid #eee6df;
+}
+
+.front-office-panel-header h2 {
+  margin: 0 0 5px;
+  color: #321c3d;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.front-office-panel-header p {
+  margin: 0;
+  color: #958796;
+  font-size: 11px;
+}
+
+.panel-count {
+  min-width: 30px;
+  height: 30px;
+  padding: 0 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  background: #f8f0df;
+  color: #80652f;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.front-office-list {
+  padding: 8px 24px;
+}
+
+.front-office-list-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 0;
+  border-bottom: 1px solid #f0e9e3;
+}
+
+.front-office-list-item:last-child {
+  border-bottom: none;
+}
+
+.guest-avatar {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 11px;
+  background: #f0e8f3;
+  color: #704583;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.guest-avatar.checkout {
+  background: #eaf1f7;
+  color: #5d83a8;
+}
+
+.guest-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.guest-info strong {
+  overflow: hidden;
+  color: #321c3d;
+  font-size: 13px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.guest-info span {
+  color: #7b6d7f;
+  font-size: 11px;
+}
+
+.guest-info small {
+  color: #958796;
+  font-size: 10px;
+}
+
+.activity-status {
+  padding: 5px 9px;
+  border-radius: 20px;
+  font-size: 9px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.activity-status.confirmed {
+  background: #e8f5ed;
+  color: #3c8b5a;
+}
+
+.activity-status.checkout-status {
+  background: #eaf1f7;
+  color: #5d83a8;
+}
+
+/* ========================================
+   EMPTY STATE
+======================================== */
+
+.front-office-empty {
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.front-office-empty i {
+  color: #b8944e;
+  font-size: 30px;
+}
+
+.front-office-empty p {
+  margin: 0;
+  color: #958796;
+  font-size: 12px;
+}
+
+/* ========================================
+   ROOM STATUS
+======================================== */
+
+.room-status-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.room-status-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 17px;
+  border-radius: 13px;
+  background: #faf8f5;
+  border: 1px solid #e6ddd3;
+}
+
+.room-status-icon {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-size: 17px;
+}
+
+.room-status-card.available .room-status-icon {
+  background: #e8f5ed;
+  color: #3c8b5a;
+}
+
+.room-status-card.occupied .room-status-icon {
+  background: #f0e8f3;
+  color: #704583;
+}
+
+.room-status-card.cleaning .room-status-icon {
+  background: #f8f0df;
+  color: #b8944e;
+}
+
+.room-status-card.maintenance .room-status-icon {
+  background: #f9e8e8;
+  color: #b44b4b;
+}
+
+.room-status-card > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.room-status-card span {
+  color: #7b6d7f;
+  font-size: 11px;
+}
+
+.room-status-card strong {
+  color: #321c3d;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* ========================================
+   GUEST OVERVIEW
+======================================== */
+
+.guest-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.guest-overview-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-width: 0;
+  padding: 17px;
+  border: 1px solid #e6ddd3;
+  border-radius: 13px;
+  background: #faf8f5;
+}
+
+.guest-avatar.large {
+  width: 43px;
+  height: 43px;
+  font-size: 15px;
+}
+
+.guest-overview-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.guest-overview-info h3 {
+  overflow: hidden;
+  margin: 0 0 7px;
+  color: #321c3d;
+  font-size: 13px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.guest-overview-info p {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow: hidden;
+  margin: 3px 0;
+  color: #958796;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.guest-overview-info p i {
+  color: #704583;
+}
+
+.guest-active {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 7px;
+  border-radius: 12px;
+  background: #e8f5ed;
+  color: #3c8b5a;
+  font-size: 8px;
+  font-weight: 600;
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 1100px) {
+  .front-office-stats,
+  .front-office-actions {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .room-status-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .guest-overview-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 800px) {
+  .front-office-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .front-office-stats,
+  .front-office-actions,
+  .room-status-grid,
+  .guest-overview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .front-office-section {
+    padding: 18px;
+  }
+
+  .front-office-section-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .front-office-panel-header {
+    padding: 18px;
+  }
+
+  .front-office-list {
+    padding: 8px 18px;
+  }
+
+  .front-office-action-card {
+    min-height: 155px;
+  }
+
+  .activity-status {
+    display: none;
+  }
+
+  .front-office-hotel-bar {
+    padding: 13px;
+  }
+}
+
+@media (max-width: 420px) {
+  .front-office-stat {
+    padding: 16px;
+  }
+
+  .front-office-stat-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .front-office-stat strong {
+    font-size: 20px;
+  }
+
+  .guest-overview-card {
+    padding: 14px;
+  }
+
+  .front-office-hotel-icon {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+  }
+}

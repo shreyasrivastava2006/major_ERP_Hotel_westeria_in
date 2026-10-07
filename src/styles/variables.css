@@ -1,0 +1,100 @@
+:root {
+  /* =================================
+     WISTERIA IN
+     LUXURY HOTEL ERP THEME
+     ================================= */
+
+  /* ---------- DARK ---------- */
+
+  --w-dark: #1c1c1c;
+  --w-dark-soft: #252321;
+  --w-dark-light: #332e29;
+
+  /* ---------- GOLD / BROWN ---------- */
+
+  --w-gold: #b99470;
+  --w-gold-light: #c19b76;
+  --w-gold-dark: #96704f;
+
+  /* ---------- BACKGROUND ---------- */
+
+  --w-background: #f7f5f2;
+  --w-background-soft: #fbfaf8;
+
+  --w-white: #ffffff;
+  --w-cream: #f9f9f7;
+
+  /* ---------- TEXT ---------- */
+
+  --w-text: #1c1c1c;
+  --w-text-light: #44403c;
+
+  --w-muted: #6a6a6a;
+  --w-muted-light: #9a9a9a;
+
+  /* ---------- BORDERS ---------- */
+
+  --w-border: #e7e2dc;
+  --w-border-light: #eeeae5;
+  --w-border-dark: #40382f;
+
+  /* ---------- STATUS ---------- */
+
+  --w-success: #3f8f5f;
+  --w-success-bg: #edf7f0;
+
+  --w-warning: #c58a32;
+  --w-warning-bg: #fff7e8;
+
+  --w-danger: #b84a4a;
+  --w-danger-bg: #fceeee;
+
+  --w-info: #527a9b;
+  --w-info-bg: #edf4f8;
+
+  /* ---------- CARDS ---------- */
+
+  --w-card: #ffffff;
+  --w-card-hover: #faf8f5;
+
+  /* ---------- SHADOWS ---------- */
+
+  --w-shadow:
+    0 8px 25px rgba(28, 28, 28, 0.07);
+
+  --w-shadow-medium:
+    0 12px 35px rgba(28, 28, 28, 0.10);
+
+  --w-shadow-hover:
+    0 16px 40px rgba(28, 28, 28, 0.13);
+
+  --w-shadow-gold:
+    0 10px 30px rgba(185, 148, 112, 0.20);
+
+  /* ---------- RADIUS ---------- */
+
+  --w-radius-sm: 6px;
+  --w-radius-md: 10px;
+  --w-radius-lg: 14px;
+  --w-radius-xl: 20px;
+
+  /* ---------- TRANSITION ---------- */
+
+  --w-transition:
+    all 0.3s ease;
+
+  /* ---------- FONT ---------- */
+
+  --w-font-heading:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  --w-font-body:
+    "Montserrat",
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}

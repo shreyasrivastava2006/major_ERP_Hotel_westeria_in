@@ -1,0 +1,1179 @@
+/* =========================================================
+   WISTERIA IN - SUPER ADMIN HOTELS
+   Luxury Ivory + Muted Gold + Soft Plum
+========================================================= */
+
+.super-hotels-page {
+  width: 100%;
+  box-sizing: border-box;
+  color: #4c3d36;
+}
+
+
+/* =========================================================
+   BREADCRUMB
+========================================================= */
+
+.super-hotels-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  margin-bottom: 20px;
+
+  color: #a09284;
+
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.super-hotels-breadcrumb i {
+  font-size: 9px;
+  color: #b9aa9a;
+}
+
+.super-hotels-breadcrumb-link {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  cursor: pointer;
+
+  transition: color 0.2s ease;
+}
+
+.super-hotels-breadcrumb-link i {
+  color: #ad8758;
+  font-size: 11px;
+}
+
+.super-hotels-breadcrumb-link:hover {
+  color: #8e6b48;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.super-hotels-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 25px;
+
+  margin-bottom: 27px;
+}
+
+.super-hotels-eyebrow {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #ae895b;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 1.8px;
+}
+
+.super-hotels-header h1 {
+  margin: 0;
+
+  color: #4b3940;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 31px;
+  font-weight: 500;
+
+  line-height: 1.15;
+}
+
+.super-hotels-header p {
+  margin: 8px 0 0;
+
+  max-width: 620px;
+
+  color: #938579;
+
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   ADD HOTEL BUTTON
+========================================================= */
+
+.super-hotels-add-btn {
+  min-width: 135px;
+  height: 44px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  padding: 0 18px;
+
+  border: 1px solid #ae895b;
+  border-radius: 9px;
+
+  background: linear-gradient(
+    135deg,
+    #b99565,
+    #a47b4e
+  );
+
+  color: #fffaf3;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 5px 15px rgba(135, 99, 59, 0.12);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.super-hotels-add-btn:hover {
+  transform: translateY(-1px);
+
+  background: linear-gradient(
+    135deg,
+    #c1a173,
+    #ad8455
+  );
+
+  box-shadow:
+    0 8px 20px rgba(135, 99, 59, 0.17);
+}
+
+.super-hotels-add-btn i {
+  font-size: 15px;
+}
+
+
+/* =========================================================
+   STATISTICS
+========================================================= */
+
+.super-hotels-stats {
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr));
+
+  gap: 14px;
+
+  margin-bottom: 22px;
+}
+
+.super-hotels-stat-card {
+  min-height: 112px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 18px;
+
+  box-sizing: border-box;
+
+  background: rgba(255, 252, 247, 0.92);
+
+  border: 1px solid #e5d9c9;
+
+  border-radius: 12px;
+
+  box-shadow:
+    0 5px 18px rgba(86, 66, 47, 0.045);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.super-hotels-stat-card:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 9px 23px rgba(86, 66, 47, 0.08);
+}
+
+
+/* STAT ICON */
+
+.super-hotels-stat-icon {
+  width: 43px;
+  height: 43px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 11px;
+
+  font-size: 17px;
+}
+
+.super-hotels-stat-icon.gold {
+  background: #f3e8d5;
+  color: #ad8554;
+}
+
+.super-hotels-stat-icon.green {
+  background: #e6eee7;
+  color: #718b75;
+}
+
+.super-hotels-stat-icon.purple {
+  background: #eee7ef;
+  color: #876f89;
+}
+
+.super-hotels-stat-icon.rose {
+  background: #f3e5e5;
+  color: #a87979;
+}
+
+.super-hotels-stat-icon.blue {
+  background: #e6edf1;
+  color: #6f8793;
+}
+
+
+/* STAT CONTENT */
+
+.super-hotels-stat-content {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  margin-left: 13px;
+}
+
+.super-hotels-stat-content span {
+  color: #94867a;
+
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.super-hotels-stat-content strong {
+  margin-top: 3px;
+
+  color: #51413b;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 23px;
+  font-weight: 500;
+}
+
+.super-hotels-stat-content small {
+  margin-top: 2px;
+
+  color: #aa9d91;
+
+  font-size: 9px;
+}
+
+
+/* =========================================================
+   FILTER CARD
+========================================================= */
+
+.super-hotels-filter-card {
+  padding: 18px;
+
+  margin-bottom: 20px;
+
+  background: rgba(255, 252, 247, 0.9);
+
+  border: 1px solid #e5d9c9;
+
+  border-radius: 12px;
+
+  box-shadow:
+    0 4px 16px rgba(86, 66, 47, 0.04);
+}
+
+.super-hotels-filter-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 14px;
+}
+
+.super-hotels-filter-heading > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.super-hotels-filter-heading i {
+  color: #ad8758;
+  font-size: 14px;
+}
+
+.super-hotels-filter-heading span {
+  color: #5b4940;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.super-hotels-result-count {
+  padding: 5px 9px;
+
+  border-radius: 20px;
+
+  background: #f2eadf;
+
+  color: #967755 !important;
+
+  font-size: 9px !important;
+  font-weight: 600 !important;
+}
+
+
+/* FILTER ROW */
+
+.super-hotels-filter-row {
+  display: grid;
+
+  grid-template-columns:
+    minmax(260px, 1fr)
+    180px
+    170px
+    auto;
+
+  gap: 10px;
+}
+
+
+/* SEARCH */
+
+.super-hotels-search-box {
+  height: 42px;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  border: 1px solid #ddd0bf;
+  border-radius: 8px;
+
+  background: #fffdf9;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.super-hotels-search-box:focus-within {
+  border-color: #c4a273;
+
+  box-shadow:
+    0 0 0 3px rgba(181, 145, 91, 0.08);
+}
+
+.super-hotels-search-box > i {
+  margin-left: 13px;
+
+  color: #a48b73;
+
+  font-size: 13px;
+}
+
+.super-hotels-search-box input {
+  width: 100%;
+  height: 100%;
+
+  padding: 0 12px;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  color: #5a4941;
+
+  font-family: inherit;
+
+  font-size: 11px;
+}
+
+.super-hotels-search-box input::placeholder {
+  color: #b0a398;
+}
+
+.super-hotels-search-clear {
+  width: 27px;
+  height: 27px;
+
+  margin-right: 7px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 50%;
+
+  background: #f0e7da;
+
+  color: #8f7d6e;
+
+  cursor: pointer;
+}
+
+.super-hotels-search-clear:hover {
+  background: #e8dccb;
+  color: #705643;
+}
+
+
+/* SELECT */
+
+.super-hotels-filter-select {
+  height: 42px;
+
+  padding: 0 12px;
+
+  border: 1px solid #ddd0bf;
+  border-radius: 8px;
+
+  outline: none;
+
+  background: #fffdf9;
+
+  color: #66564c;
+
+  font-family: inherit;
+
+  font-size: 11px;
+
+  cursor: pointer;
+}
+
+.super-hotels-filter-select:focus {
+  border-color: #c4a273;
+
+  box-shadow:
+    0 0 0 3px rgba(181, 145, 91, 0.08);
+}
+
+
+/* CLEAR BUTTON */
+
+.super-hotels-clear-btn {
+  height: 42px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 0 14px;
+
+  border: 1px solid #ddd0bf;
+  border-radius: 8px;
+
+  background: #f8f2e9;
+
+  color: #806f62;
+
+  font-family: inherit;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.super-hotels-clear-btn:hover {
+  background: #eee4d6;
+
+  border-color: #cdb99d;
+
+  color: #705642;
+}
+
+
+/* =========================================================
+   TABLE CARD
+========================================================= */
+
+.super-hotels-table-card {
+  overflow: hidden;
+
+  background: rgba(255, 252, 247, 0.96);
+
+  border: 1px solid #e3d7c7;
+
+  border-radius: 12px;
+
+  box-shadow:
+    0 5px 20px rgba(86, 66, 47, 0.05);
+}
+
+
+/* TABLE HEADER */
+
+.super-hotels-table-header {
+  min-height: 76px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 17px 20px;
+
+  border-bottom: 1px solid #e9dfd2;
+}
+
+.super-hotels-table-eyebrow {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #ae895b;
+
+  font-size: 8px;
+  font-weight: 700;
+
+  letter-spacing: 1.5px;
+}
+
+.super-hotels-table-header h2 {
+  margin: 0;
+
+  color: #54433c;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.super-hotels-directory-count {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 7px 11px;
+
+  border: 1px solid #e1d4c3;
+  border-radius: 20px;
+
+  background: #faf5ed;
+
+  color: #8e7458;
+
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.super-hotels-directory-count i {
+  color: #ad8758;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.super-hotels-table-wrapper {
+  width: 100%;
+
+  overflow-x: auto;
+}
+
+.super-hotels-table {
+  width: 100%;
+
+  min-width: 1050px;
+
+  border-collapse: collapse;
+}
+
+.super-hotels-table thead {
+  background: #faf6ef;
+}
+
+.super-hotels-table th {
+  height: 43px;
+
+  padding: 0 15px;
+
+  color: #9a8b7d;
+
+  font-size: 8px;
+  font-weight: 700;
+
+  letter-spacing: 1px;
+
+  text-align: left;
+
+  border-bottom: 1px solid #e8ddd0;
+
+  white-space: nowrap;
+}
+
+.super-hotels-table td {
+  padding: 14px 15px;
+
+  border-bottom: 1px solid #eee6dc;
+
+  vertical-align: middle;
+}
+
+.super-hotels-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.super-hotels-table tbody tr:hover {
+  background: #fdf9f3;
+}
+
+.super-hotels-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+
+/* =========================================================
+   HOTEL INFO
+========================================================= */
+
+.super-hotel-info {
+  display: flex;
+  align-items: center;
+
+  min-width: 210px;
+}
+
+.super-hotel-avatar {
+  width: 39px;
+  height: 39px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border: 1px solid #d2b995;
+  border-radius: 10px;
+
+  background: linear-gradient(
+    135deg,
+    #f2e6d5,
+    #e5d2b6
+  );
+
+  color: #92704a;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 17px;
+}
+
+.super-hotel-details {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  margin-left: 10px;
+}
+
+.super-hotel-details strong {
+  overflow: hidden;
+
+  color: #55443d;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.super-hotel-details span {
+  margin-top: 3px;
+
+  color: #a39487;
+
+  font-size: 9px;
+}
+
+
+/* =========================================================
+   LOCATION
+========================================================= */
+
+.super-hotel-location {
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  min-width: 140px;
+
+  color: #786b61;
+
+  font-size: 10px;
+}
+
+.super-hotel-location i {
+  color: #ae895b;
+
+  font-size: 12px;
+}
+
+.super-hotel-location span {
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   MANAGER
+========================================================= */
+
+.super-hotel-manager {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 145px;
+}
+
+.super-hotel-manager strong {
+  color: #625149;
+
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.super-hotel-manager span {
+  margin-top: 3px;
+
+  color: #a09286;
+
+  font-size: 8px;
+}
+
+
+/* =========================================================
+   NUMBER CELLS
+========================================================= */
+
+.super-hotel-number {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+}
+
+.super-hotel-number i {
+  color: #a48a70;
+
+  font-size: 12px;
+}
+
+.super-hotel-number strong {
+  color: #5c4b43;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   PLAN
+========================================================= */
+
+.super-hotel-plan {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 5px 9px;
+
+  border-radius: 20px;
+
+  font-size: 8px;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+.super-hotel-plan.basic {
+  background: #eee9e2;
+  color: #83776d;
+}
+
+.super-hotel-plan.premium {
+  background: #f2e6d1;
+  color: #967247;
+}
+
+.super-hotel-plan.enterprise {
+  background: #ebe4ed;
+  color: #7c6780;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.super-hotel-status {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 5px;
+
+  padding: 5px 9px;
+
+  border-radius: 20px;
+
+  font-size: 8px;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+.super-hotel-status i {
+  font-size: 5px;
+}
+
+.super-hotel-status.active {
+  background: #e7efe8;
+  color: #6f896f;
+}
+
+.super-hotel-status.pending {
+  background: #f4ead9;
+  color: #a27b4d;
+}
+
+.super-hotel-status.inactive {
+  background: #eee8e7;
+  color: #927d78;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.super-hotel-actions {
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+}
+
+.super-hotel-action {
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #e1d6c8;
+  border-radius: 7px;
+
+  background: #fbf8f3;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.super-hotel-action i {
+  font-size: 12px;
+}
+
+.super-hotel-action.view {
+  color: #7d7168;
+}
+
+.super-hotel-action.edit {
+  color: #9a7953;
+}
+
+.super-hotel-action.status {
+  color: #7d7786;
+}
+
+.super-hotel-action.delete {
+  color: #9b7470;
+}
+
+.super-hotel-action:hover {
+  transform: translateY(-1px);
+}
+
+.super-hotel-action.view:hover {
+  background: #eee9e2;
+  border-color: #d0c2b1;
+}
+
+.super-hotel-action.edit:hover {
+  background: #f3e9da;
+  border-color: #d7c09e;
+}
+
+.super-hotel-action.status:hover {
+  background: #ece9ef;
+  border-color: #cfc5d4;
+}
+
+.super-hotel-action.delete:hover {
+  background: #f3e5e3;
+  border-color: #d9bcb8;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.super-hotels-empty-cell {
+  padding: 0 !important;
+}
+
+.super-hotels-empty {
+  min-height: 280px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px;
+}
+
+.super-hotels-empty-icon {
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 13px;
+
+  border-radius: 50%;
+
+  background: #f0e8dc;
+
+  color: #a68a6b;
+
+  font-size: 22px;
+}
+
+.super-hotels-empty h3 {
+  margin: 0;
+
+  color: #5b4941;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.super-hotels-empty p {
+  margin: 7px 0 14px;
+
+  color: #9d9084;
+
+  font-size: 10px;
+}
+
+.super-hotels-empty button {
+  padding: 8px 13px;
+
+  border: 1px solid #d8c6ad;
+  border-radius: 7px;
+
+  background: #f8f0e5;
+
+  color: #806343;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.super-hotels-empty button:hover {
+  background: #efe3d2;
+}
+
+
+/* =========================================================
+   TABLE FOOTER
+========================================================= */
+
+.super-hotels-table-footer {
+  min-height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 20px;
+
+  border-top: 1px solid #e9dfd3;
+
+  background: #fbf8f3;
+
+  color: #a09489;
+
+  font-size: 9px;
+}
+
+.super-hotels-table-footer strong {
+  color: #78665a;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   RESPONSIVE - 1200px
+========================================================= */
+
+@media (max-width: 1200px) {
+
+  .super-hotels-stats {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+
+  .super-hotels-filter-row {
+    grid-template-columns:
+      1fr 160px 160px auto;
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE - 900px
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .super-hotels-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .super-hotels-add-btn {
+    align-self: flex-start;
+  }
+
+  .super-hotels-filter-row {
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+  .super-hotels-search-box {
+    grid-column: 1 / -1;
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE - 700px
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .super-hotels-stats {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .super-hotels-filter-row {
+    grid-template-columns: 1fr;
+  }
+
+  .super-hotels-search-box {
+    grid-column: auto;
+  }
+
+  .super-hotels-table-header {
+    align-items: flex-start;
+    flex-direction: column;
+
+    gap: 10px;
+  }
+
+  .super-hotels-table-footer {
+    align-items: flex-start;
+    flex-direction: column;
+
+    gap: 5px;
+
+    padding: 11px 15px;
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE - 480px
+========================================================= */
+
+@media (max-width: 480px) {
+
+  .super-hotels-header h1 {
+    font-size: 26px;
+  }
+
+  .super-hotels-header p {
+    font-size: 11px;
+  }
+
+  .super-hotels-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .super-hotels-stat-card {
+    min-height: 96px;
+  }
+
+  .super-hotels-filter-card {
+    padding: 14px;
+  }
+
+  .super-hotels-table-header {
+    padding: 15px;
+  }
+
+  .super-hotels-table-footer {
+    font-size: 8px;
+  }
+}
