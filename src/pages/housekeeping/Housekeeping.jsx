@@ -1,367 +1,836 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 
-import MainLayout from '../../layouts/MainLayout'
-import Breadcrumb from '../../components/layout/Breadcrumb'
-import PageHeader from '../../components/layout/PageHeader'
+import MainLayout from "../../layouts/MainLayout";
+import PageHeader from "../../components/layout/PageHeader";
+import Breadcrumb from "../../components/layout/Breadcrumb";
 
-import { useHotel } from '../../context/HotelContext'
+import { useHotel } from "../../context/HotelContext";
+import { useHotelData } from "../../context/HotelDataContext";
 
-import './Housekeeping.css'
+import "./Housekeeping.css";
+
+const DEFAULT_TASKS = [
+  {
+    id: "HK-TASK-001",
+    hotelId: "HOTEL-001",
+    hotelName: "Wisteria In",
+    room: "101",
+    roomId: "101",
+    task: "Room Cleaning",
+    assignedTo: "Anita Sharma",
+    status: "Clean",
+    priority: "Normal",
+    date: new Date().toISOString().split("T")[0],
+  },
+  {
+    id: "HK-TASK-002",
+    hotelId: "HOTEL-001",
+    hotelName: "Wisteria In",
+    room: "102",
+    roomId: "102",
+    task: "Room Cleaning",
+    assignedTo: "Pooja Verma",
+    status: "In Progress",
+    priority: "High",
+    date: new Date().toISOString().split("T")[0],
+  },
+  {
+    id: "HK-TASK-003",
+    hotelId: "HOTEL-001",
+    hotelName: "Wisteria In",
+    room: "205",
+    roomId: "205",
+    task: "Deep Cleaning",
+    assignedTo: "Neha Singh",
+    status: "Dirty",
+    priority: "High",
+    date: new Date().toISOString().split("T")[0],
+  },
+];
 
 function Housekeeping() {
-  const navigate = useNavigate()
-  const { selectedHotel } = useHotel()
+  const { selectedHotel } = useHotel();
+  const { rooms, staff, updateRoomStatus } = useHotelData();
 
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      room: '101',
-      guest: 'Rahul Sharma',
-      staff: 'Anita Sharma',
-      task: 'Room Cleaning',
-      priority: 'High',
-      status: 'In Progress',
-      time: '10:00 AM',
-    },
-    {
-      id: 2,
-      room: '205',
-      guest: 'Priya Singh',
-      staff: 'Pooja Verma',
-      task: 'Bathroom Cleaning',
-      priority: 'Medium',
-      status: 'Pending',
-      time: '11:00 AM',
-    },
-    {
-      id: 3,
-      room: '302',
-      guest: 'Aman Verma',
-      staff: 'Neha Singh',
-      task: 'Room Cleaning',
-      priority: 'Low',
-      status: 'Completed',
-      time: '09:30 AM',
-    },
-    {
-      id: 4,
-      room: '405',
-      guest: 'Sneha Gupta',
-      staff: 'Ravi Kumar',
-      task: 'Deep Cleaning',
-      priority: 'High',
-      status: 'Pending',
-      time: '12:00 PM',
-    },
-  ])
+  const [tasks, setTasks] = useState(() => {
+    try {
+      const saved = localStorage.getItem(
+        "wisteriaHousekeepingTasks"
+      );
 
-  const updateStatus = (id, status) => {
-    setTasks((previousTasks) =>
-      previousTasks.map((task) =>
-        task.id === id
-          ? { ...task, status }
-          : task
+      return saved ? JSON.parse(saved) : DEFAULT_TASKS;
+    } catch {
+      return DEFAULT_TASKS;
+    }
+  });
+
+  const [showForm, setShowForm] = useState(false);
+
+  const [formData, setFormData] = useState({
+    room: "",
+    assignedTo: "",
+    task: "Room Cleaning",
+    status: "Dirty",
+    priority: "Normal",
+  });
+
+  const hotelId =
+    selectedHotel?.id ||
+    selectedHotel?.hotelId ||
+    selectedHotel?.code ||
+    "";
+
+  const hotelName =
+    selectedHotel?.name ||
+    selectedHotel?.hotelName ||
+    "Wisteria In";
+
+  const hotelCode =
+    selectedHotel?.code ||
+    selectedHotel?.hotelCode ||
+    selectedHotel?.id ||
+    "";
+
+  const hotelRating =
+    selectedHotel?.rating ||
+    selectedHotel?.stars ||
+    selectedHotel?.starRating ||
+    "5 Star";
+
+  const hotelCity =
+    selectedHotel?.city ||
+    selectedHotel?.location ||
+    "Lucknow";
+
+  const hotelState =
+    selectedHotel?.state ||
+    selectedHotel?.stateName ||
+    "Uttar Pradesh";
+
+  const hotelRooms = useMemo(() => {
+    if (!hotelId) return rooms;
+
+    const hasHotelData = rooms.some(
+      (room) =>
+        room.hotelId ||
+        room.hotel_id ||
+        room.hotelCode
+    );
+
+    if (!hasHotelData) return rooms;
+
+    return rooms.filter(
+      (room) =>
+        String(
+          room.hotelId ||
+            room.hotel_id ||
+            room.hotelCode ||
+            ""
+        ) === String(hotelId)
+    );
+  }, [rooms, hotelId]);
+
+  const hotelStaff = useMemo(() => {
+    if (!hotelId) return staff;
+
+    const hasHotelData = staff.some(
+      (member) =>
+        member.hotelId ||
+        member.hotel_id ||
+        member.hotelCode
+    );
+
+    if (!hasHotelData) return staff;
+
+    return staff.filter(
+      (member) =>
+        String(
+          member.hotelId ||
+            member.hotel_id ||
+            member.hotelCode ||
+            ""
+        ) === String(hotelId)
+    );
+  }, [staff, hotelId]);
+
+  const hotelTasks = useMemo(() => {
+    if (!hotelId) return tasks;
+
+    const hasHotelData = tasks.some(
+      (task) => task.hotelId
+    );
+
+    if (!hasHotelData) return tasks;
+
+    return tasks.filter(
+      (task) =>
+        String(task.hotelId) === String(hotelId)
+    );
+  }, [tasks, hotelId]);
+
+  const saveTasks = (updatedTasks) => {
+    setTasks(updatedTasks);
+
+    localStorage.setItem(
+      "wisteriaHousekeepingTasks",
+      JSON.stringify(updatedTasks)
+    );
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const addTask = (e) => {
+    e.preventDefault();
+
+    if (!formData.room) {
+      alert("Please select a room.");
+      return;
+    }
+
+    const selectedRoom = hotelRooms.find(
+      (room) =>
+        String(
+          room.roomNumber ??
+            room.number ??
+            room.id ??
+            ""
+        ) === String(formData.room)
+    );
+
+    const selectedStaff = hotelStaff.find(
+      (member) =>
+        String(member.name || "") ===
+        String(formData.assignedTo)
+    );
+
+    const newTask = {
+      id: `HK-${Date.now()}`,
+      hotelId,
+      hotelName,
+      room: formData.room,
+      roomId: selectedRoom?.id || "",
+      task: formData.task,
+      assignedTo:
+        selectedStaff?.name ||
+        formData.assignedTo ||
+        "Unassigned",
+      status: formData.status,
+      priority: formData.priority,
+      date: new Date()
+        .toISOString()
+        .split("T")[0],
+    };
+
+    saveTasks([newTask, ...tasks]);
+
+    setFormData({
+      room: "",
+      assignedTo: "",
+      task: "Room Cleaning",
+      status: "Dirty",
+      priority: "Normal",
+    });
+
+    setShowForm(false);
+  };
+
+  const updateTaskStatus = (
+    taskId,
+    newStatus
+  ) => {
+    const task = tasks.find(
+      (item) => item.id === taskId
+    );
+
+    const updatedTasks = tasks.map((item) =>
+      item.id === taskId
+        ? {
+            ...item,
+            status: newStatus,
+          }
+        : item
+    );
+
+    saveTasks(updatedTasks);
+
+    if (task?.roomId) {
+      if (newStatus === "Clean") {
+        updateRoomStatus(
+          task.roomId,
+          "Available"
+        );
+      }
+
+      if (newStatus === "Dirty") {
+        updateRoomStatus(
+          task.roomId,
+          "Maintenance"
+        );
+      }
+    }
+  };
+
+  const deleteTask = (taskId) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this housekeeping task?"
+    );
+
+    if (!confirmed) return;
+
+    saveTasks(
+      tasks.filter(
+        (task) => task.id !== taskId
       )
-    )
-  }
+    );
+  };
 
-  const totalTasks = tasks.length
+  const totalTasks = hotelTasks.length;
 
-  const completedTasks = tasks.filter(
-    (task) => task.status === 'Completed'
-  ).length
+  const cleanTasks = hotelTasks.filter(
+    (task) => task.status === "Clean"
+  ).length;
 
-  const pendingTasks = tasks.filter(
-    (task) => task.status === 'Pending'
-  ).length
+  const dirtyTasks = hotelTasks.filter(
+    (task) => task.status === "Dirty"
+  ).length;
 
-  const progressTasks = tasks.filter(
-    (task) => task.status === 'In Progress'
-  ).length
+  const inProgressTasks = hotelTasks.filter(
+    (task) =>
+      task.status === "In Progress"
+  ).length;
 
   return (
     <MainLayout>
       <div className="housekeeping-page">
-        <Breadcrumb items={['Housekeeping']} />
 
-        <div className="housekeeping-heading-row">
-          <PageHeader
-            title="Housekeeping"
-            subtitle={
-              selectedHotel
-                ? `Manage housekeeping operations for ${selectedHotel.name}`
-                : 'Manage room cleaning, inspections and housekeeping staff'
+        <Breadcrumb
+          items={[
+            {
+              label: "Dashboard",
+              path: "/dashboard",
+            },
+            {
+              label: "Housekeeping",
+            },
+          ]}
+        />
+
+        <PageHeader
+          title="Housekeeping"
+          subtitle="Manage room cleaning and housekeeping tasks"
+        >
+          <button
+            type="button"
+            className="housekeeping-add-btn"
+            onClick={() =>
+              setShowForm((prev) => !prev)
             }
-          />
+          >
+            <i className="bi bi-plus-lg"></i>
+            {showForm ? "Close" : "Add Task"}
+          </button>
+        </PageHeader>
 
-          <div className="housekeeping-header-icon">
-            <i className="bi bi-stars"></i>
-          </div>
-        </div>
+        {/* SELECTED PROPERTY */}
 
         {selectedHotel && (
-          <div className="housekeeping-hotel-bar">
-            <div className="housekeeping-hotel-icon">
+          <div className="housekeeping-property-bar">
+
+            <div className="property-icon">
               <i className="bi bi-building"></i>
             </div>
 
-            <div className="housekeeping-hotel-info">
-              <span>SELECTED PROPERTY</span>
+            <div className="property-label">
+              SELECTED PROPERTY
+            </div>
 
-              <strong>{selectedHotel.name}</strong>
+            <div className="property-name">
+              {hotelName}
+            </div>
 
-              <small>
-                {selectedHotel.code} • {selectedHotel.category} •{' '}
-                {selectedHotel.address.city},{' '}
-                {selectedHotel.address.state}
-              </small>
+            <div className="property-details">
+              {hotelCode && (
+                <span>{hotelCode}</span>
+              )}
+
+              <span>•</span>
+
+              <span>{hotelRating}</span>
+
+              <span>•</span>
+
+              <span>
+                {hotelCity}
+                {hotelState
+                  ? `, ${hotelState}`
+                  : ""}
+              </span>
             </div>
           </div>
         )}
 
-        {/* =====================================
-            STATISTICS
-        ===================================== */}
+        {/* STATS */}
 
         <div className="housekeeping-stats">
+
           <div className="housekeeping-stat-card">
-            <div className="housekeeping-stat-icon">
+            <div className="stat-icon">
               <i className="bi bi-list-check"></i>
             </div>
 
             <div>
               <span>Total Tasks</span>
-              <h2>{totalTasks}</h2>
+              <strong>{totalTasks}</strong>
             </div>
           </div>
 
           <div className="housekeeping-stat-card">
-            <div className="housekeeping-stat-icon pending">
-              <i className="bi bi-clock"></i>
+            <div className="stat-icon clean">
+              <i className="bi bi-check-circle"></i>
             </div>
 
             <div>
-              <span>Pending</span>
-              <h2>{pendingTasks}</h2>
+              <span>Clean</span>
+              <strong>{cleanTasks}</strong>
             </div>
           </div>
 
           <div className="housekeeping-stat-card">
-            <div className="housekeeping-stat-icon progress">
+            <div className="stat-icon dirty">
+              <i className="bi bi-exclamation-circle"></i>
+            </div>
+
+            <div>
+              <span>Dirty</span>
+              <strong>{dirtyTasks}</strong>
+            </div>
+          </div>
+
+          <div className="housekeeping-stat-card">
+            <div className="stat-icon progress">
               <i className="bi bi-arrow-repeat"></i>
             </div>
 
             <div>
               <span>In Progress</span>
-              <h2>{progressTasks}</h2>
+              <strong>{inProgressTasks}</strong>
             </div>
           </div>
 
-          <div className="housekeeping-stat-card">
-            <div className="housekeeping-stat-icon completed">
-              <i className="bi bi-check-circle"></i>
-            </div>
-
-            <div>
-              <span>Completed</span>
-              <h2>{completedTasks}</h2>
-            </div>
-          </div>
         </div>
 
-        {/* =====================================
-            MANAGEMENT SECTION
-        ===================================== */}
+        {/* ADD TASK */}
 
-        <div className="housekeeping-section">
-          <div className="housekeeping-section-title">
-            <div>
-              <h2>Housekeeping Management</h2>
+        {showForm && (
+          <form
+            className="housekeeping-form-card"
+            onSubmit={addTask}
+          >
+
+            <div className="form-card-header">
+              <h3>
+                Add Housekeeping Task
+              </h3>
+
               <p>
-                Quick access to housekeeping operations
+                Create a new room cleaning task
               </p>
             </div>
-          </div>
 
-          <div className="housekeeping-actions">
-            <button
-              type="button"
-              className="housekeeping-action-card"
-              onClick={() =>
-                navigate('/housekeeping/cleaning-schedule')
-              }
-            >
-              <div className="action-icon cleaning-icon">
-                <i className="bi bi-calendar-check-fill"></i>
+            <div className="housekeeping-form-grid">
+
+              <div className="housekeeping-form-group">
+                <label>Room</label>
+
+                <select
+                  name="room"
+                  value={formData.room}
+                  onChange={handleChange}
+                  required
+                >
+                  <option value="">
+                    Select Room
+                  </option>
+
+                  {hotelRooms.map((room) => {
+                    const roomNumber =
+                      room.roomNumber ??
+                      room.number ??
+                      room.id;
+
+                    return (
+                      <option
+                        key={room.id}
+                        value={roomNumber}
+                      >
+                        Room {roomNumber}
+                      </option>
+                    );
+                  })}
+                </select>
               </div>
 
-              <div className="action-content">
-                <h3>Cleaning Schedule</h3>
-                <p>
-                  Create and manage daily room cleaning schedules.
-                </p>
+              <div className="housekeeping-form-group">
+                <label>Assigned To</label>
+
+                <select
+                  name="assignedTo"
+                  value={formData.assignedTo}
+                  onChange={handleChange}
+                >
+                  <option value="">
+                    Select Staff
+                  </option>
+
+                  {hotelStaff.map((member) => (
+                    <option
+                      key={member.id}
+                      value={member.name}
+                    >
+                      {member.name}
+                    </option>
+                  ))}
+                </select>
               </div>
 
-              <i className="bi bi-chevron-right action-arrow"></i>
-            </button>
+              <div className="housekeeping-form-group">
+                <label>Task</label>
 
-            <button
-              type="button"
-              className="housekeeping-action-card"
-              onClick={() =>
-                navigate('/housekeeping/room-inspection')
-              }
-            >
-              <div className="action-icon inspection-icon">
-                <i className="bi bi-clipboard-check-fill"></i>
+                <select
+                  name="task"
+                  value={formData.task}
+                  onChange={handleChange}
+                >
+                  <option value="Room Cleaning">
+                    Room Cleaning
+                  </option>
+
+                  <option value="Deep Cleaning">
+                    Deep Cleaning
+                  </option>
+
+                  <option value="Bathroom Cleaning">
+                    Bathroom Cleaning
+                  </option>
+
+                  <option value="Laundry">
+                    Laundry
+                  </option>
+
+                  <option value="Inspection">
+                    Inspection
+                  </option>
+                </select>
               </div>
 
-              <div className="action-content">
-                <h3>Room Inspection</h3>
-                <p>
-                  Inspect rooms and check cleanliness standards.
-                </p>
+              <div className="housekeeping-form-group">
+                <label>Status</label>
+
+                <select
+                  name="status"
+                  value={formData.status}
+                  onChange={handleChange}
+                >
+                  <option value="Dirty">
+                    Dirty
+                  </option>
+
+                  <option value="In Progress">
+                    In Progress
+                  </option>
+
+                  <option value="Clean">
+                    Clean
+                  </option>
+                </select>
               </div>
 
-              <i className="bi bi-chevron-right action-arrow"></i>
-            </button>
+              <div className="housekeeping-form-group">
+                <label>Priority</label>
 
-            <button
-              type="button"
-              className="housekeeping-action-card"
-              onClick={() =>
-                navigate('/housekeeping/staff-management')
-              }
-            >
-              <div className="action-icon staff-icon">
-                <i className="bi bi-people-fill"></i>
+                <select
+                  name="priority"
+                  value={formData.priority}
+                  onChange={handleChange}
+                >
+                  <option value="Normal">
+                    Normal
+                  </option>
+
+                  <option value="High">
+                    High
+                  </option>
+
+                  <option value="Urgent">
+                    Urgent
+                  </option>
+                </select>
               </div>
 
-              <div className="action-content">
-                <h3>Staff Management</h3>
-                <p>
-                  Manage housekeeping staff, shifts and assignments.
-                </p>
-              </div>
+            </div>
 
-              <i className="bi bi-chevron-right action-arrow"></i>
-            </button>
-          </div>
+            <div className="housekeeping-form-actions">
+
+              <button
+                type="button"
+                className="cancel-task-btn"
+                onClick={() =>
+                  setShowForm(false)
+                }
+              >
+                Cancel
+              </button>
+
+              <button
+                type="submit"
+                className="save-task-btn"
+              >
+                <i className="bi bi-check-lg"></i>
+                Add Task
+              </button>
+
+            </div>
+
+          </form>
+        )}
+
+        {/* QUICK LINKS */}
+
+        <div className="housekeeping-quick-links">
+
+          <Link
+            to="/housekeeping/cleaning-schedule"
+            className="housekeeping-link-card"
+          >
+            <div className="quick-link-icon">
+              <i className="bi bi-calendar3"></i>
+            </div>
+
+            <div className="quick-link-content">
+              <h3>Cleaning Schedule</h3>
+
+              <p>
+                View and manage daily room cleaning schedules
+              </p>
+            </div>
+
+            <i className="bi bi-chevron-right quick-link-arrow"></i>
+          </Link>
+
+          <Link
+            to="/housekeeping/room-inspection"
+            className="housekeeping-link-card"
+          >
+            <div className="quick-link-icon">
+              <i className="bi bi-clipboard-check"></i>
+            </div>
+
+            <div className="quick-link-content">
+              <h3>Room Inspection</h3>
+
+              <p>
+                Inspect rooms and check cleanliness standards
+              </p>
+            </div>
+
+            <i className="bi bi-chevron-right quick-link-arrow"></i>
+          </Link>
+
+          <Link
+            to="/housekeeping/staff-management"
+            className="housekeeping-link-card"
+          >
+            <div className="quick-link-icon">
+              <i className="bi bi-people"></i>
+            </div>
+
+            <div className="quick-link-content">
+              <h3>Staff Management</h3>
+
+              <p>
+                Manage housekeeping staff, shifts and assignments
+              </p>
+            </div>
+
+            <i className="bi bi-chevron-right quick-link-arrow"></i>
+          </Link>
+
         </div>
 
-        {/* =====================================
-            TASK TABLE
-        ===================================== */}
+        {/* TASK TABLE */}
 
         <div className="housekeeping-table-card">
+
           <div className="housekeeping-table-header">
+
             <div>
-              <h2>Today's Housekeeping Tasks</h2>
+              <h3>
+                Today's Housekeeping Tasks
+              </h3>
+
               <p>
-                Monitor room cleaning and housekeeping activities.
+                Monitor room cleaning and housekeeping activities
               </p>
             </div>
 
-            <span className="housekeeping-count">
-              {tasks.length} Tasks
+            <span className="task-count">
+              {totalTasks} Tasks
             </span>
+
           </div>
 
-          <div className="housekeeping-table-wrapper">
-            <table className="housekeeping-table">
-              <thead>
-                <tr>
-                  <th>Room</th>
-                  <th>Guest</th>
-                  <th>Task</th>
-                  <th>Staff</th>
-                  <th>Priority</th>
-                  <th>Time</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
+          {hotelTasks.length === 0 ? (
+            <div className="housekeeping-empty">
 
-              <tbody>
-                {tasks.length > 0 ? (
-                  tasks.map((task) => (
+              <i className="bi bi-inbox"></i>
+
+              <h4>
+                No housekeeping tasks
+              </h4>
+
+              <p>
+                Add a new task to get started.
+              </p>
+
+            </div>
+          ) : (
+            <div className="housekeeping-table-wrapper">
+
+              <table className="housekeeping-table">
+
+                <thead>
+                  <tr>
+                    <th>Task ID this </th>
+                    <th>Room</th>
+                    <th>Task</th>
+                    <th>Assigned To</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  {hotelTasks.map((task) => (
                     <tr key={task.id}>
-                      <td>
-                        <div className="housekeeping-room">
-                          <i className="bi bi-door-closed"></i>
-                          <strong>{task.room}</strong>
-                        </div>
-                      </td>
-
-                      <td>{task.guest}</td>
-
-                      <td>{task.task}</td>
 
                       <td>
-                        <div className="housekeeping-staff">
-                          <div className="staff-avatar">
-                            {task.staff.charAt(0)}
-                          </div>
-
-                          <span>{task.staff}</span>
-                        </div>
-                      </td>
-
-                      <td>
-                        <span
-                          className={`priority-badge ${task.priority
-                            .toLowerCase()
-                            .replace(/\s+/g, '-')}`}
-                        >
-                          {task.priority}
+                        <span className="task-id">
+                          {task.id}
                         </span>
                       </td>
 
-                      <td>{task.time}</td>
+                      <td>
+                        <strong>
+                          Room {task.room}
+                        </strong>
+                      </td>
 
                       <td>
+                        {task.task}
+                      </td>
+
+                      <td>
+                        {task.assignedTo ||
+                          "Unassigned"}
+                      </td>
+
+                      <td>
+
+                        <span
+                          className={`priority-badge ${String(
+                            task.priority ||
+                              "Normal"
+                          ).toLowerCase()}`}
+                        >
+                          {task.priority ||
+                            "Normal"}
+                        </span>
+
+                      </td>
+
+                      <td>
+
                         <select
-                          className={`task-status ${task.status
+                          className={`task-status-select ${String(
+                            task.status
+                          )
                             .toLowerCase()
-                            .replace(/\s+/g, '-')}`}
+                            .replace(
+                              /\s+/g,
+                              "-"
+                            )}`}
                           value={task.status}
                           onChange={(e) =>
-                            updateStatus(
+                            updateTaskStatus(
                               task.id,
                               e.target.value
                             )
                           }
                         >
-                          <option>Pending</option>
-                          <option>In Progress</option>
-                          <option>Completed</option>
+
+                          <option value="Dirty">
+                            Dirty
+                          </option>
+
+                          <option value="In Progress">
+                            In Progress
+                          </option>
+
+                          <option value="Clean">
+                            Clean
+                          </option>
+
                         </select>
+
                       </td>
+
+                      <td>
+                        {task.date}
+                      </td>
+
+                      <td>
+
+                        <button
+                          type="button"
+                          className="housekeeping-delete-btn"
+                          onClick={() =>
+                            deleteTask(
+                              task.id
+                            )
+                          }
+                          title="Delete task"
+                        >
+                          <i className="bi bi-trash3"></i>
+                        </button>
+
+                      </td>
+
                     </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td
-                      colSpan="7"
-                      className="housekeeping-empty"
-                    >
-                      <i className="bi bi-clipboard-x"></i>
+                  ))}
 
-                      <strong>No housekeeping tasks</strong>
+                </tbody>
 
-                      <span>
-                        There are currently no housekeeping tasks.
-                      </span>
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
+              </table>
+
+            </div>
+          )}
+
         </div>
+
       </div>
     </MainLayout>
-  )
+  );
 }
 
-export default Housekeeping
+export default Housekeeping;
