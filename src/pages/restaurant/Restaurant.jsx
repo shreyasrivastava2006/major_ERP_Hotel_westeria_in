@@ -1,84 +1,108 @@
-import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import MainLayout from '../../layouts/MainLayout'
-import PageHeader from '../../components/layout/PageHeader'
 import Breadcrumb from '../../components/layout/Breadcrumb'
+import PageHeader from '../../components/layout/PageHeader'
 import './Restaurant.css'
 
 function Restaurant() {
   const navigate = useNavigate()
 
-  const [orders, setOrders] = useState([
+  const stats = [
     {
-      id: 1,
-      orderNo: '#ORD-1001',
-      table: 'Table 05',
-      guest: 'Rahul Sharma',
-      items: 3,
-      amount: 1450,
-      type: 'Dine In',
-      status: 'Preparing'
+      title: 'Total Orders',
+      value: '24',
+      subtitle: 'Today',
+      icon: 'bi-receipt',
+      className: ''
     },
     {
-      id: 2,
-      orderNo: '#ORD-1002',
-      table: 'Room 205',
-      guest: 'Priya Singh',
-      items: 2,
-      amount: 850,
-      type: 'Room Service',
+      title: 'Pending Orders',
+      value: '5',
+      subtitle: 'Need attention',
+      icon: 'bi-clock',
+      className: 'pending'
+    },
+    {
+      title: 'Preparing',
+      value: '7',
+      subtitle: 'In kitchen',
+      icon: 'bi-fire',
+      className: 'preparing'
+    },
+    {
+      title: "Today's Revenue",
+      value: '₹18,450',
+      subtitle: 'Restaurant earnings',
+      icon: 'bi-currency-rupee',
+      className: 'revenue'
+    }
+  ]
+
+  const recentOrders = [
+    {
+      id: 1,
+      orderNo: 'ORD-1001',
+      guest: 'Rahul Sharma',
+      room: '101',
+      items: 'Paneer Tikka, Butter Naan',
+      amount: 480,
       status: 'Pending'
     },
     {
+      id: 2,
+      orderNo: 'ORD-1002',
+      guest: 'Priya Verma',
+      room: '201',
+      items: 'Chicken Biryani, Gulab Jamun',
+      amount: 600,
+      status: 'Preparing'
+    },
+    {
       id: 3,
-      orderNo: '#ORD-1003',
-      table: 'Table 02',
-      guest: 'Aman Verma',
-      items: 4,
-      amount: 2100,
-      type: 'Dine In',
-      status: 'Completed'
+      orderNo: 'ORD-1003',
+      guest: 'Aman Singh',
+      room: '102',
+      items: 'Dal Makhani, Butter Naan',
+      amount: 360,
+      status: 'Ready'
     },
     {
       id: 4,
-      orderNo: '#ORD-1004',
-      table: 'Room 302',
-      guest: 'Sneha Gupta',
-      items: 2,
-      amount: 650,
-      type: 'Room Service',
-      status: 'Ready'
+      orderNo: 'ORD-1004',
+      guest: 'Neha Kapoor',
+      room: '205',
+      items: 'Chicken Tikka, Garlic Naan',
+      amount: 490,
+      status: 'Completed'
     }
-  ])
+  ]
 
-  const updateStatus = (id, status) => {
-    setOrders(
-      orders.map(order =>
-        order.id === id
-          ? { ...order, status }
-          : order
-      )
-    )
-  }
-
-  const totalOrders = orders.length
-
-  const pendingOrders = orders.filter(
-    order => order.status === 'Pending'
-  ).length
-
-  const preparingOrders = orders.filter(
-    order => order.status === 'Preparing'
-  ).length
-
-  const completedOrders = orders.filter(
-    order => order.status === 'Completed'
-  ).length
-
-  const totalRevenue = orders.reduce(
-    (total, order) => total + order.amount,
-    0
-  )
+  const quickActions = [
+    {
+      title: 'Restaurant Menu',
+      description: 'View food items and availability',
+      icon: 'bi-menu-button-wide',
+      path: '/restaurant/menu'
+    },
+    {
+      title: 'Menu Management',
+      description: 'Manage food items and pricing',
+      icon: 'bi-gear',
+      path: '/restaurant/menu-management'
+    },
+    {
+      title: 'New Order',
+      description: 'Create a new restaurant order',
+      icon: 'bi-plus-circle',
+      path: '/restaurant/new-order'
+    },
+    {
+      title: 'All Orders',
+      description: 'View and manage restaurant orders',
+      icon: 'bi-receipt',
+      path: '/restaurant/orders'
+    }
+  ]
 
   return (
     <MainLayout>
@@ -86,239 +110,259 @@ function Restaurant() {
       <Breadcrumb items={['Restaurant']} />
 
       <PageHeader
-        title="Restaurant Management"
-        subtitle="Manage restaurant orders, menu and room service"
+        title="Restaurant"
+        subtitle="Manage restaurant operations, food orders and menu"
       />
 
-      {/* Stats */}
-      <div className="restaurant-stats">
+      <div className="restaurant-page">
 
-        <div className="restaurant-stat-card">
-          <div className="restaurant-stat-icon">
-            <i className="bi bi-receipt"></i>
-          </div>
+        {/* Stats */}
 
-          <div>
-            <span>Total Orders</span>
-            <h2>{totalOrders}</h2>
-          </div>
-        </div>
+        <div className="restaurant-stats">
 
-        <div className="restaurant-stat-card">
-          <div className="restaurant-stat-icon pending">
-            <i className="bi bi-clock-fill"></i>
-          </div>
+          {stats.map((stat) => (
+            <div className="restaurant-stat-card" key={stat.title}>
 
-          <div>
-            <span>Pending</span>
-            <h2>{pendingOrders}</h2>
-          </div>
-        </div>
+              <div className={`restaurant-stat-icon ${stat.className}`}>
+                <i className={`bi ${stat.icon}`}></i>
+              </div>
 
-        <div className="restaurant-stat-card">
-          <div className="restaurant-stat-icon preparing">
-            <i className="bi bi-fire"></i>
-          </div>
+              <div>
+                <span>{stat.title}</span>
+                <h3>{stat.value}</h3>
+                <small>{stat.subtitle}</small>
+              </div>
 
-          <div>
-            <span>Preparing</span>
-            <h2>{preparingOrders}</h2>
-          </div>
-        </div>
-
-        <div className="restaurant-stat-card">
-          <div className="restaurant-stat-icon completed">
-            <i className="bi bi-check-circle-fill"></i>
-          </div>
-
-          <div>
-            <span>Completed</span>
-            <h2>{completedOrders}</h2>
-          </div>
-        </div>
-
-      </div>
-
-      {/* Revenue */}
-      <div className="restaurant-overview">
-
-        <div className="revenue-card">
-
-          <div className="revenue-icon">
-            <i className="bi bi-currency-rupee"></i>
-          </div>
-
-          <div>
-            <span>Today's Restaurant Revenue</span>
-            <h2>₹{totalRevenue.toLocaleString('en-IN')}</h2>
-          </div>
+            </div>
+          ))}
 
         </div>
 
-      </div>
+        {/* Quick Actions */}
 
-      {/* Restaurant Operations */}
-      <div className="restaurant-section">
+        <div className="restaurant-section">
 
-        <div className="restaurant-section-title">
-          <h2>Restaurant Operations</h2>
-          <p>Quick access to restaurant management</p>
+          <div className="restaurant-section-header">
+            <div>
+              <h2>Restaurant Operations</h2>
+              <p>Quick access to restaurant management modules</p>
+            </div>
+          </div>
+
+          <div className="restaurant-actions">
+
+            {quickActions.map((action) => (
+              <button
+                type="button"
+                className="restaurant-action-card"
+                key={action.title}
+                onClick={() => navigate(action.path)}
+              >
+
+                <div className="restaurant-action-icon">
+                  <i className={`bi ${action.icon}`}></i>
+                </div>
+
+                <div className="restaurant-action-content">
+                  <h3>{action.title}</h3>
+                  <p>{action.description}</p>
+                </div>
+
+                <i className="bi bi-arrow-right restaurant-action-arrow"></i>
+
+              </button>
+            ))}
+
+          </div>
+
         </div>
 
-        <div className="restaurant-actions">
+        {/* Revenue + Kitchen Overview */}
 
-          {/* Menu Management */}
-          <div
-            className="restaurant-action-card"
-            onClick={() => navigate('/restaurant/menu')}
-          >
-            <div className="restaurant-action-icon menu">
-              <i className="bi bi-menu-button-wide-fill"></i>
+        <div className="restaurant-overview">
+
+          <div className="restaurant-overview-card revenue-card">
+
+            <div className="overview-card-header">
+              <div>
+                <h2>Today's Revenue</h2>
+                <p>Restaurant income overview</p>
+              </div>
+
+              <div className="overview-icon">
+                <i className="bi bi-currency-rupee"></i>
+              </div>
             </div>
 
-            <div className="restaurant-action-content">
-              <h3>Menu Management</h3>
-              <p>
-                Add, edit and manage restaurant food and beverages.
-              </p>
+            <div className="revenue-value">
+              ₹18,450
             </div>
 
-            <i className="bi bi-chevron-right restaurant-action-arrow"></i>
+            <div className="revenue-details">
+              <div>
+                <span>Room Service</span>
+                <strong>₹11,250</strong>
+              </div>
+
+              <div>
+                <span>Restaurant</span>
+                <strong>₹5,700</strong>
+              </div>
+
+              <div>
+                <span>Takeaway</span>
+                <strong>₹1,500</strong>
+              </div>
+            </div>
+
           </div>
 
-          {/* Order Management */}
-          <div
-            className="restaurant-action-card"
-            onClick={() => navigate('/restaurant/orders')}
-          >
-            <div className="restaurant-action-icon orders">
-              <i className="bi bi-basket3-fill"></i>
+          <div className="restaurant-overview-card kitchen-card">
+
+            <div className="overview-card-header">
+              <div>
+                <h2>Kitchen Status</h2>
+                <p>Current order processing</p>
+              </div>
+
+              <div className="overview-icon">
+                <i className="bi bi-cup-hot"></i>
+              </div>
             </div>
 
-            <div className="restaurant-action-content">
-              <h3>Order Management</h3>
-              <p>
-                Track dine-in and room service orders.
-              </p>
+            <div className="kitchen-status-list">
+
+              <div className="kitchen-status-item">
+                <div>
+                  <span className="status-dot pending-dot"></span>
+                  <span>Pending</span>
+                </div>
+
+                <strong>5</strong>
+              </div>
+
+              <div className="kitchen-status-item">
+                <div>
+                  <span className="status-dot preparing-dot"></span>
+                  <span>Preparing</span>
+                </div>
+
+                <strong>7</strong>
+              </div>
+
+              <div className="kitchen-status-item">
+                <div>
+                  <span className="status-dot ready-dot"></span>
+                  <span>Ready</span>
+                </div>
+
+                <strong>4</strong>
+              </div>
+
+              <div className="kitchen-status-item">
+                <div>
+                  <span className="status-dot completed-dot"></span>
+                  <span>Completed</span>
+                </div>
+
+                <strong>8</strong>
+              </div>
+
             </div>
 
-            <i className="bi bi-chevron-right restaurant-action-arrow"></i>
-          </div>
-
-          {/* Room Service */}
-          <div
-            className="restaurant-action-card"
-            onClick={() => navigate('/services/room-services')}
-          >
-            <div className="restaurant-action-icon service">
-              <i className="bi bi-bell-fill"></i>
-            </div>
-
-            <div className="restaurant-action-content">
-              <h3>Room Service</h3>
-              <p>
-                Manage food and beverage requests from hotel rooms.
-              </p>
-            </div>
-
-            <i className="bi bi-chevron-right restaurant-action-arrow"></i>
           </div>
 
         </div>
 
-      </div>
+        {/* Recent Orders */}
 
-      {/* Today's Orders */}
-      <div className="restaurant-table-card">
+        <div className="restaurant-table-card">
 
-        <div className="restaurant-table-header">
-          <div>
-            <h2>Today's Orders</h2>
-            <p>Monitor current restaurant orders</p>
+          <div className="restaurant-table-header">
+
+            <div>
+              <h2>Recent Orders</h2>
+              <p>Latest restaurant orders</p>
+            </div>
+
+            <button
+              type="button"
+              className="view-all-btn"
+              onClick={() => navigate('/restaurant/orders')}
+            >
+              View All
+              <i className="bi bi-arrow-right"></i>
+            </button>
+
           </div>
-        </div>
 
-        <div className="restaurant-table-wrapper">
+          <div className="restaurant-table-wrapper">
 
-          <table className="restaurant-table">
+            <table className="restaurant-table">
 
-            <thead>
-              <tr>
-                <th>Order</th>
-                <th>Table / Room</th>
-                <th>Guest</th>
-                <th>Items</th>
-                <th>Type</th>
-                <th>Amount</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-
-            <tbody>
-
-              {orders.map(order => (
-                <tr key={order.id}>
-
-                  <td>
-                    <span className="order-number">
-                      {order.orderNo}
-                    </span>
-                  </td>
-
-                  <td>
-                    <span className="table-room">
-                      {order.table}
-                    </span>
-                  </td>
-
-                  <td>
-                    <strong className="restaurant-guest">
-                      {order.guest}
-                    </strong>
-                  </td>
-
-                  <td>
-                    {order.items}
-                  </td>
-
-                  <td>
-                    <span className="order-type">
-                      {order.type}
-                    </span>
-                  </td>
-
-                  <td>
-                    <strong className="restaurant-amount">
-                      ₹{order.amount.toLocaleString('en-IN')}
-                    </strong>
-                  </td>
-
-                  <td>
-                    <select
-                      className={`order-status ${order.status
-                        .toLowerCase()
-                        .replace(' ', '-')}`}
-                      value={order.status}
-                      onChange={e =>
-                        updateStatus(
-                          order.id,
-                          e.target.value
-                        )
-                      }
-                    >
-                      <option>Pending</option>
-                      <option>Preparing</option>
-                      <option>Ready</option>
-                      <option>Completed</option>
-                    </select>
-                  </td>
-
+              <thead>
+                <tr>
+                  <th>ORDER NO.</th>
+                  <th>GUEST</th>
+                  <th>ROOM</th>
+                  <th>ITEMS</th>
+                  <th>AMOUNT</th>
+                  <th>STATUS</th>
                 </tr>
-              ))}
+              </thead>
 
-            </tbody>
+              <tbody>
 
-          </table>
+                {recentOrders.map((order) => (
+                  <tr key={order.id}>
+
+                    <td>
+                      <span className="restaurant-order-number">
+                        #{order.orderNo}
+                      </span>
+                    </td>
+
+                    <td>
+                      <strong>{order.guest}</strong>
+                    </td>
+
+                    <td>
+                      <span className="restaurant-room">
+                        Room {order.room}
+                      </span>
+                    </td>
+
+                    <td>
+                      <span className="restaurant-order-items">
+                        {order.items}
+                      </span>
+                    </td>
+
+                    <td>
+                      <strong className="restaurant-order-amount">
+                        ₹{order.amount.toLocaleString('en-IN')}
+                      </strong>
+                    </td>
+
+                    <td>
+                      <span
+                        className={`restaurant-order-status ${order.status
+                          .toLowerCase()
+                          .replace(' ', '-')}`}
+                      >
+                        <span></span>
+                        {order.status}
+                      </span>
+                    </td>
+
+                  </tr>
+                ))}
+
+              </tbody>
+
+            </table>
+
+          </div>
 
         </div>
 

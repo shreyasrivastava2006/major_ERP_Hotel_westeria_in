@@ -1,0 +1,427 @@
+.hotel-profile-page {
+  width: 100%;
+}
+
+/* ================================
+   HEADER
+================================ */
+
+.hotel-profile-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.hotel-profile-dashboard-btn {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 16px;
+  border: 1px solid var(--w-border);
+  border-radius: 9px;
+  background: var(--w-white);
+  color: var(--w-text);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.hotel-profile-dashboard-btn:hover {
+  border-color: var(--w-gold);
+  color: var(--w-gold-dark);
+  background: rgba(201, 162, 74, 0.05);
+}
+
+/* ================================
+   HOTEL IDENTITY
+================================ */
+
+.hotel-profile-identity {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 24px;
+  margin-bottom: 20px;
+  background: var(--w-white);
+  border: 1px solid var(--w-border);
+  border-radius: 14px;
+  box-shadow: var(--w-shadow);
+}
+
+.hotel-profile-identity-left {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+}
+
+.hotel-profile-logo {
+  width: 72px;
+  height: 72px;
+  min-width: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  background: linear-gradient(
+    135deg,
+    rgba(201, 162, 74, 0.18),
+    rgba(106, 52, 145, 0.1)
+  );
+  border: 1px solid rgba(201, 162, 74, 0.3);
+  color: var(--w-gold-dark);
+  font-size: 28px;
+}
+
+.hotel-profile-identity h2 {
+  margin: 0 0 5px;
+  color: var(--w-text);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.hotel-profile-id {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--w-gold-dark);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.hotel-profile-identity p {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  color: var(--w-muted);
+  font-size: 11px;
+}
+
+.hotel-profile-identity p i {
+  color: var(--w-gold-dark);
+}
+
+.hotel-profile-active {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: 20px;
+  background: rgba(34, 197, 94, 0.1);
+  color: #16803b;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* ================================
+   FORM
+================================ */
+
+.hotel-profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.hotel-profile-card {
+  background: var(--w-white);
+  border: 1px solid var(--w-border);
+  border-radius: 14px;
+  box-shadow: var(--w-shadow);
+  overflow: hidden;
+}
+
+.hotel-profile-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--w-border);
+}
+
+.hotel-profile-card-icon {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: rgba(201, 162, 74, 0.1);
+  color: var(--w-gold-dark);
+  font-size: 17px;
+}
+
+.hotel-profile-card-header h2 {
+  margin: 0 0 3px;
+  color: var(--w-text);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.hotel-profile-card-header p {
+  margin: 0;
+  color: var(--w-muted);
+  font-size: 10px;
+}
+
+/* ================================
+   INPUT GRID
+================================ */
+
+.hotel-profile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 22px;
+}
+
+.hotel-profile-field {
+  min-width: 0;
+}
+
+.hotel-profile-field.full-width {
+  grid-column: 1 / -1;
+}
+
+.hotel-profile-field label {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--w-text);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.hotel-profile-input {
+  position: relative;
+}
+
+.hotel-profile-input > i {
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--w-gold-dark);
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.hotel-profile-input input {
+  width: 100%;
+  height: 43px;
+  padding: 0 13px 0 38px;
+  border: 1px solid var(--w-border);
+  border-radius: 8px;
+  outline: none;
+  background: var(--w-background-soft);
+  color: var(--w-text);
+  font-family: inherit;
+  font-size: 12px;
+  transition: all 0.2s ease;
+}
+
+.hotel-profile-input input::placeholder {
+  color: var(--w-muted);
+}
+
+.hotel-profile-input input:focus {
+  border-color: var(--w-gold);
+  background: var(--w-white);
+  box-shadow: 0 0 0 3px rgba(201, 162, 74, 0.08);
+}
+
+.hotel-profile-input.disabled input {
+  cursor: not-allowed;
+  opacity: 0.7;
+  background: #f2f0ec;
+}
+
+.hotel-profile-field small {
+  display: block;
+  margin-top: 5px;
+  color: var(--w-muted);
+  font-size: 9px;
+}
+
+/* ================================
+   DESCRIPTION
+================================ */
+
+.hotel-profile-description {
+  padding: 22px;
+}
+
+.hotel-profile-description textarea {
+  width: 100%;
+  min-height: 130px;
+  padding: 13px 14px;
+  border: 1px solid var(--w-border);
+  border-radius: 8px;
+  outline: none;
+  resize: vertical;
+  background: var(--w-background-soft);
+  color: var(--w-text);
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 1.7;
+  transition: all 0.2s ease;
+}
+
+.hotel-profile-description textarea::placeholder {
+  color: var(--w-muted);
+}
+
+.hotel-profile-description textarea:focus {
+  border-color: var(--w-gold);
+  background: var(--w-white);
+  box-shadow: 0 0 0 3px rgba(201, 162, 74, 0.08);
+}
+
+/* ================================
+   ACTIONS
+================================ */
+
+.hotel-profile-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 18px 20px;
+  background: var(--w-white);
+  border: 1px solid var(--w-border);
+  border-radius: 12px;
+  box-shadow: var(--w-shadow);
+}
+
+.hotel-profile-success {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-right: auto;
+  color: #16803b;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.hotel-profile-cancel,
+.hotel-profile-save {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 18px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.hotel-profile-cancel {
+  border: 1px solid var(--w-border);
+  background: var(--w-white);
+  color: var(--w-text);
+}
+
+.hotel-profile-cancel:hover {
+  border-color: var(--w-gold);
+  color: var(--w-gold-dark);
+}
+
+.hotel-profile-save {
+  border: 1px solid var(--w-gold);
+  background: var(--w-gold);
+  color: #171018;
+}
+
+.hotel-profile-save:hover {
+  background: var(--w-gold-light);
+  transform: translateY(-1px);
+  box-shadow: var(--w-shadow-gold);
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 800px) {
+  .hotel-profile-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .hotel-profile-dashboard-btn {
+    align-self: flex-end;
+  }
+
+  .hotel-profile-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hotel-profile-field.full-width {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 550px) {
+  .hotel-profile-dashboard-btn {
+    width: 100%;
+  }
+
+  .hotel-profile-identity {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 18px;
+  }
+
+  .hotel-profile-identity-left {
+    align-items: flex-start;
+  }
+
+  .hotel-profile-logo {
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+    font-size: 24px;
+  }
+
+  .hotel-profile-identity h2 {
+    font-size: 18px;
+  }
+
+  .hotel-profile-active {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hotel-profile-grid,
+  .hotel-profile-description {
+    padding: 16px;
+  }
+
+  .hotel-profile-card-header {
+    padding: 16px;
+  }
+
+  .hotel-profile-actions {
+    flex-direction: column-reverse;
+    padding: 15px;
+  }
+
+  .hotel-profile-cancel,
+  .hotel-profile-save {
+    width: 100%;
+  }
+
+  .hotel-profile-success {
+    width: 100%;
+    justify-content: center;
+    margin: 0 0 5px;
+  }
+}

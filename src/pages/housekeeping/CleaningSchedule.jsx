@@ -1,73 +1,152 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
+
 import MainLayout from '../../layouts/MainLayout'
 import Breadcrumb from '../../components/layout/Breadcrumb'
 import PageHeader from '../../components/layout/PageHeader'
+
 import { useHotel } from '../../context/HotelContext'
+import { useHotelData } from '../../context/HotelDataContext'
+
 import './CleaningSchedule.css'
+
+const DEFAULT_SCHEDULE = [
+  {
+    id: 'CS-001',
+    hotelId: 'HOTEL-001',
+    room: '101',
+    roomId: '101',
+    assignedTo: 'Anita Sharma',
+    task: 'Room Cleaning',
+    date: new Date().toISOString().split('T')[0],
+    shift: 'Morning',
+    status: 'Pending',
+    priority: 'Normal',
+  },
+  {
+    id: 'CS-002',
+    hotelId: 'HOTEL-001',
+    room: '102',
+    roomId: '102',
+    assignedTo: 'Pooja Verma',
+    task: 'Deep Cleaning',
+    date: new Date().toISOString().split('T')[0],
+    shift: 'Morning',
+    status: 'In Progress',
+    priority: 'High',
+  },
+  {
+    id: 'CS-003',
+    hotelId: 'HOTEL-001',
+    room: '205',
+    roomId: '205',
+    assignedTo: 'Neha Singh',
+    task: 'Room Cleaning',
+    date: new Date().toISOString().split('T')[0],
+    shift: 'Evening',
+    status: 'Completed',
+    priority: 'Normal',
+  },
+]
+
+const initialForm = {
+  room: '',
+  assignedTo: '',
+  task: 'Room Cleaning',
+  date: new Date().toISOString().split('T')[0],
+  shift: 'Morning',
+  status: 'Pending',
+  priority: 'Normal',
+}
 
 function CleaningSchedule() {
   const { selectedHotel } = useHotel()
 
-  const [schedules, setSchedules] = useState([
-    {
-      id: 1,
-      room: '101',
-      guest: 'Rahul Sharma',
-      cleaningType: 'Regular Cleaning',
-      staff: 'Anjali',
-      date: '2026-09-14',
-      time: '09:00 AM',
-      status: 'Pending',
-    },
-    {
-      id: 2,
-      room: '205',
-      guest: 'Priya Singh',
-      cleaningType: 'Deep Cleaning',
-      staff: 'Neha',
-      date: '2026-09-14',
-      time: '10:30 AM',
-      status: 'In Progress',
-    },
-    {
-      id: 3,
-      room: '302',
-      guest: 'Aman Verma',
-      cleaningType: 'Checkout Cleaning',
-      staff: 'Riya',
-      date: '2026-09-14',
-      time: '12:00 PM',
-      status: 'Completed',
-    },
-    {
-      id: 4,
-      room: '405',
-      guest: 'Sneha Kapoor',
-      cleaningType: 'Regular Cleaning',
-      staff: 'Pooja',
-      date: '2026-09-15',
-      time: '09:30 AM',
-      status: 'Pending',
-    },
-  ])
+  const {
+    rooms,
+    staff,
+    updateRoomStatus,
+  } = useHotelData()
+
+  const [schedule, setSchedule] = useState(() => {
+    try {
+      const saved = localStorage.getItem(
+        'wisteriaCleaningSchedule'
+      )
+
+      return saved
+        ? JSON.parse(saved)
+        : DEFAULT_SCHEDULE
+    } catch {
+      return DEFAULT_SCHEDULE
+    }
+  })
 
   const [showForm, setShowForm] = useState(false)
-  const [statusFilter, setStatusFilter] = useState('All Status')
 
-  const [newSchedule, setNewSchedule] = useState({
-    room: '',
-    guest: '',
-    cleaningType: 'Regular Cleaning',
-    staff: '',
-    date: '',
-    time: '',
-    status: 'Pending',
-  })
+  const [formData, setFormData] =
+    useState(initialForm)
+
+  const saveSchedule = (updated) => {
+    setSchedule(updated)
+
+    localStorage.setItem(
+      'wisteriaCleaningSchedule',
+      JSON.stringify(updated)
+    )
+  }
+
+  const hotelRooms = useMemo(() => {
+    if (!selectedHotel) return rooms
+
+    const hasHotelData = rooms.some(
+      (room) => room.hotelId
+    )
+
+    if (!hasHotelData) return rooms
+
+    return rooms.filter(
+      (room) =>
+        String(room.hotelId) ===
+        String(selectedHotel.id)
+    )
+  }, [rooms, selectedHotel])
+
+  const hotelStaff = useMemo(() => {
+    if (!selectedHotel) return staff
+
+    const hasHotelData = staff.some(
+      (member) => member.hotelId
+    )
+
+    if (!hasHotelData) return staff
+
+    return staff.filter(
+      (member) =>
+        String(member.hotelId) ===
+        String(selectedHotel.id)
+    )
+  }, [staff, selectedHotel])
+
+  const hotelSchedule = useMemo(() => {
+    if (!selectedHotel) return schedule
+
+    const hasHotelData = schedule.some(
+      (item) => item.hotelId
+    )
+
+    if (!hasHotelData) return schedule
+
+    return schedule.filter(
+      (item) =>
+        String(item.hotelId) ===
+        String(selectedHotel.id)
+    )
+  }, [schedule, selectedHotel])
 
   const handleChange = (e) => {
     const { name, value } = e.target
 
-    setNewSchedule((previous) => ({
+    setFormData((previous) => ({
       ...previous,
       [name]: value,
     }))
@@ -76,137 +155,210 @@ function CleaningSchedule() {
   const addSchedule = (e) => {
     e.preventDefault()
 
-    if (
-      !newSchedule.room ||
-      !newSchedule.staff ||
-      !newSchedule.date ||
-      !newSchedule.time
-    ) {
-      alert('Please fill all required fields.')
+    if (!formData.room) {
+      alert('Please select a room.')
       return
     }
 
-    const schedule = {
-      id: Date.now(),
-      ...newSchedule,
+    const room = hotelRooms.find(
+      (item) =>
+        String(
+          item.roomNumber ??
+            item.number ??
+            item.id
+        ) === String(formData.room)
+    )
+
+    const staffMember = hotelStaff.find(
+      (member) =>
+        String(member.name) ===
+        String(formData.assignedTo)
+    )
+
+    const newSchedule = {
+      id: `CS-${Date.now()}`,
+      ...(selectedHotel
+        ? {
+            hotelId: selectedHotel.id,
+            hotelName: selectedHotel.name,
+          }
+        : {}),
+      room: formData.room,
+      roomId: room?.id ?? '',
+      assignedTo:
+        staffMember?.name ||
+        formData.assignedTo ||
+        'Unassigned',
+      task: formData.task,
+      date: formData.date,
+      shift: formData.shift,
+      status: formData.status,
+      priority: formData.priority,
     }
 
-    setSchedules((previous) => [...previous, schedule])
+    saveSchedule([
+      newSchedule,
+      ...schedule,
+    ])
 
-    setNewSchedule({
-      room: '',
-      guest: '',
-      cleaningType: 'Regular Cleaning',
-      staff: '',
-      date: '',
-      time: '',
-      status: 'Pending',
+    setFormData({
+      ...initialForm,
+      date: new Date()
+        .toISOString()
+        .split('T')[0],
     })
 
     setShowForm(false)
   }
 
-  const updateStatus = (id, status) => {
-    setSchedules((previous) =>
-      previous.map((schedule) =>
-        schedule.id === id
-          ? { ...schedule, status }
-          : schedule
+  const updateStatus = (
+    id,
+    newStatus
+  ) => {
+    const selectedItem =
+      schedule.find(
+        (item) =>
+          String(item.id) ===
+          String(id)
+      )
+
+    const updated = schedule.map(
+      (item) =>
+        String(item.id) === String(id)
+          ? {
+              ...item,
+              status: newStatus,
+            }
+          : item
+    )
+
+    saveSchedule(updated)
+
+    if (selectedItem?.roomId) {
+      if (newStatus === 'Completed') {
+        updateRoomStatus(
+          selectedItem.roomId,
+          'Available'
+        )
+      }
+
+      if (
+        newStatus === 'In Progress' ||
+        newStatus === 'Pending'
+      ) {
+        updateRoomStatus(
+          selectedItem.roomId,
+          'Maintenance'
+        )
+      }
+    }
+  }
+
+  const deleteSchedule = (id) => {
+    const confirmed = window.confirm(
+      'Are you sure you want to delete this cleaning schedule?'
+    )
+
+    if (!confirmed) return
+
+    saveSchedule(
+      schedule.filter(
+        (item) =>
+          String(item.id) !==
+          String(id)
       )
     )
   }
 
-  const deleteSchedule = (id) => {
-    if (
-      window.confirm(
-        'Are you sure you want to delete this schedule?'
-      )
-    ) {
-      setSchedules((previous) =>
-        previous.filter((schedule) => schedule.id !== id)
-      )
-    }
-  }
+  const pendingCount =
+    hotelSchedule.filter(
+      (item) =>
+        item.status === 'Pending'
+    ).length
 
-  const pendingCount = schedules.filter(
-    (item) => item.status === 'Pending'
-  ).length
+  const progressCount =
+    hotelSchedule.filter(
+      (item) =>
+        item.status === 'In Progress'
+    ).length
 
-  const progressCount = schedules.filter(
-    (item) => item.status === 'In Progress'
-  ).length
-
-  const completedCount = schedules.filter(
-    (item) => item.status === 'Completed'
-  ).length
-
-  const filteredSchedules =
-    statusFilter === 'All Status'
-      ? schedules
-      : schedules.filter(
-          (schedule) => schedule.status === statusFilter
-        )
+  const completedCount =
+    hotelSchedule.filter(
+      (item) =>
+        item.status === 'Completed'
+    ).length
 
   return (
     <MainLayout>
+
       <div className="cleaning-schedule-page">
+
         <Breadcrumb
-          items={['Housekeeping', 'Cleaning Schedule']}
+          items={[
+            'Housekeeping',
+            'Cleaning Schedule',
+          ]}
         />
 
-        <div className="schedule-page-header">
+        <div className="cleaning-page-header">
+
           <PageHeader
             title="Cleaning Schedule"
             subtitle={
               selectedHotel
-                ? `Schedule and manage cleaning activities for ${selectedHotel.name}`
-                : 'Schedule and manage room cleaning activities.'
+                ? `Manage cleaning schedules for ${selectedHotel.name}`
+                : 'Manage daily room cleaning schedules'
             }
           />
 
           <button
             type="button"
             className="add-schedule-btn"
-            onClick={() => setShowForm(!showForm)}
+            onClick={() =>
+              setShowForm(!showForm)
+            }
           >
-            <i className="bi bi-plus-lg"></i>
-            {showForm ? 'Close Form' : 'Add Schedule'}
+            <i className="bi bi-calendar-plus-fill"></i>
+
+            {showForm
+              ? 'Close Form'
+              : 'Add Schedule'}
           </button>
+
         </div>
 
         {selectedHotel && (
-          <div className="schedule-hotel-bar">
-            <div className="schedule-hotel-icon">
+          <div className="cleaning-hotel-bar">
+
+            <div className="cleaning-hotel-icon">
               <i className="bi bi-building"></i>
             </div>
 
-            <div className="schedule-hotel-info">
-              <span>SELECTED PROPERTY</span>
-              <strong>{selectedHotel.name}</strong>
+            <div>
+              <span>
+                SELECTED PROPERTY
+              </span>
+
+              <strong>
+                {selectedHotel.name}
+              </strong>
+
               <small>
-                {selectedHotel.code} • {selectedHotel.category} •{' '}
-                {selectedHotel.address.city},{' '}
-                {selectedHotel.address.state}
+                {selectedHotel.code} •{' '}
+                {selectedHotel.category} •{' '}
+                {selectedHotel.address?.city},{' '}
+                {selectedHotel.address?.state}
               </small>
             </div>
+
           </div>
         )}
 
-        <div className="schedule-stats">
-          <div className="schedule-stat">
-            <div className="schedule-stat-icon">
-              <i className="bi bi-calendar-check"></i>
-            </div>
+        <div className="cleaning-stats">
 
-            <div>
-              <span>Total Schedule</span>
-              <h2>{schedules.length}</h2>
-            </div>
-          </div>
-
-          <div className="schedule-stat">
-            <div className="schedule-stat-icon pending">
-              <i className="bi bi-clock"></i>
+          <div className="cleaning-stat-card">
+            <div className="cleaning-stat-icon">
+              <i className="bi bi-hourglass-split"></i>
             </div>
 
             <div>
@@ -215,8 +367,8 @@ function CleaningSchedule() {
             </div>
           </div>
 
-          <div className="schedule-stat">
-            <div className="schedule-stat-icon progress">
+          <div className="cleaning-stat-card">
+            <div className="cleaning-stat-icon progress-icon">
               <i className="bi bi-arrow-repeat"></i>
             </div>
 
@@ -226,9 +378,9 @@ function CleaningSchedule() {
             </div>
           </div>
 
-          <div className="schedule-stat">
-            <div className="schedule-stat-icon completed">
-              <i className="bi bi-check-circle"></i>
+          <div className="cleaning-stat-card">
+            <div className="cleaning-stat-icon completed-icon">
+              <i className="bi bi-check-circle-fill"></i>
             </div>
 
             <div>
@@ -236,112 +388,177 @@ function CleaningSchedule() {
               <h2>{completedCount}</h2>
             </div>
           </div>
+
+          <div className="cleaning-stat-card">
+            <div className="cleaning-stat-icon total-icon">
+              <i className="bi bi-calendar-check"></i>
+            </div>
+
+            <div>
+              <span>Total</span>
+              <h2>{hotelSchedule.length}</h2>
+            </div>
+          </div>
+
         </div>
 
         {showForm && (
-          <div className="schedule-form-card">
-            <div className="form-title">
+          <div className="cleaning-form-card">
+
+            <div className="cleaning-form-header">
+
               <div>
-                <h2>Add Cleaning Schedule</h2>
-                <p>Create a new housekeeping task.</p>
+                <h2>
+                  Add Cleaning Schedule
+                </h2>
+
+                <p>
+                  Assign a room and housekeeping
+                  staff for cleaning.
+                </p>
               </div>
 
-              <button
-                type="button"
-                className="close-form-btn"
-                onClick={() => setShowForm(false)}
-              >
-                <i className="bi bi-x-lg"></i>
-              </button>
+              <i className="bi bi-calendar2-check-fill"></i>
+
             </div>
 
             <form onSubmit={addSchedule}>
-              <div className="form-grid">
-                <div className="form-group">
-                  <label>Room Number *</label>
 
-                  <input
-                    type="text"
+              <div className="cleaning-form-grid">
+
+                <div className="cleaning-form-group">
+                  <label>Room</label>
+
+                  <select
                     name="room"
-                    placeholder="e.g. 101"
-                    value={newSchedule.room}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label>Guest Name</label>
-
-                  <input
-                    type="text"
-                    name="guest"
-                    placeholder="Guest name"
-                    value={newSchedule.guest}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label>Cleaning Type *</label>
-
-                  <select
-                    name="cleaningType"
-                    value={newSchedule.cleaningType}
+                    value={formData.room}
                     onChange={handleChange}
                   >
-                    <option>Regular Cleaning</option>
-                    <option>Deep Cleaning</option>
-                    <option>Checkout Cleaning</option>
-                    <option>Room Refresh</option>
-                    <option>Maintenance Cleaning</option>
+                    <option value="">
+                      Select Room
+                    </option>
+
+                    {hotelRooms.map((room) => (
+                      <option
+                        key={room.id}
+                        value={
+                          room.roomNumber ??
+                          room.number ??
+                          room.id
+                        }
+                      >
+                        Room{' '}
+                        {room.roomNumber ??
+                          room.number ??
+                          room.id}
+                      </option>
+                    ))}
                   </select>
                 </div>
 
-                <div className="form-group">
-                  <label>Assigned Staff *</label>
+                <div className="cleaning-form-group">
+                  <label>Staff</label>
 
                   <select
-                    name="staff"
-                    value={newSchedule.staff}
+                    name="assignedTo"
+                    value={
+                      formData.assignedTo
+                    }
                     onChange={handleChange}
                   >
-                    <option value="">Select Staff</option>
-                    <option>Anjali</option>
-                    <option>Neha</option>
-                    <option>Riya</option>
-                    <option>Pooja</option>
-                    <option>Priya</option>
+                    <option value="">
+                      Select Staff
+                    </option>
+
+                    {hotelStaff.map(
+                      (member) => (
+                        <option
+                          key={member.id}
+                          value={member.name}
+                        >
+                          {member.name}
+                        </option>
+                      )
+                    )}
                   </select>
                 </div>
 
-                <div className="form-group">
-                  <label>Date *</label>
+                <div className="cleaning-form-group">
+                  <label>Task</label>
+
+                  <select
+                    name="task"
+                    value={formData.task}
+                    onChange={handleChange}
+                  >
+                    <option>
+                      Room Cleaning
+                    </option>
+                    <option>
+                      Deep Cleaning
+                    </option>
+                    <option>
+                      Bathroom Cleaning
+                    </option>
+                    <option>
+                      Linen Change
+                    </option>
+                    <option>
+                      Inspection
+                    </option>
+                  </select>
+                </div>
+
+                <div className="cleaning-form-group">
+                  <label>Date</label>
 
                   <input
                     type="date"
                     name="date"
-                    value={newSchedule.date}
+                    value={formData.date}
                     onChange={handleChange}
                   />
                 </div>
 
-                <div className="form-group">
-                  <label>Time *</label>
+                <div className="cleaning-form-group">
+                  <label>Shift</label>
 
-                  <input
-                    type="time"
-                    name="time"
-                    value={newSchedule.time}
+                  <select
+                    name="shift"
+                    value={formData.shift}
                     onChange={handleChange}
-                  />
+                  >
+                    <option>Morning</option>
+                    <option>Afternoon</option>
+                    <option>Evening</option>
+                    <option>Night</option>
+                  </select>
                 </div>
+
+                <div className="cleaning-form-group">
+                  <label>Priority</label>
+
+                  <select
+                    name="priority"
+                    value={formData.priority}
+                    onChange={handleChange}
+                  >
+                    <option>Normal</option>
+                    <option>High</option>
+                    <option>Urgent</option>
+                  </select>
+                </div>
+
               </div>
 
-              <div className="form-buttons">
+              <div className="cleaning-form-actions">
+
                 <button
                   type="button"
-                  className="cancel-btn"
-                  onClick={() => setShowForm(false)}
+                  className="cancel-schedule-btn"
+                  onClick={() =>
+                    setShowForm(false)
+                  }
                 >
                   Cancel
                 </button>
@@ -350,145 +567,159 @@ function CleaningSchedule() {
                   type="submit"
                   className="save-schedule-btn"
                 >
-                  <i className="bi bi-check-lg"></i>
-                  Save Schedule
+                  <i className="bi bi-check-circle-fill"></i>
+                  Add Schedule
                 </button>
+
               </div>
+
             </form>
           </div>
         )}
 
-        <div className="schedule-table-card">
-          <div className="table-heading">
+        <div className="cleaning-table-card">
+
+          <div className="cleaning-table-header">
+
             <div>
-              <h2>Scheduled Cleaning</h2>
+              <h2>Daily Cleaning Schedule</h2>
+
               <p>
-                All housekeeping cleaning schedules for this property.
+                Manage assigned cleaning tasks
+                and their progress.
               </p>
             </div>
 
-            <div className="table-filter">
-              <i className="bi bi-funnel"></i>
+            <span>
+              {hotelSchedule.length} Schedules
+            </span>
 
-              <select
-                value={statusFilter}
-                onChange={(e) =>
-                  setStatusFilter(e.target.value)
-                }
-              >
-                <option>All Status</option>
-                <option>Pending</option>
-                <option>In Progress</option>
-                <option>Completed</option>
-              </select>
-            </div>
           </div>
 
-          <div className="schedule-results">
-            Showing <strong>{filteredSchedules.length}</strong> of{' '}
-            <strong>{schedules.length}</strong> schedules
-          </div>
+          <div className="cleaning-table-wrapper">
 
-          <div className="schedule-table-wrapper">
-            <table className="schedule-table">
+            <table className="cleaning-table">
+
               <thead>
                 <tr>
                   <th>Room</th>
-                  <th>Guest</th>
-                  <th>Cleaning Type</th>
+                  <th>Task</th>
                   <th>Staff</th>
                   <th>Date</th>
-                  <th>Time</th>
+                  <th>Shift</th>
+                  <th>Priority</th>
                   <th>Status</th>
                   <th>Action</th>
                 </tr>
               </thead>
 
               <tbody>
-                {filteredSchedules.length > 0 ? (
-                  filteredSchedules.map((schedule) => (
-                    <tr key={schedule.id}>
-                      <td>
-                        <div className="room-cell">
-                          <i className="bi bi-door-closed"></i>
-                          <strong>{schedule.room}</strong>
-                        </div>
-                      </td>
 
-                      <td>
-                        {schedule.guest || '—'}
-                      </td>
-
-                      <td>
-                        {schedule.cleaningType}
-                      </td>
-
-                      <td>
-                        <div className="staff-cell">
-                          <div className="staff-circle">
-                            {schedule.staff.charAt(0)}
-                          </div>
-
-                          {schedule.staff}
-                        </div>
-                      </td>
-
-                      <td>{schedule.date}</td>
-
-                      <td>{schedule.time}</td>
-
-                      <td>
-                        <select
-                          className={`schedule-status ${schedule.status
-                            .toLowerCase()
-                            .replace(/\s+/g, '-')}`}
-                          value={schedule.status}
-                          onChange={(e) =>
-                            updateStatus(
-                              schedule.id,
-                              e.target.value
-                            )
-                          }
-                        >
-                          <option>Pending</option>
-                          <option>In Progress</option>
-                          <option>Completed</option>
-                        </select>
-                      </td>
-
-                      <td>
-                        <button
-                          type="button"
-                          className="delete-btn"
-                          onClick={() =>
-                            deleteSchedule(schedule.id)
-                          }
-                          title="Delete Schedule"
-                        >
-                          <i className="bi bi-trash3"></i>
-                        </button>
-                      </td>
-                    </tr>
-                  ))
-                ) : (
+                {hotelSchedule.length === 0 ? (
                   <tr>
                     <td
                       colSpan="8"
-                      className="schedule-empty"
+                      className="cleaning-empty"
                     >
                       <i className="bi bi-calendar-x"></i>
-                      <strong>No schedules found</strong>
-                      <span>
-                        Try changing the status filter.
-                      </span>
+
+                      <p>
+                        No cleaning schedules
+                        found.
+                      </p>
                     </td>
                   </tr>
+                ) : (
+                  hotelSchedule.map(
+                    (item) => (
+                      <tr key={item.id}>
+
+                        <td>
+                          <strong>
+                            Room {item.room}
+                          </strong>
+                        </td>
+
+                        <td>
+                          {item.task}
+                        </td>
+
+                        <td>
+                          {item.assignedTo ||
+                            'Unassigned'}
+                        </td>
+
+                        <td>
+                          {item.date}
+                        </td>
+
+                        <td>
+                          {item.shift}
+                        </td>
+
+                        <td>
+                          {item.priority}
+                        </td>
+
+                        <td>
+                          <select
+                            value={
+                              item.status
+                            }
+                            onChange={(e) =>
+                              updateStatus(
+                                item.id,
+                                e.target.value
+                              )
+                            }
+                            className={`cleaning-status-select ${item.status
+                              .toLowerCase()
+                              .replace(
+                                /\s+/g,
+                                '-'
+                              )}`}
+                          >
+                            <option>
+                              Pending
+                            </option>
+                            <option>
+                              In Progress
+                            </option>
+                            <option>
+                              Completed
+                            </option>
+                          </select>
+                        </td>
+
+                        <td>
+                          <button
+                            type="button"
+                            className="delete-schedule-btn"
+                            onClick={() =>
+                              deleteSchedule(
+                                item.id
+                              )
+                            }
+                            title="Delete Schedule"
+                          >
+                            <i className="bi bi-trash3"></i>
+                          </button>
+                        </td>
+
+                      </tr>
+                    )
+                  )
                 )}
+
               </tbody>
+
             </table>
+
           </div>
         </div>
+
       </div>
+
     </MainLayout>
   )
 }

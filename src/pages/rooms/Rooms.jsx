@@ -1,115 +1,119 @@
-import { useState } from 'react'
-import MainLayout from '../../layouts/MainLayout'
-import PageHeader from '../../components/layout/PageHeader'
-import Breadcrumb from '../../components/layout/Breadcrumb'
-import RoomFilter from './RoomFilter'
-import RoomCard from './RoomCard'
-import AddRoom from './AddRoom'
-import RoomDetails from './RoomDetails'
-import { useHotel } from '../../context/HotelContext'
-import './Rooms.css'
+// src/pages/rooms/Rooms.jsx
+
+import { useState } from "react";
+
+import MainLayout from "../../layouts/MainLayout";
+import PageHeader from "../../components/layout/PageHeader";
+import Breadcrumb from "../../components/layout/Breadcrumb";
+
+import RoomFilter from "./RoomFilter";
+import RoomCard from "./RoomCard";
+import AddRoom from "./AddRoom";
+import RoomDetails from "./RoomDetails";
+
+import { useHotel } from "../../context/HotelContext";
+import { useHotelData } from "../../context/HotelDataContext";
+
+import "./Rooms.css";
 
 function Rooms() {
-  const { selectedHotel } = useHotel()
+  const { selectedHotel } = useHotel();
 
-  const [rooms, setRooms] = useState([
-    {
-      id: 1,
-      number: '101',
-      type: 'Deluxe Room',
-      floor: '1st Floor',
-      price: '₹4,500',
-      status: 'Available',
-    },
-    {
-      id: 2,
-      number: '102',
-      type: 'Deluxe Room',
-      floor: '1st Floor',
-      price: '₹4,500',
-      status: 'Occupied',
-    },
-    {
-      id: 3,
-      number: '201',
-      type: 'Suite Room',
-      floor: '2nd Floor',
-      price: '₹7,500',
-      status: 'Available',
-    },
-    {
-      id: 4,
-      number: '202',
-      type: 'Executive Room',
-      floor: '2nd Floor',
-      price: '₹6,000',
-      status: 'Maintenance',
-    },
-  ])
+  const {
+    rooms,
+    addRoom,
+    totalRooms,
+    availableRooms,
+    occupiedRooms,
+    maintenanceRooms,
+  } = useHotelData();
 
-  const [showAddRoom, setShowAddRoom] = useState(false)
-  const [selectedRoom, setSelectedRoom] = useState(null)
+  const [showAddRoom, setShowAddRoom] = useState(false);
+  const [selectedRoom, setSelectedRoom] = useState(null);
 
-  const [statusFilter, setStatusFilter] = useState('All')
-  const [typeFilter, setTypeFilter] = useState('All')
+  const [statusFilter, setStatusFilter] = useState("All");
+  const [typeFilter, setTypeFilter] = useState("All");
+
+  // =====================================================
+  // ADD ROOM
+  // =====================================================
 
   const handleAddRoom = (newRoom) => {
-    const room = {
+    addRoom({
       ...newRoom,
-      id: rooms.length + 1,
-      price: `₹${Number(newRoom.price).toLocaleString('en-IN')}`,
-    }
+      price: Number(newRoom.price) || 0,
+    });
 
-    setRooms((prev) => [...prev, room])
-    setShowAddRoom(false)
-  }
+    setShowAddRoom(false);
+  };
+
+  // =====================================================
+  // FILTER ROOMS
+  // =====================================================
 
   const filteredRooms = rooms.filter((room) => {
     const matchesStatus =
-      statusFilter === 'All' || room.status === statusFilter
+      statusFilter === "All" ||
+      room.status === statusFilter;
 
     const matchesType =
-      typeFilter === 'All' || room.type === typeFilter
+      typeFilter === "All" ||
+      room.type === typeFilter;
 
-    return matchesStatus && matchesType
-  })
+    return matchesStatus && matchesType;
+  });
+
+  // =====================================================
+  // CLEAR FILTER
+  // =====================================================
 
   const clearFilters = () => {
-    setStatusFilter('All')
-    setTypeFilter('All')
-  }
+    setStatusFilter("All");
+    setTypeFilter("All");
+  };
 
-  const totalRooms = selectedHotel?.rooms?.total || rooms.length
+  // =====================================================
+  // OPEN ROOM DETAILS
+  // =====================================================
 
-  const availableRooms =
-    selectedHotel?.rooms?.available ??
-    rooms.filter((room) => room.status === 'Available').length
+  const handleViewDetails = (room) => {
+    setSelectedRoom(room);
+  };
 
-  const occupiedRooms =
-    selectedHotel?.rooms?.occupied ??
-    rooms.filter((room) => room.status === 'Occupied').length
+  // =====================================================
+  // CLOSE ROOM DETAILS
+  // =====================================================
 
-  const maintenanceRooms =
-    selectedHotel?.rooms?.maintenance ??
-    rooms.filter((room) => room.status === 'Maintenance').length
+  const handleCloseDetails = () => {
+    setSelectedRoom(null);
+  };
 
   return (
     <MainLayout>
+      {/* =================================================
+          BREADCRUMB
+      ================================================= */}
 
-      <Breadcrumb items={['Rooms']} />
+      <Breadcrumb items={["Rooms"]} />
+
+      {/* =================================================
+          PAGE HEADER
+      ================================================= */}
 
       <PageHeader
         title="Rooms"
         subtitle={
           selectedHotel
             ? `Manage rooms for ${selectedHotel.name}`
-            : 'Manage hotel rooms, availability and room status'
+            : "Manage hotel rooms, availability and room status"
         }
       />
 
       <div className="rooms-page">
 
-        {/* SELECTED HOTEL */}
+        {/* =================================================
+            SELECTED HOTEL
+        ================================================= */}
 
         {selectedHotel && (
           <div className="rooms-hotel-bar">
@@ -120,9 +124,14 @@ function Rooms() {
 
             <div>
               <span>SELECTED PROPERTY</span>
-              <strong>{selectedHotel.name}</strong>
+
+              <strong>
+                {selectedHotel.name}
+              </strong>
+
               <small>
-                {selectedHotel.code} • {selectedHotel.address.city},{' '}
+                {selectedHotel.code} •{" "}
+                {selectedHotel.address.city},{" "}
                 {selectedHotel.address.state}
               </small>
             </div>
@@ -130,11 +139,15 @@ function Rooms() {
           </div>
         )}
 
-        {/* STATS */}
+        {/* =================================================
+            ROOM STATISTICS
+        ================================================= */}
 
         <div className="rooms-stats">
 
+          {/* TOTAL */}
           <div className="rooms-stat-card">
+
             <div className="rooms-stat-icon">
               <i className="bi bi-door-open"></i>
             </div>
@@ -143,9 +156,12 @@ function Rooms() {
               <span>Total Rooms</span>
               <h3>{totalRooms}</h3>
             </div>
+
           </div>
 
+          {/* AVAILABLE */}
           <div className="rooms-stat-card">
+
             <div className="rooms-stat-icon available">
               <i className="bi bi-check-circle"></i>
             </div>
@@ -154,9 +170,12 @@ function Rooms() {
               <span>Available</span>
               <h3>{availableRooms}</h3>
             </div>
+
           </div>
 
+          {/* OCCUPIED */}
           <div className="rooms-stat-card">
+
             <div className="rooms-stat-icon occupied">
               <i className="bi bi-person-fill"></i>
             </div>
@@ -165,9 +184,12 @@ function Rooms() {
               <span>Occupied</span>
               <h3>{occupiedRooms}</h3>
             </div>
+
           </div>
 
+          {/* MAINTENANCE */}
           <div className="rooms-stat-card">
+
             <div className="rooms-stat-icon maintenance">
               <i className="bi bi-tools"></i>
             </div>
@@ -176,33 +198,54 @@ function Rooms() {
               <span>Maintenance</span>
               <h3>{maintenanceRooms}</h3>
             </div>
+
           </div>
 
         </div>
 
-        {/* ACTION */}
+        {/* =================================================
+            ADD ROOM BUTTON
+        ================================================= */}
 
         <div className="rooms-actions">
 
           <button
             type="button"
             className="add-room-btn"
-            onClick={() => setShowAddRoom(!showAddRoom)}
+            onClick={() =>
+              setShowAddRoom((prev) => !prev)
+            }
           >
-            <i className="bi bi-plus-circle"></i>
 
-            {showAddRoom ? 'Close Form' : 'Add New Room'}
+            <i
+              className={
+                showAddRoom
+                  ? "bi bi-x-circle"
+                  : "bi bi-plus-circle"
+              }
+            ></i>
+
+            {showAddRoom
+              ? "Close Form"
+              : "Add New Room"}
+
           </button>
 
         </div>
 
-        {/* ADD ROOM */}
+        {/* =================================================
+            ADD ROOM FORM
+        ================================================= */}
 
         {showAddRoom && (
-          <AddRoom onAdd={handleAddRoom} />
+          <AddRoom
+            onAdd={handleAddRoom}
+          />
         )}
 
-        {/* FILTER */}
+        {/* =================================================
+            ROOM FILTER
+        ================================================= */}
 
         <RoomFilter
           status={statusFilter}
@@ -212,7 +255,9 @@ function Rooms() {
           onClear={clearFilters}
         />
 
-        {/* ROOM HEADER */}
+        {/* =================================================
+            ROOM LIST HEADER
+        ================================================= */}
 
         <div className="rooms-list-header">
 
@@ -220,7 +265,9 @@ function Rooms() {
             <h2>Hotel Rooms</h2>
 
             <p>
-              Showing {filteredRooms.length} of {rooms.length} room records
+              Showing{" "}
+              {filteredRooms.length} of{" "}
+              {rooms.length} room records
             </p>
           </div>
 
@@ -230,22 +277,37 @@ function Rooms() {
 
         </div>
 
-        {/* ROOMS */}
+        {/* =================================================
+            ROOM CARDS
+        ================================================= */}
 
         {filteredRooms.length > 0 ? (
+
           <div className="rooms-grid">
 
             {filteredRooms.map((room) => (
+
               <div
                 key={room.id}
-                onClick={() => setSelectedRoom(room)}
               >
-                <RoomCard room={room} />
+
+                <RoomCard
+                  room={room}
+                  onViewDetails={handleViewDetails}
+                />
+
               </div>
+
             ))}
 
           </div>
+
         ) : (
+
+          /* =================================================
+             EMPTY STATE
+          ================================================= */
+
           <div className="rooms-empty">
 
             <i className="bi bi-door-open"></i>
@@ -253,25 +315,30 @@ function Rooms() {
             <h3>No Rooms Found</h3>
 
             <p>
-              Try changing your room status or room type filter.
+              Try changing your room status or
+              room type filter.
             </p>
 
           </div>
+
         )}
 
-        {/* DETAILS */}
+        {/* =================================================
+            ROOM DETAILS MODAL
+        ================================================= */}
 
         {selectedRoom && (
+
           <RoomDetails
             room={selectedRoom}
-            onClose={() => setSelectedRoom(null)}
+            onClose={handleCloseDetails}
           />
+
         )}
 
       </div>
-
     </MainLayout>
-  )
+  );
 }
 
-export default Rooms
+export default Rooms;

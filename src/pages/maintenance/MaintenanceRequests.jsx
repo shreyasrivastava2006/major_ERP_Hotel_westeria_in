@@ -3,10 +3,12 @@ import { useNavigate } from 'react-router-dom'
 import MainLayout from '../../layouts/MainLayout'
 import Breadcrumb from '../../components/layout/Breadcrumb'
 import PageHeader from '../../components/layout/PageHeader'
+import { useHotel } from '../../context/HotelContext'
 import './MaintenanceRequests.css'
 
 function MaintenanceRequests() {
   const navigate = useNavigate()
+  const { selectedHotel } = useHotel()
 
   const [requests, setRequests] = useState([
     {
@@ -80,15 +82,17 @@ function MaintenanceRequests() {
     <MainLayout>
       <div className="maintenance-requests-page">
 
-        <Breadcrumb
-          items={['Maintenance', 'Requests']}
-        />
+        <Breadcrumb items={['Maintenance', 'Requests']} />
 
         <div className="maintenance-requests-header">
 
           <PageHeader
             title="Maintenance Requests"
-            subtitle="Manage guest and hotel maintenance requests"
+            subtitle={
+              selectedHotel
+                ? `Manage maintenance requests for ${selectedHotel.name}`
+                : 'Manage guest and hotel maintenance requests'
+            }
           />
 
           <button
@@ -102,11 +106,26 @@ function MaintenanceRequests() {
 
         </div>
 
+        {selectedHotel && (
+          <div className="maintenance-requests-hotel-bar">
+            <div className="maintenance-requests-hotel-icon">
+              <i className="bi bi-building"></i>
+            </div>
+
+            <div className="maintenance-requests-hotel-info">
+              <span>SELECTED PROPERTY</span>
+              <strong>{selectedHotel.name}</strong>
+              <small>
+                {selectedHotel.code} • {selectedHotel.category} •{' '}
+                {selectedHotel.address.city}, {selectedHotel.address.state}
+              </small>
+            </div>
+          </div>
+        )}
+
         <div className="maintenance-requests-card">
 
-          {/* CARD HEADER */}
           <div className="maintenance-requests-card-header">
-
             <div>
               <h2>Maintenance Requests</h2>
               <p>
@@ -117,10 +136,8 @@ function MaintenanceRequests() {
             <span className="maintenance-requests-count">
               {filteredRequests.length} Requests
             </span>
-
           </div>
 
-          {/* TOOLBAR */}
           <div className="maintenance-requests-toolbar">
 
             <div className="maintenance-requests-search">
@@ -146,7 +163,6 @@ function MaintenanceRequests() {
 
           </div>
 
-          {/* TABLE */}
           <div className="maintenance-requests-table-wrapper">
 
             <table className="maintenance-requests-table">

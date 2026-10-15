@@ -3,10 +3,12 @@ import { useNavigate } from 'react-router-dom'
 import MainLayout from '../../layouts/MainLayout'
 import Breadcrumb from '../../components/layout/Breadcrumb'
 import PageHeader from '../../components/layout/PageHeader'
+import { useHotel } from '../../context/HotelContext'
 import './Equipments.css'
 
 function Equipments() {
   const navigate = useNavigate()
+  const { selectedHotel } = useHotel()
 
   const [equipment, setEquipment] = useState([
     {
@@ -107,14 +109,16 @@ function Equipments() {
     <MainLayout>
       <div className="equipment-page">
 
-        <Breadcrumb
-          items={['Maintenance', 'Equipment']}
-        />
+        <Breadcrumb items={['Maintenance', 'Equipment']} />
 
         <div className="equipment-header">
           <PageHeader
             title="Equipment"
-            subtitle="Manage hotel equipment, service schedules and operational status"
+            subtitle={
+              selectedHotel
+                ? `Manage equipment and service schedules for ${selectedHotel.name}`
+                : 'Manage hotel equipment, service schedules and operational status'
+            }
           />
 
           <button
@@ -127,7 +131,23 @@ function Equipments() {
           </button>
         </div>
 
-        {/* STATS */}
+        {selectedHotel && (
+          <div className="equipment-hotel-bar">
+            <div className="equipment-hotel-icon">
+              <i className="bi bi-building"></i>
+            </div>
+
+            <div className="equipment-hotel-info">
+              <span>SELECTED PROPERTY</span>
+              <strong>{selectedHotel.name}</strong>
+              <small>
+                {selectedHotel.code} • {selectedHotel.category} •{' '}
+                {selectedHotel.address.city}, {selectedHotel.address.state}
+              </small>
+            </div>
+          </div>
+        )}
+
         <div className="equipment-stats">
 
           <div className="equipment-stat-card">
@@ -165,13 +185,12 @@ function Equipments() {
 
         </div>
 
-        {/* EQUIPMENT CARD */}
         <div className="equipment-card">
 
           <div className="equipment-card-header">
             <div>
               <h2>Equipment List</h2>
-              <p>Current hotel equipment and maintenance status</p>
+              <p>Current equipment and maintenance status</p>
             </div>
 
             <span className="equipment-count">
@@ -179,7 +198,6 @@ function Equipments() {
             </span>
           </div>
 
-          {/* TOOLBAR */}
           <div className="equipment-toolbar">
 
             <div className="equipment-search">
@@ -197,9 +215,7 @@ function Equipments() {
               value={categoryFilter}
               onChange={(e) => setCategoryFilter(e.target.value)}
             >
-              <option value="All Categories">
-                All Categories
-              </option>
+              <option value="All Categories">All Categories</option>
               <option value="HVAC">HVAC</option>
               <option value="Laundry">Laundry</option>
               <option value="Electrical">Electrical</option>
@@ -209,7 +225,6 @@ function Equipments() {
 
           </div>
 
-          {/* TABLE */}
           <div className="equipment-table-wrapper">
 
             <table className="equipment-table">
@@ -232,10 +247,7 @@ function Equipments() {
 
                 {filteredEquipment.length === 0 ? (
                   <tr>
-                    <td
-                      colSpan="9"
-                      className="equipment-empty"
-                    >
+                    <td colSpan="9" className="equipment-empty">
                       <i className="bi bi-search"></i>
                       <span>No equipment found.</span>
                     </td>
@@ -278,7 +290,6 @@ function Equipments() {
                       </td>
 
                       <td>{item.lastService}</td>
-
                       <td>{item.nextService}</td>
 
                       <td>

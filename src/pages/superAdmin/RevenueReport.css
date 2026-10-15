@@ -1,0 +1,787 @@
+/* =========================================================
+   WISTERIA IN - SUPER ADMIN REVENUE REPORT
+   Luxury Ivory + Muted Gold + Soft Plum
+========================================================= */
+
+/* ================= PAGE ================= */
+
+.super-revenue-page {
+  width: 100%;
+  min-width: 0;
+  min-height: 100%;
+  box-sizing: border-box;
+  padding-bottom: 40px;
+  color: #4d4039;
+  font-family: "Inter", "Segoe UI", sans-serif;
+}
+
+.super-revenue-page *,
+.super-revenue-page *::before,
+.super-revenue-page *::after {
+  box-sizing: border-box;
+}
+
+/* ================= BREADCRUMB ================= */
+
+.super-revenue-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 20px;
+  color: #9b8b7c;
+  font-size: 12px;
+}
+
+.super-revenue-breadcrumb button {
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #9b8b7c;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.super-revenue-breadcrumb button:hover {
+  color: #a17b4f;
+}
+
+.super-revenue-breadcrumb i {
+  color: #c3a77f;
+  font-size: 10px;
+}
+
+.super-revenue-breadcrumb strong {
+  color: #9f7b51;
+  font-weight: 600;
+}
+
+/* ================= HEADER ================= */
+
+.super-revenue-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.super-revenue-eyebrow {
+  display: block;
+  margin-bottom: 8px;
+  color: #ad987f;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.7px;
+}
+
+.super-revenue-header h1 {
+  margin: 0;
+  color: #4b3b35;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 32px;
+  font-weight: 500;
+}
+
+.super-revenue-header p {
+  max-width: 600px;
+  margin: 10px 0 0;
+  color: #918174;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.super-revenue-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.super-revenue-back-btn,
+.super-revenue-export-btn {
+  min-height: 43px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 0 18px;
+  border-radius: 9px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.super-revenue-back-btn {
+  border: 1px solid #ddcfbd;
+  background: #fffdf9;
+  color: #806d5d;
+}
+
+.super-revenue-back-btn:hover {
+  background: #f3eadc;
+  border-color: #c8a979;
+}
+
+.super-revenue-export-btn {
+  border: 1px solid #b99464;
+  background: linear-gradient(135deg, #c6a477, #b48d5e);
+  color: #fffaf2;
+  box-shadow: 0 5px 15px rgba(145, 108, 66, 0.15);
+}
+
+.super-revenue-export-btn:hover {
+  background: linear-gradient(135deg, #d0b184, #bc9869);
+  transform: translateY(-2px);
+}
+
+/* ================= STATS ================= */
+
+.super-revenue-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 17px;
+  margin-bottom: 26px;
+}
+
+.super-revenue-stat-card {
+  min-width: 0;
+  min-height: 125px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  border: 1px solid #e3d7c7;
+  border-radius: 13px;
+  background: #fffdf9;
+  box-shadow: 0 5px 18px rgba(91, 68, 48, 0.055);
+  transition: all 0.25s ease;
+}
+
+.super-revenue-stat-card:hover {
+  transform: translateY(-3px);
+  border-color: #cdb18b;
+  box-shadow: 0 10px 25px rgba(91, 68, 48, 0.09);
+}
+
+.super-revenue-stat-icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-size: 20px;
+}
+
+.super-revenue-stat-icon.gold {
+  background: #f2e8d7;
+  color: #a78355;
+  border: 1px solid #e5d4b8;
+}
+
+.super-revenue-stat-icon.purple {
+  background: #eee5e8;
+  color: #8b6874;
+  border: 1px solid #dfced3;
+}
+
+.super-revenue-stat-icon.rose {
+  background: #f0e5e4;
+  color: #9a7270;
+  border: 1px solid #dfcecc;
+}
+
+.super-revenue-stat-icon.green {
+  background: #e7eee8;
+  color: #708a76;
+  border: 1px solid #d1dfd4;
+}
+
+.super-revenue-stat-content {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.super-revenue-stat-content span {
+  color: #918174;
+  font-size: 11px;
+}
+
+.super-revenue-stat-content strong {
+  margin-top: 7px;
+  color: #4d3e37;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(19px, 2vw, 27px);
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.super-revenue-stat-content small {
+  margin-top: 5px;
+  color: #a8998b;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+/* ================= FILTER CARD ================= */
+
+.super-revenue-filter-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 26px;
+  padding: 20px;
+  border: 1px solid #e2d5c4;
+  border-radius: 13px;
+  background: #fffdf9;
+  box-shadow: 0 5px 20px rgba(91, 68, 48, 0.05);
+}
+
+.super-revenue-filter-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.super-revenue-filter-icon {
+  width: 41px;
+  height: 41px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: #f2e8d8;
+  border: 1px solid #e4d3bb;
+  color: #a47e50;
+  font-size: 16px;
+}
+
+.super-revenue-filter-heading > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.super-revenue-filter-heading strong {
+  color: #5b4940;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.super-revenue-filter-heading span {
+  color: #9c8c7e;
+  font-size: 10px;
+}
+
+.super-revenue-filter-controls {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.super-revenue-search {
+  width: 230px;
+  height: 41px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #ded2c3;
+  border-radius: 9px;
+  background: #fcfaf6;
+}
+
+.super-revenue-search:focus-within {
+  border-color: #c5a374;
+  box-shadow: 0 0 0 3px rgba(184, 145, 91, 0.08);
+}
+
+.super-revenue-search i {
+  margin-left: 13px;
+  color: #a89582;
+  font-size: 13px;
+}
+
+.super-revenue-search input {
+  width: 100%;
+  height: 100%;
+  padding: 0 12px;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #5d4d44;
+  font-family: inherit;
+  font-size: 11px;
+}
+
+.super-revenue-filter-controls select {
+  height: 41px;
+  min-width: 120px;
+  padding: 0 12px;
+  border: 1px solid #ded2c3;
+  border-radius: 9px;
+  background: #fcfaf6;
+  color: #77685e;
+  font-family: inherit;
+  font-size: 11px;
+  outline: none;
+  cursor: pointer;
+}
+
+.super-revenue-clear-btn {
+  height: 41px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 14px;
+  border: 1px solid #ddcfbd;
+  border-radius: 9px;
+  background: #faf6ef;
+  color: #8b7662;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.super-revenue-clear-btn:hover {
+  background: #f2e8dc;
+}
+
+/* ================= CHART GRID ================= */
+
+.super-revenue-charts {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.super-revenue-chart-card {
+  min-width: 0;
+  padding: 23px;
+  border: 1px solid #e2d5c4;
+  border-radius: 14px;
+  background: #fffdf9;
+  box-shadow: 0 5px 20px rgba(91, 68, 48, 0.055);
+}
+
+.super-revenue-chart-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 22px;
+}
+
+.super-revenue-chart-header span {
+  color: #ad987f;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+}
+
+.super-revenue-chart-header h2 {
+  margin: 7px 0;
+  color: #54433b;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 21px;
+  font-weight: 500;
+}
+
+.super-revenue-chart-header p {
+  margin: 0;
+  color: #9b8c7e;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.super-revenue-chart-icon {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid #e4d3bb;
+  border-radius: 9px;
+  background: #f2e8d8;
+  color: #a47e50;
+  font-size: 16px;
+}
+
+.super-revenue-chart-body {
+  position: relative;
+  width: 100%;
+  height: 320px;
+}
+
+.super-revenue-doughnut {
+  position: relative;
+  width: 100%;
+  height: 320px;
+}
+
+.super-revenue-full-chart {
+  margin-bottom: 26px;
+}
+
+.super-revenue-chart-empty {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: #a8998b;
+  font-size: 12px;
+  text-align: center;
+}
+
+/* ================= TABLE CARD ================= */
+
+.super-revenue-table-card {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #e2d5c4;
+  border-radius: 14px;
+  background: #fffdf9;
+  box-shadow: 0 5px 20px rgba(91, 68, 48, 0.055);
+}
+
+.super-revenue-table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 24px 26px;
+  border-bottom: 1px solid #e9dfd3;
+}
+
+.super-revenue-table-header > div:first-child > span {
+  color: #ad987f;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+}
+
+.super-revenue-table-header h2 {
+  margin: 7px 0;
+  color: #54433b;
+  font-family: Georgia, serif;
+  font-size: 23px;
+  font-weight: 500;
+}
+
+.super-revenue-table-header p {
+  margin: 0;
+  color: #9b8c7e;
+  font-size: 11px;
+}
+
+.super-revenue-manage-btn {
+  min-height: 41px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 0 16px;
+  border: 1px solid #c9aa7e;
+  border-radius: 9px;
+  background: #f5ead9;
+  color: #947044;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.super-revenue-manage-btn:hover {
+  background: #ecddc7;
+}
+
+/* ================= TABLE ================= */
+
+.super-revenue-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.super-revenue-table {
+  width: 100%;
+  min-width: 1000px;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.super-revenue-table thead {
+  background: #f8f2e9;
+}
+
+.super-revenue-table th {
+  padding: 17px 16px;
+  color: #9a8065;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+  white-space: nowrap;
+}
+
+.super-revenue-table td {
+  padding: 18px 16px;
+  border-top: 1px solid #f0e8de;
+  color: #77685e;
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+.super-revenue-table tbody tr:hover {
+  background: #fcf8f2;
+}
+
+/* ================= HOTEL CELL ================= */
+
+.super-revenue-hotel-cell {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.super-revenue-hotel-icon {
+  width: 39px;
+  height: 39px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: #f2e8d8;
+  color: #a47e50;
+  font-size: 16px;
+}
+
+.super-revenue-hotel-cell > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.super-revenue-hotel-cell strong {
+  color: #5b4940;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.super-revenue-hotel-cell span {
+  color: #a8998b;
+  font-size: 10px;
+}
+
+/* ================= PLAN BADGE ================= */
+
+.super-revenue-plan-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 11px;
+  border: 1px solid #e3d3bd;
+  border-radius: 8px;
+  background: #f7efe3;
+  color: #96744f;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ================= AMOUNT ================= */
+
+.super-revenue-amount {
+  color: #5b4940;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ================= PAYMENT STATUS ================= */
+
+.super-revenue-payment {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 11px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.super-revenue-payment .status-dot {
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.super-revenue-payment.paid {
+  background: #edf3ed;
+  color: #6e8973;
+  border: 1px solid #d8e5d9;
+}
+
+.super-revenue-payment.paid .status-dot {
+  background: #779b7c;
+}
+
+.super-revenue-payment.pending {
+  background: #fbf1df;
+  color: #aa8751;
+  border: 1px solid #ead9b9;
+}
+
+.super-revenue-payment.pending .status-dot {
+  background: #c49a58;
+}
+
+/* ================= EMPTY STATE ================= */
+
+.super-revenue-empty {
+  padding: 70px 20px;
+  text-align: center;
+}
+
+.super-revenue-empty > i {
+  color: #c5a171;
+  font-size: 42px;
+}
+
+.super-revenue-empty h3 {
+  margin: 16px 0 8px;
+  color: #54433b;
+  font-family: Georgia, serif;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.super-revenue-empty p {
+  margin: 0;
+  color: #9c8c7e;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.super-revenue-empty button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  padding: 12px 20px;
+  border: 1px solid #b99464;
+  border-radius: 9px;
+  background: linear-gradient(135deg, #c6a477, #b48d5e);
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1350px) {
+  .super-revenue-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .super-revenue-filter-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .super-revenue-filter-controls {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 1000px) {
+  .super-revenue-charts {
+    grid-template-columns: 1fr;
+  }
+
+  .super-revenue-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .super-revenue-header-actions {
+    width: 100%;
+  }
+}
+
+@media (max-width: 650px) {
+  .super-revenue-header h1 {
+    font-size: 27px;
+  }
+
+  .super-revenue-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .super-revenue-header-actions {
+    flex-direction: column;
+  }
+
+  .super-revenue-back-btn,
+  .super-revenue-export-btn {
+    width: 100%;
+  }
+
+  .super-revenue-filter-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .super-revenue-search,
+  .super-revenue-filter-controls select,
+  .super-revenue-clear-btn {
+    width: 100%;
+  }
+
+  .super-revenue-chart-card {
+    padding: 18px;
+  }
+
+  .super-revenue-chart-body,
+  .super-revenue-doughnut {
+    height: 280px;
+  }
+
+  .super-revenue-table-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .super-revenue-header h1 {
+    font-size: 24px;
+  }
+
+  .super-revenue-chart-header h2 {
+    font-size: 18px;
+  }
+
+  .super-revenue-table-header h2 {
+    font-size: 20px;
+  }
+}

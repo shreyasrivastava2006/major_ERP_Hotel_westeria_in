@@ -3,10 +3,12 @@ import { useNavigate } from 'react-router-dom'
 import MainLayout from '../../layouts/MainLayout'
 import Breadcrumb from '../../components/layout/Breadcrumb'
 import PageHeader from '../../components/layout/PageHeader'
+import { useHotel } from '../../context/HotelContext'
 import './Maintenance.css'
 
 function Maintenance() {
   const navigate = useNavigate()
+  const { selectedHotel } = useHotel()
 
   const [tasks, setTasks] = useState([
     {
@@ -74,10 +76,14 @@ function Maintenance() {
     return matchesSearch && matchesStatus
   })
 
-  const pending = tasks.filter((task) => task.status === 'Pending').length
+  const pending = tasks.filter(
+    (task) => task.status === 'Pending'
+  ).length
+
   const inProgress = tasks.filter(
     (task) => task.status === 'In Progress'
   ).length
+
   const completed = tasks.filter(
     (task) => task.status === 'Completed'
   ).length
@@ -107,12 +113,18 @@ function Maintenance() {
         <Breadcrumb items={['Maintenance']} />
 
         <div className="maintenance-header">
+
           <PageHeader
             title="Maintenance"
-            subtitle="Manage maintenance tasks, repairs and service activities"
+            subtitle={
+              selectedHotel
+                ? `Manage maintenance activities for ${selectedHotel.name}`
+                : 'Manage maintenance tasks, repairs and service activities'
+            }
           />
 
           <div className="maintenance-header-actions">
+
             <button
               type="button"
               className="maintenance-secondary-btn"
@@ -139,8 +151,26 @@ function Maintenance() {
               <i className="bi bi-plus-lg"></i>
               New Request
             </button>
+
           </div>
         </div>
+
+        {selectedHotel && (
+          <div className="maintenance-hotel-bar">
+            <div className="maintenance-hotel-icon">
+              <i className="bi bi-building"></i>
+            </div>
+
+            <div className="maintenance-hotel-info">
+              <span>SELECTED PROPERTY</span>
+              <strong>{selectedHotel.name}</strong>
+              <small>
+                {selectedHotel.code} • {selectedHotel.category} •{' '}
+                {selectedHotel.address.city}, {selectedHotel.address.state}
+              </small>
+            </div>
+          </div>
+        )}
 
         <div className="maintenance-stats">
 
@@ -148,6 +178,7 @@ function Maintenance() {
             <div className="maintenance-stat-icon">
               <i className="bi bi-tools"></i>
             </div>
+
             <div>
               <span>Total Tasks</span>
               <strong>{tasks.length}</strong>
@@ -158,6 +189,7 @@ function Maintenance() {
             <div className="maintenance-stat-icon pending-icon">
               <i className="bi bi-clock"></i>
             </div>
+
             <div>
               <span>Pending</span>
               <strong>{pending}</strong>
@@ -168,6 +200,7 @@ function Maintenance() {
             <div className="maintenance-stat-icon progress-icon">
               <i className="bi bi-arrow-repeat"></i>
             </div>
+
             <div>
               <span>In Progress</span>
               <strong>{inProgress}</strong>
@@ -178,6 +211,7 @@ function Maintenance() {
             <div className="maintenance-stat-icon completed-icon">
               <i className="bi bi-check-circle"></i>
             </div>
+
             <div>
               <span>Completed</span>
               <strong>{completed}</strong>
@@ -212,17 +246,15 @@ function Maintenance() {
               />
             </div>
 
-            <div className="maintenance-filter-card">
-              <select
-                value={statusFilter}
-                onChange={(e) => setStatusFilter(e.target.value)}
-              >
-                <option value="All">All Status</option>
-                <option value="Pending">Pending</option>
-                <option value="In Progress">In Progress</option>
-                <option value="Completed">Completed</option>
-              </select>
-            </div>
+            <select
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value)}
+            >
+              <option value="All">All Status</option>
+              <option value="Pending">Pending</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+            </select>
 
           </div>
 
@@ -262,7 +294,7 @@ function Maintenance() {
 
                       <td>
                         <div className="maintenance-issue">
-                          <div className="maintenance-item-icon">
+                          <div className="maintenance-task-icon">
                             <i className="bi bi-wrench-adjustable"></i>
                           </div>
 

@@ -5,6 +5,10 @@ import './Welcome.css'
 function Welcome() {
   const navigate = useNavigate()
 
+  const handleNext = () => {
+    navigate('/home')
+  }
+
   return (
     <div
       className="welcome-page"
@@ -13,10 +17,11 @@ function Welcome() {
       <div className="welcome-overlay"></div>
 
       <button
+        type="button"
         className="welcome-next-btn"
-        onClick={() => navigate('/home')}
+        onClick={handleNext}
       >
-        NEXT
+        <span>NEXT</span>
         <i className="bi bi-arrow-right"></i>
       </button>
     </div>

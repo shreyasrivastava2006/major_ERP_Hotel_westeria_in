@@ -1,0 +1,887 @@
+/* =========================================================
+   WISTERIA IN - SUPER ADMIN HOTEL PERFORMANCE
+   Luxury Ivory + Muted Gold + Soft Plum
+========================================================= */
+
+.hotel-performance-page {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding-bottom: 40px;
+  color: #4d4039;
+  font-family: "Inter", "Segoe UI", sans-serif;
+}
+
+.hotel-performance-page *,
+.hotel-performance-page *::before,
+.hotel-performance-page *::after {
+  box-sizing: border-box;
+}
+
+/* ================= BREADCRUMB ================= */
+
+.hotel-performance-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 20px;
+  color: #9b8b7c;
+  font-size: 12px;
+}
+
+.hotel-performance-breadcrumb button {
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #9b8b7c;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.hotel-performance-breadcrumb button:hover {
+  color: #a17b4f;
+}
+
+.hotel-performance-breadcrumb i {
+  color: #c3a77f;
+  font-size: 10px;
+}
+
+.hotel-performance-breadcrumb strong {
+  color: #9f7b51;
+  font-weight: 600;
+}
+
+/* ================= HEADER ================= */
+
+.hotel-performance-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.hotel-performance-eyebrow {
+  display: block;
+  margin-bottom: 8px;
+  color: #ad987f;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.7px;
+}
+
+.hotel-performance-header h1 {
+  margin: 0;
+  color: #4b3b35;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 32px;
+  font-weight: 500;
+}
+
+.hotel-performance-header p {
+  max-width: 600px;
+  margin: 10px 0 0;
+  color: #918174;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.hotel-performance-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.hotel-performance-back-btn,
+.hotel-performance-export-btn {
+  min-height: 43px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 0 18px;
+  border-radius: 9px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.hotel-performance-back-btn {
+  border: 1px solid #ddcfbd;
+  background: #fffdf9;
+  color: #806d5d;
+}
+
+.hotel-performance-back-btn:hover {
+  background: #f3eadc;
+  border-color: #c8a979;
+}
+
+.hotel-performance-export-btn {
+  border: 1px solid #b99464;
+  background: linear-gradient(135deg, #c6a477, #b48d5e);
+  color: #fffaf2;
+  box-shadow: 0 5px 15px rgba(145, 108, 66, 0.15);
+}
+
+.hotel-performance-export-btn:hover {
+  background: linear-gradient(135deg, #d0b184, #bc9869);
+  transform: translateY(-2px);
+}
+
+/* ================= STATISTICS ================= */
+
+.hotel-performance-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 17px;
+  margin-bottom: 26px;
+}
+
+.hotel-performance-stat-card {
+  min-width: 0;
+  min-height: 125px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  border: 1px solid #e3d7c7;
+  border-radius: 13px;
+  background: #fffdf9;
+  box-shadow: 0 5px 18px rgba(91, 68, 48, 0.055);
+  transition: all 0.25s ease;
+}
+
+.hotel-performance-stat-card:hover {
+  transform: translateY(-3px);
+  border-color: #cdb18b;
+  box-shadow: 0 10px 25px rgba(91, 68, 48, 0.09);
+}
+
+.hotel-performance-stat-icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-size: 20px;
+}
+
+.hotel-performance-stat-icon.gold {
+  background: #f2e8d7;
+  color: #a78355;
+  border: 1px solid #e5d4b8;
+}
+
+.hotel-performance-stat-icon.purple {
+  background: #eee5e8;
+  color: #8b6874;
+  border: 1px solid #dfced3;
+}
+
+.hotel-performance-stat-icon.green {
+  background: #e7eee8;
+  color: #708a76;
+  border: 1px solid #d1dfd4;
+}
+
+.hotel-performance-stat-icon.rose {
+  background: #f0e5e4;
+  color: #9a7270;
+  border: 1px solid #dfcecc;
+}
+
+.hotel-performance-stat-content {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.hotel-performance-stat-content span {
+  color: #918174;
+  font-size: 11px;
+}
+
+.hotel-performance-stat-content strong {
+  margin-top: 7px;
+  color: #4d3e37;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(19px, 2vw, 27px);
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.hotel-performance-stat-content small {
+  margin-top: 5px;
+  color: #a8998b;
+  font-size: 10px;
+}
+
+/* ================= FILTER CARD ================= */
+
+.hotel-performance-filter-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 26px;
+  padding: 20px;
+  border: 1px solid #e2d5c4;
+  border-radius: 13px;
+  background: #fffdf9;
+  box-shadow: 0 5px 20px rgba(91, 68, 48, 0.05);
+}
+
+.hotel-performance-filter-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hotel-performance-filter-icon {
+  width: 41px;
+  height: 41px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: #f2e8d8;
+  border: 1px solid #e4d3bb;
+  color: #a47e50;
+  font-size: 16px;
+}
+
+.hotel-performance-filter-heading > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.hotel-performance-filter-heading strong {
+  color: #5b4940;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.hotel-performance-filter-heading span {
+  color: #9c8c7e;
+  font-size: 10px;
+}
+
+.hotel-performance-filter-controls {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.hotel-performance-search {
+  width: 240px;
+  height: 41px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #ded2c3;
+  border-radius: 9px;
+  background: #fcfaf6;
+}
+
+.hotel-performance-search:focus-within {
+  border-color: #c5a374;
+  box-shadow: 0 0 0 3px rgba(184, 145, 91, 0.08);
+}
+
+.hotel-performance-search i {
+  margin-left: 13px;
+  color: #a89582;
+  font-size: 13px;
+}
+
+.hotel-performance-search input {
+  width: 100%;
+  height: 100%;
+  padding: 0 12px;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #5d4d44;
+  font-family: inherit;
+  font-size: 11px;
+}
+
+.hotel-performance-filter-controls select {
+  height: 41px;
+  min-width: 130px;
+  padding: 0 12px;
+  border: 1px solid #ded2c3;
+  border-radius: 9px;
+  background: #fcfaf6;
+  color: #77685e;
+  font-family: inherit;
+  font-size: 11px;
+  outline: none;
+  cursor: pointer;
+}
+
+.hotel-performance-clear-btn {
+  height: 41px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 14px;
+  border: 1px solid #ddcfbd;
+  border-radius: 9px;
+  background: #faf6ef;
+  color: #8b7662;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+/* ================= CHART GRID ================= */
+
+.hotel-performance-charts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.hotel-performance-chart-card {
+  min-width: 0;
+  padding: 23px;
+  border: 1px solid #e2d5c4;
+  border-radius: 14px;
+  background: #fffdf9;
+  box-shadow: 0 5px 20px rgba(91, 68, 48, 0.055);
+}
+
+.hotel-performance-chart-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.hotel-performance-chart-header span {
+  color: #ad987f;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+}
+
+.hotel-performance-chart-header h2 {
+  margin: 7px 0;
+  color: #54433b;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 21px;
+  font-weight: 500;
+}
+
+.hotel-performance-chart-header p {
+  margin: 0;
+  color: #9b8c7e;
+  font-size: 11px;
+}
+
+.hotel-performance-chart-icon {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid #e4d3bb;
+  border-radius: 9px;
+  background: #f2e8d8;
+  color: #a47e50;
+  font-size: 16px;
+}
+
+.hotel-performance-chart-body {
+  position: relative;
+  width: 100%;
+  height: 320px;
+}
+
+/* ================= INSIGHTS ================= */
+
+.hotel-performance-insights {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 26px;
+}
+
+.hotel-performance-doughnut {
+  position: relative;
+  width: 100%;
+  height: 280px;
+}
+
+/* ================= TOP HOTEL ================= */
+
+.hotel-performance-highlight-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px;
+  border: 1px solid #d9c6a8;
+  border-radius: 14px;
+  background: linear-gradient(
+    145deg,
+    #fffdf9 0%,
+    #f7efe3 100%
+  );
+  box-shadow: 0 6px 22px rgba(145, 108, 66, 0.08);
+  text-align: center;
+}
+
+.hotel-performance-highlight-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.hotel-performance-highlight-header span {
+  color: #a5875e;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+}
+
+.hotel-performance-highlight-header i {
+  color: #c6a477;
+  font-size: 20px;
+}
+
+.hotel-performance-highlight-icon {
+  width: 75px;
+  height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  border: 1px solid #dec9a9;
+  border-radius: 20px;
+  background: #f2e5d0;
+  color: #aa8554;
+  font-size: 32px;
+}
+
+.hotel-performance-highlight-card h2 {
+  margin: 0;
+  color: #54433b;
+  font-family: Georgia, serif;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.hotel-performance-highlight-card > p {
+  margin: 10px 0 25px;
+  color: #958473;
+  font-size: 12px;
+}
+
+.hotel-performance-highlight-stats {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: auto;
+}
+
+.hotel-performance-highlight-stats > div {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding: 15px 10px;
+  border: 1px solid #e4d5bf;
+  border-radius: 10px;
+  background: rgba(255, 253, 249, 0.8);
+}
+
+.hotel-performance-highlight-stats span {
+  color: #ad987f;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+}
+
+.hotel-performance-highlight-stats strong {
+  color: #5a4437;
+  font-family: Georgia, serif;
+  font-size: 17px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.hotel-performance-highlight-stats strong i {
+  color: #c6a477;
+  font-size: 12px;
+}
+
+/* ================= TABLE CARD ================= */
+
+.hotel-performance-table-card {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #e2d5c4;
+  border-radius: 14px;
+  background: #fffdf9;
+  box-shadow: 0 5px 20px rgba(91, 68, 48, 0.055);
+}
+
+.hotel-performance-table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 24px 26px;
+  border-bottom: 1px solid #e9dfd3;
+}
+
+.hotel-performance-table-header > div:first-child > span {
+  color: #ad987f;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+}
+
+.hotel-performance-table-header h2 {
+  margin: 7px 0;
+  color: #54433b;
+  font-family: Georgia, serif;
+  font-size: 23px;
+  font-weight: 500;
+}
+
+.hotel-performance-table-header p {
+  margin: 0;
+  color: #9b8c7e;
+  font-size: 11px;
+}
+
+.hotel-performance-period {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid #e2d3bd;
+  border-radius: 20px;
+  background: #f7efe3;
+  color: #95734e;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ================= TABLE ================= */
+
+.hotel-performance-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.hotel-performance-table {
+  width: 100%;
+  min-width: 1100px;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.hotel-performance-table thead {
+  background: #f8f2e9;
+}
+
+.hotel-performance-table th {
+  padding: 17px 16px;
+  color: #9a8065;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+  white-space: nowrap;
+}
+
+.hotel-performance-table td {
+  padding: 18px 16px;
+  border-top: 1px solid #f0e8de;
+  color: #77685e;
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+.hotel-performance-table tbody tr:hover {
+  background: #fcf8f2;
+}
+
+/* ================= HOTEL CELL ================= */
+
+.hotel-performance-hotel-cell {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.hotel-performance-hotel-icon {
+  width: 39px;
+  height: 39px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: #f2e8d8;
+  color: #a47e50;
+  font-size: 16px;
+}
+
+.hotel-performance-hotel-cell > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.hotel-performance-hotel-cell strong {
+  color: #5b4940;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.hotel-performance-hotel-cell span {
+  color: #a8998b;
+  font-size: 10px;
+}
+
+/* ================= OCCUPANCY ================= */
+
+.hotel-performance-occupancy-cell {
+  min-width: 100px;
+}
+
+.hotel-performance-occupancy-cell strong {
+  color: #5b4940;
+  font-size: 12px;
+}
+
+.hotel-performance-progress {
+  width: 100%;
+  height: 6px;
+  overflow: hidden;
+  margin-top: 8px;
+  border-radius: 10px;
+  background: #eee7dd;
+}
+
+.hotel-performance-progress > div {
+  height: 100%;
+  border-radius: 10px;
+  background: linear-gradient(
+    90deg,
+    #c6a477,
+    #a98559
+  );
+}
+
+/* ================= REVENUE ================= */
+
+.hotel-performance-revenue {
+  color: #5b4940;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ================= RATING ================= */
+
+.hotel-performance-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #79654e;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.hotel-performance-rating i {
+  color: #c6a477;
+  font-size: 12px;
+}
+
+/* ================= GROWTH ================= */
+
+.hotel-performance-growth {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #718a75;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* ================= BADGES ================= */
+
+.hotel-performance-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.hotel-performance-badge.excellent {
+  background: #edf3ed;
+  color: #6e8973;
+  border: 1px solid #d8e5d9;
+}
+
+.hotel-performance-badge.good {
+  background: #f7efe3;
+  color: #a07d51;
+  border: 1px solid #e7d8c0;
+}
+
+.hotel-performance-badge.average {
+  background: #f5e9e7;
+  color: #a07670;
+  border: 1px solid #e5d1cd;
+}
+
+/* ================= EMPTY STATE ================= */
+
+.hotel-performance-empty {
+  padding: 65px 20px;
+  text-align: center;
+}
+
+.hotel-performance-empty > i {
+  color: #c5a171;
+  font-size: 40px;
+}
+
+.hotel-performance-empty h3 {
+  margin: 15px 0 8px;
+  color: #54433b;
+  font-family: Georgia, serif;
+  font-size: 21px;
+  font-weight: 500;
+}
+
+.hotel-performance-empty p {
+  color: #9c8c7e;
+  font-size: 12px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1350px) {
+  .hotel-performance-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hotel-performance-filter-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hotel-performance-filter-controls {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 1000px) {
+  .hotel-performance-charts,
+  .hotel-performance-insights {
+    grid-template-columns: 1fr;
+  }
+
+  .hotel-performance-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hotel-performance-header-actions {
+    width: 100%;
+  }
+}
+
+@media (max-width: 650px) {
+  .hotel-performance-header h1 {
+    font-size: 27px;
+  }
+
+  .hotel-performance-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .hotel-performance-header-actions {
+    flex-direction: column;
+  }
+
+  .hotel-performance-back-btn,
+  .hotel-performance-export-btn {
+    width: 100%;
+  }
+
+  .hotel-performance-filter-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hotel-performance-search,
+  .hotel-performance-filter-controls select,
+  .hotel-performance-clear-btn {
+    width: 100%;
+  }
+
+  .hotel-performance-chart-card {
+    padding: 18px;
+  }
+
+  .hotel-performance-chart-body {
+    height: 280px;
+  }
+
+  .hotel-performance-highlight-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .hotel-performance-table-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hotel-performance-header h1 {
+    font-size: 24px;
+  }
+
+  .hotel-performance-chart-header h2 {
+    font-size: 18px;
+  }
+
+  .hotel-performance-table-header h2 {
+    font-size: 20px;
+  }
+}

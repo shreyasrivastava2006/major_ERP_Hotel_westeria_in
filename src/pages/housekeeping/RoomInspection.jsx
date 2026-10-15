@@ -5,255 +5,378 @@ import Breadcrumb from '../../components/layout/Breadcrumb'
 import PageHeader from '../../components/layout/PageHeader'
 
 import { useHotel } from '../../context/HotelContext'
+import { useHotelData } from '../../context/HotelDataContext'
 
 import './RoomInspection.css'
 
-const initialInspections = [
+const DEFAULT_INSPECTIONS = [
   {
-    id: 1,
+    id: 'RI-001',
     hotelId: 'HOTEL-001',
     room: '101',
-    inspector: 'Anjali',
+    inspector: 'Anita Sharma',
     condition: 'Excellent',
-    cleanliness: 95,
+    cleanliness: 'Excellent',
+    score: 95,
+    status: 'Pass',
+    remarks: 'Room is ready for guest.',
     checklist: {
       bed: true,
       bathroom: true,
       floor: true,
-      towels: true,
+      linen: true,
       amenities: true,
-      lights: true,
+      overall: true,
     },
-    remarks: 'Room is clean and ready for guest.',
-    status: 'Pass',
-    date: '2026-09-14',
+    date: new Date().toISOString().split('T')[0],
   },
   {
-    id: 2,
+    id: 'RI-002',
     hotelId: 'HOTEL-001',
     room: '205',
-    inspector: 'Neha',
+    inspector: 'Neha Singh',
     condition: 'Good',
-    cleanliness: 86,
+    cleanliness: 'Good',
+    score: 86,
+    status: 'Pass',
+    remarks: 'Minor maintenance required.',
     checklist: {
       bed: true,
       bathroom: true,
       floor: true,
-      towels: false,
-      amenities: true,
-      lights: true,
+      linen: true,
+      amenities: false,
+      overall: true,
     },
-    remarks: 'Towels need replacement.',
-    status: 'Pass',
-    date: '2026-09-14',
+    date: new Date().toISOString().split('T')[0],
   },
   {
-    id: 3,
+    id: 'RI-003',
     hotelId: 'HOTEL-001',
     room: '302',
-    inspector: 'Riya',
+    inspector: 'Riya Sharma',
     condition: 'Needs Attention',
-    cleanliness: 62,
+    cleanliness: 'Needs Attention',
+    score: 62,
+    status: 'Fail',
+    remarks: 'Bathroom and linen need attention.',
     checklist: {
       bed: true,
       bathroom: false,
-      floor: false,
-      towels: true,
-      amenities: false,
-      lights: true,
-    },
-    remarks:
-      'Bathroom requires cleaning and amenities need restocking.',
-    status: 'Fail',
-    date: '2026-09-14',
-  },
-  {
-    id: 4,
-    hotelId: 'HOTEL-002',
-    room: '201',
-    inspector: 'Pooja',
-    condition: 'Good',
-    cleanliness: 88,
-    checklist: {
-      bed: true,
-      bathroom: true,
       floor: true,
-      towels: true,
-      amenities: true,
-      lights: false,
+      linen: false,
+      amenities: false,
+      overall: true,
     },
-    remarks: 'Minor light issue reported.',
-    status: 'Pass',
-    date: '2026-09-15',
+    date: new Date().toISOString().split('T')[0],
   },
 ]
 
-const emptyInspection = {
+const initialForm = {
   room: '',
   inspector: '',
-  condition: 'Excellent',
-  bed: false,
-  bathroom: false,
-  floor: false,
-  towels: false,
-  amenities: false,
-  lights: false,
+  condition: 'Good',
+  cleanliness: 'Good',
   remarks: '',
+  checklist: {
+    bed: true,
+    bathroom: true,
+    floor: true,
+    linen: true,
+    amenities: true,
+    overall: true,
+  },
 }
 
 function RoomInspection() {
   const { selectedHotel } = useHotel()
 
-  const [inspections, setInspections] = useState(initialInspections)
+  const {
+    rooms,
+    staff,
+    updateRoomStatus,
+  } = useHotelData()
 
-  const [showForm, setShowForm] = useState(false)
+  const [inspections, setInspections] =
+    useState(() => {
+      try {
+        const saved =
+          localStorage.getItem(
+            'wisteriaRoomInspections'
+          )
 
-  const [filter, setFilter] = useState('All Results')
+        return saved
+          ? JSON.parse(saved)
+          : DEFAULT_INSPECTIONS
+      } catch {
+        return DEFAULT_INSPECTIONS
+      }
+    })
 
-  const [newInspection, setNewInspection] =
-    useState(emptyInspection)
+  const [showForm, setShowForm] =
+    useState(false)
+
+  const [filter, setFilter] =
+    useState('All')
+
+  const [formData, setFormData] =
+    useState(initialForm)
+
+  const saveInspections = (updated) => {
+    setInspections(updated)
+
+    localStorage.setItem(
+      'wisteriaRoomInspections',
+      JSON.stringify(updated)
+    )
+  }
+
+  const hotelRooms = useMemo(() => {
+    if (!selectedHotel) return rooms
+
+    const hasHotelData = rooms.some(
+      (room) => room.hotelId
+    )
+
+    if (!hasHotelData) return rooms
+
+    return rooms.filter(
+      (room) =>
+        String(room.hotelId) ===
+        String(selectedHotel.id)
+    )
+  }, [rooms, selectedHotel])
+
+  const hotelStaff = useMemo(() => {
+    if (!selectedHotel) return staff
+
+    const hasHotelData = staff.some(
+      (member) => member.hotelId
+    )
+
+    if (!hasHotelData) return staff
+
+    return staff.filter(
+      (member) =>
+        String(member.hotelId) ===
+        String(selectedHotel.id)
+    )
+  }, [staff, selectedHotel])
+
+  const hotelInspections =
+    useMemo(() => {
+      if (!selectedHotel) {
+        return inspections
+      }
+
+      const hasHotelData =
+        inspections.some(
+          (item) => item.hotelId
+        )
+
+      if (!hasHotelData) {
+        return inspections
+      }
+
+      return inspections.filter(
+        (item) =>
+          String(item.hotelId) ===
+          String(selectedHotel.id)
+      )
+    }, [
+      inspections,
+      selectedHotel,
+    ])
+
+  const filteredInspections =
+    useMemo(() => {
+      if (filter === 'All') {
+        return hotelInspections
+      }
+
+      return hotelInspections.filter(
+        (item) =>
+          item.status === filter
+      )
+    }, [
+      hotelInspections,
+      filter,
+    ])
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target
+    const { name, value } = e.target
 
-    setNewInspection((previous) => ({
+    setFormData((previous) => ({
       ...previous,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: value,
+    }))
+  }
+
+  const handleChecklistChange = (
+    name
+  ) => {
+    setFormData((previous) => ({
+      ...previous,
+      checklist: {
+        ...previous.checklist,
+        [name]:
+          !previous.checklist[name],
+      },
     }))
   }
 
   const calculateScore = () => {
-    const items = [
-      newInspection.bed,
-      newInspection.bathroom,
-      newInspection.floor,
-      newInspection.towels,
-      newInspection.amenities,
-      newInspection.lights,
-    ]
+    const values = Object.values(
+      formData.checklist
+    )
 
-    const completed = items.filter(Boolean).length
+    const passed = values.filter(
+      Boolean
+    ).length
 
-    return Math.round((completed / items.length) * 100)
+    return Math.round(
+      (passed / values.length) * 100
+    )
   }
-
-  const hotelInspections = useMemo(() => {
-    if (!selectedHotel) {
-      return inspections
-    }
-
-    const hasHotelData = inspections.some(
-      (inspection) => inspection.hotelId
-    )
-
-    if (!hasHotelData) {
-      return inspections
-    }
-
-    return inspections.filter(
-      (inspection) =>
-        inspection.hotelId === selectedHotel.id
-    )
-  }, [inspections, selectedHotel])
-
-  const filteredInspections =
-    filter === 'All Results'
-      ? hotelInspections
-      : hotelInspections.filter(
-          (inspection) =>
-            inspection.status === filter
-        )
 
   const addInspection = (e) => {
     e.preventDefault()
 
-    if (!newInspection.room || !newInspection.inspector) {
-      alert(
-        'Please enter room number and inspector name.'
-      )
+    if (!formData.room) {
+      alert('Please select a room.')
       return
     }
 
-    const score = calculateScore()
+    if (!formData.inspector) {
+      alert('Please select an inspector.')
+      return
+    }
 
-    const inspection = {
-      id: Date.now(),
+    const selectedRoom =
+      hotelRooms.find(
+        (room) =>
+          String(
+            room.roomNumber ??
+              room.number ??
+              room.id
+          ) ===
+          String(formData.room)
+      )
+
+    const score =
+      calculateScore()
+
+    const newInspection = {
+      id: `RI-${Date.now()}`,
       ...(selectedHotel
-        ? { hotelId: selectedHotel.id }
+        ? {
+            hotelId:
+              selectedHotel.id,
+            hotelName:
+              selectedHotel.name,
+          }
         : {}),
-      room: newInspection.room,
-      inspector: newInspection.inspector,
-      condition: newInspection.condition,
-      cleanliness: score,
-      checklist: {
-        bed: newInspection.bed,
-        bathroom: newInspection.bathroom,
-        floor: newInspection.floor,
-        towels: newInspection.towels,
-        amenities: newInspection.amenities,
-        lights: newInspection.lights,
-      },
-      remarks: newInspection.remarks,
-      status: score >= 70 ? 'Pass' : 'Fail',
+      room: formData.room,
+      roomId:
+        selectedRoom?.id ?? '',
+      inspector:
+        formData.inspector,
+      condition:
+        formData.condition,
+      cleanliness:
+        formData.cleanliness,
+      checklist:
+        formData.checklist,
+      remarks:
+        formData.remarks.trim(),
+      score,
+      status:
+        score >= 70
+          ? 'Pass'
+          : 'Fail',
       date: new Date()
         .toISOString()
         .split('T')[0],
     }
 
-    setInspections((previous) => [
-      ...previous,
-      inspection,
+    saveInspections([
+      newInspection,
+      ...inspections,
     ])
 
-    setNewInspection({
-      ...emptyInspection,
+    if (selectedRoom?.id) {
+      if (score >= 70) {
+        updateRoomStatus(
+          selectedRoom.id,
+          'Available'
+        )
+      } else {
+        updateRoomStatus(
+          selectedRoom.id,
+          'Maintenance'
+        )
+      }
+    }
+
+    setFormData({
+      ...initialForm,
     })
 
     setShowForm(false)
   }
 
   const deleteInspection = (id) => {
-    const confirmDelete = window.confirm(
+    const confirmed = window.confirm(
       'Are you sure you want to delete this inspection?'
     )
 
-    if (!confirmDelete) return
+    if (!confirmed) return
 
-    setInspections((previous) =>
-      previous.filter(
-        (inspection) => inspection.id !== id
+    saveInspections(
+      inspections.filter(
+        (item) =>
+          String(item.id) !==
+          String(id)
       )
     )
   }
 
-  const passed = hotelInspections.filter(
-    (inspection) => inspection.status === 'Pass'
-  ).length
+  const passed =
+    hotelInspections.filter(
+      (item) =>
+        item.status === 'Pass'
+    ).length
 
-  const failed = hotelInspections.filter(
-    (inspection) => inspection.status === 'Fail'
-  ).length
+  const failed =
+    hotelInspections.filter(
+      (item) =>
+        item.status === 'Fail'
+    ).length
 
   const averageScore =
-    hotelInspections.length > 0
+    hotelInspections.length
       ? Math.round(
           hotelInspections.reduce(
-            (total, inspection) =>
-              total + inspection.cleanliness,
+            (sum, item) =>
+              sum +
+              Number(item.score || 0),
             0
-          ) / hotelInspections.length
+          ) /
+            hotelInspections.length
         )
       : 0
 
   return (
     <MainLayout>
+
       <div className="room-inspection-page">
 
         <Breadcrumb
-          items={['Housekeeping', 'Room Inspection']}
+          items={[
+            'Housekeeping',
+            'Room Inspection',
+          ]}
         />
-
-        {/* PAGE HEADER */}
 
         <div className="inspection-heading-row">
 
@@ -261,8 +384,8 @@ function RoomInspection() {
             title="Room Inspection"
             subtitle={
               selectedHotel
-                ? `Inspect rooms and housekeeping standards for ${selectedHotel.name}`
-                : 'Inspect room cleanliness, condition and housekeeping standards.'
+                ? `Inspect and monitor rooms for ${selectedHotel.name}`
+                : 'Inspect rooms and monitor cleanliness standards'
             }
           />
 
@@ -273,7 +396,7 @@ function RoomInspection() {
               setShowForm(!showForm)
             }
           >
-            <i className="bi bi-plus-lg"></i>
+            <i className="bi bi-clipboard-plus-fill"></i>
 
             {showForm
               ? 'Close Form'
@@ -281,8 +404,6 @@ function RoomInspection() {
           </button>
 
         </div>
-
-        {/* SELECTED HOTEL */}
 
         {selectedHotel && (
           <div className="inspection-hotel-bar">
@@ -293,7 +414,9 @@ function RoomInspection() {
 
             <div className="inspection-hotel-info">
 
-              <span>SELECTED PROPERTY</span>
+              <span>
+                SELECTED PROPERTY
+              </span>
 
               <strong>
                 {selectedHotel.name}
@@ -302,8 +425,8 @@ function RoomInspection() {
               <small>
                 {selectedHotel.code} •{' '}
                 {selectedHotel.category} •{' '}
-                {selectedHotel.address.city},{' '}
-                {selectedHotel.address.state}
+                {selectedHotel.address?.city},{' '}
+                {selectedHotel.address?.state}
               </small>
 
             </div>
@@ -311,19 +434,19 @@ function RoomInspection() {
           </div>
         )}
 
-        {/* STATISTICS */}
-
         <div className="inspection-stats">
 
           <div className="inspection-stat-card">
 
             <div className="inspection-stat-icon">
-              <i className="bi bi-clipboard-check"></i>
+              <i className="bi bi-clipboard-check-fill"></i>
             </div>
 
             <div>
               <span>Total Inspections</span>
-              <h2>{hotelInspections.length}</h2>
+              <h2>
+                {hotelInspections.length}
+              </h2>
             </div>
 
           </div>
@@ -331,7 +454,7 @@ function RoomInspection() {
           <div className="inspection-stat-card">
 
             <div className="inspection-stat-icon pass-icon">
-              <i className="bi bi-check-circle"></i>
+              <i className="bi bi-check-circle-fill"></i>
             </div>
 
             <div>
@@ -344,7 +467,7 @@ function RoomInspection() {
           <div className="inspection-stat-card">
 
             <div className="inspection-stat-icon fail-icon">
-              <i className="bi bi-x-circle"></i>
+              <i className="bi bi-x-circle-fill"></i>
             </div>
 
             <div>
@@ -357,7 +480,7 @@ function RoomInspection() {
           <div className="inspection-stat-card">
 
             <div className="inspection-stat-icon score-icon">
-              <i className="bi bi-stars"></i>
+              <i className="bi bi-star-fill"></i>
             </div>
 
             <div>
@@ -369,19 +492,19 @@ function RoomInspection() {
 
         </div>
 
-        {/* NEW INSPECTION FORM */}
-
         {showForm && (
           <div className="inspection-form-card">
 
             <div className="inspection-form-header">
 
               <div>
-                <h2>New Room Inspection</h2>
+                <h2>
+                  New Room Inspection
+                </h2>
 
                 <p>
-                  Complete the inspection checklist
-                  for the selected room.
+                  Complete the room quality
+                  checklist.
                 </p>
               </div>
 
@@ -399,57 +522,76 @@ function RoomInspection() {
 
             <form onSubmit={addInspection}>
 
-              {/* INFORMATION */}
-
               <div className="form-section">
-
-                <h3>Inspection Information</h3>
 
                 <div className="inspection-form-grid">
 
                   <div className="inspection-form-group">
+                    <label>Room</label>
 
-                    <label>
-                      Room Number *
-                    </label>
-
-                    <input
-                      type="text"
+                    <select
                       name="room"
-                      placeholder="e.g. 101"
-                      value={newInspection.room}
-                      onChange={handleChange}
-                    />
+                      value={formData.room}
+                      onChange={
+                        handleChange
+                      }
+                    >
+                      <option value="">
+                        Select Room
+                      </option>
 
+                      {hotelRooms.map(
+                        (room) => (
+                          <option
+                            key={room.id}
+                            value={
+                              room.roomNumber ??
+                              room.number ??
+                              room.id
+                            }
+                          >
+                            Room{' '}
+                            {room.roomNumber ??
+                              room.number ??
+                              room.id}
+                          </option>
+                        )
+                      )}
+                    </select>
                   </div>
 
                   <div className="inspection-form-group">
-
-                    <label>
-                      Inspector *
-                    </label>
+                    <label>Inspector</label>
 
                     <select
                       name="inspector"
                       value={
-                        newInspection.inspector
+                        formData.inspector
                       }
-                      onChange={handleChange}
+                      onChange={
+                        handleChange
+                      }
                     >
                       <option value="">
                         Select Inspector
                       </option>
-                      <option>Anjali</option>
-                      <option>Neha</option>
-                      <option>Riya</option>
-                      <option>Pooja</option>
-                      <option>Priya</option>
-                    </select>
 
+                      {hotelStaff.map(
+                        (member) => (
+                          <option
+                            key={member.id}
+                            value={
+                              member.name
+                            }
+                          >
+                            {member.name}
+                          </option>
+                        )
+                      )}
+                    </select>
                   </div>
 
                   <div className="inspection-form-group">
-
                     <label>
                       Room Condition
                     </label>
@@ -457,9 +599,11 @@ function RoomInspection() {
                     <select
                       name="condition"
                       value={
-                        newInspection.condition
+                        formData.condition
                       }
-                      onChange={handleChange}
+                      onChange={
+                        handleChange
+                      }
                     >
                       <option>
                         Excellent
@@ -474,14 +618,40 @@ function RoomInspection() {
                         Poor
                       </option>
                     </select>
+                  </div>
 
+                  <div className="inspection-form-group">
+                    <label>
+                      Cleanliness
+                    </label>
+
+                    <select
+                      name="cleanliness"
+                      value={
+                        formData.cleanliness
+                      }
+                      onChange={
+                        handleChange
+                      }
+                    >
+                      <option>
+                        Excellent
+                      </option>
+                      <option>
+                        Good
+                      </option>
+                      <option>
+                        Needs Attention
+                      </option>
+                      <option>
+                        Poor
+                      </option>
+                    </select>
                   </div>
 
                 </div>
 
               </div>
-
-              {/* CHECKLIST */}
 
               <div className="form-section">
 
@@ -494,31 +664,37 @@ function RoomInspection() {
                   <label className="check-item">
                     <input
                       type="checkbox"
-                      name="bed"
                       checked={
-                        newInspection.bed
+                        formData.checklist
+                          .bed
                       }
-                      onChange={handleChange}
+                      onChange={() =>
+                        handleChecklistChange(
+                          'bed'
+                        )
+                      }
                     />
 
                     <span>
-                      <i className="bi bi-house-heart"></i>
-                      Bed & Linen
+                      Bed & Bedding
                     </span>
                   </label>
 
                   <label className="check-item">
                     <input
                       type="checkbox"
-                      name="bathroom"
                       checked={
-                        newInspection.bathroom
+                        formData.checklist
+                          .bathroom
                       }
-                      onChange={handleChange}
+                      onChange={() =>
+                        handleChecklistChange(
+                          'bathroom'
+                        )
+                      }
                     />
 
                     <span>
-                      <i className="bi bi-droplet"></i>
                       Bathroom
                     </span>
                   </label>
@@ -526,15 +702,18 @@ function RoomInspection() {
                   <label className="check-item">
                     <input
                       type="checkbox"
-                      name="floor"
                       checked={
-                        newInspection.floor
+                        formData.checklist
+                          .floor
                       }
-                      onChange={handleChange}
+                      onChange={() =>
+                        handleChecklistChange(
+                          'floor'
+                        )
+                      }
                     />
 
                     <span>
-                      <i className="bi bi-grid"></i>
                       Floor & Carpet
                     </span>
                   </label>
@@ -542,31 +721,37 @@ function RoomInspection() {
                   <label className="check-item">
                     <input
                       type="checkbox"
-                      name="towels"
                       checked={
-                        newInspection.towels
+                        formData.checklist
+                          .linen
                       }
-                      onChange={handleChange}
+                      onChange={() =>
+                        handleChecklistChange(
+                          'linen'
+                        )
+                      }
                     />
 
                     <span>
-                      <i className="bi bi-stack"></i>
-                      Towels
+                      Linen & Towels
                     </span>
                   </label>
 
                   <label className="check-item">
                     <input
                       type="checkbox"
-                      name="amenities"
                       checked={
-                        newInspection.amenities
+                        formData.checklist
+                          .amenities
                       }
-                      onChange={handleChange}
+                      onChange={() =>
+                        handleChecklistChange(
+                          'amenities'
+                        )
+                      }
                     />
 
                     <span>
-                      <i className="bi bi-box-seam"></i>
                       Amenities
                     </span>
                   </label>
@@ -574,79 +759,66 @@ function RoomInspection() {
                   <label className="check-item">
                     <input
                       type="checkbox"
-                      name="lights"
                       checked={
-                        newInspection.lights
+                        formData.checklist
+                          .overall
                       }
-                      onChange={handleChange}
+                      onChange={() =>
+                        handleChecklistChange(
+                          'overall'
+                        )
+                      }
                     />
 
                     <span>
-                      <i className="bi bi-lightbulb"></i>
-                      Lights & Electronics
+                      Overall Condition
                     </span>
                   </label>
 
                 </div>
 
-              </div>
-
-              {/* SCORE */}
-
-              <div className="form-section">
-
-                <h3>
-                  Cleanliness Score
-                </h3>
-
                 <div className="score-preview">
 
                   <div className="score-preview-header">
-
                     <span>
-                      Current Score
+                      Inspection Score
                     </span>
 
                     <strong>
                       {calculateScore()}%
                     </strong>
-
                   </div>
 
                   <div className="score-bar">
-
                     <div
                       className="score-progress"
                       style={{
                         width: `${calculateScore()}%`,
                       }}
                     ></div>
-
                   </div>
 
                 </div>
 
               </div>
 
-              {/* REMARKS */}
+              <div className="inspection-form-group">
 
-              <div className="form-section">
-
-                <h3>Remarks</h3>
+                <label>Remarks</label>
 
                 <textarea
                   name="remarks"
                   rows="4"
                   placeholder="Enter inspection remarks..."
                   value={
-                    newInspection.remarks
+                    formData.remarks
                   }
-                  onChange={handleChange}
-                ></textarea>
+                  onChange={
+                    handleChange
+                  }
+                />
 
               </div>
-
-              {/* BUTTONS */}
 
               <div className="inspection-form-buttons">
 
@@ -664,7 +836,7 @@ function RoomInspection() {
                   type="submit"
                   className="save-inspection-btn"
                 >
-                  <i className="bi bi-check-lg"></i>
+                  <i className="bi bi-check-circle-fill"></i>
                   Save Inspection
                 </button>
 
@@ -674,8 +846,6 @@ function RoomInspection() {
 
           </div>
         )}
-
-        {/* TABLE */}
 
         <div className="inspection-table-card">
 
@@ -687,42 +857,36 @@ function RoomInspection() {
               </h2>
 
               <p>
-                Recent room inspection results
-                for this property.
+                Review room inspection
+                results and scores.
               </p>
             </div>
 
-            <div className="inspection-filter">
-
-              <i className="bi bi-funnel"></i>
-
-              <select
-                value={filter}
-                onChange={(e) =>
-                  setFilter(e.target.value)
-                }
-              >
-                <option>
-                  All Results
-                </option>
-                <option>Pass</option>
-                <option>Fail</option>
-              </select>
-
-            </div>
+            <select
+              className="inspection-filter"
+              value={filter}
+              onChange={(e) =>
+                setFilter(
+                  e.target.value
+                )
+              }
+            >
+              <option value="All">
+                All Inspections
+              </option>
+              <option value="Pass">
+                Passed
+              </option>
+              <option value="Fail">
+                Failed
+              </option>
+            </select>
 
           </div>
 
           <div className="inspection-results">
-            Showing{' '}
-            <strong>
-              {filteredInspections.length}
-            </strong>{' '}
-            of{' '}
-            <strong>
-              {hotelInspections.length}
-            </strong>{' '}
-            inspections
+            {filteredInspections.length}{' '}
+            Results
           </div>
 
           <div className="inspection-table-wrapper">
@@ -735,122 +899,132 @@ function RoomInspection() {
                   <th>Inspector</th>
                   <th>Condition</th>
                   <th>Cleanliness</th>
-                  <th>Remarks</th>
-                  <th>Status</th>
+                  <th>Score</th>
                   <th>Date</th>
+                  <th>Status</th>
+                  <th>Remarks</th>
                   <th>Action</th>
                 </tr>
               </thead>
 
               <tbody>
 
-                {filteredInspections.length > 0 ? (
+                {filteredInspections.length ===
+                0 ? (
+                  <tr>
+                    <td
+                      colSpan="9"
+                      className="inspection-empty"
+                    >
+                      <i className="bi bi-clipboard-x"></i>
 
+                      <p>
+                        No inspection records
+                        found.
+                      </p>
+                    </td>
+                  </tr>
+                ) : (
                   filteredInspections.map(
                     (inspection) => (
-
                       <tr
-                        key={inspection.id}
+                        key={
+                          inspection.id
+                        }
                       >
 
                         <td>
                           <div className="inspection-room">
-                            <i className="bi bi-door-closed"></i>
+                            <i className="bi bi-door-open"></i>
+
                             <strong>
-                              Room {inspection.room}
+                              Room{' '}
+                              {
+                                inspection.room
+                              }
                             </strong>
                           </div>
                         </td>
 
                         <td>
-
                           <div className="inspector-cell">
 
                             <div className="inspector-avatar">
-                              {inspection.inspector.charAt(
+                              {inspection.inspector?.charAt(
                                 0
                               )}
                             </div>
 
-                            {inspection.inspector}
+                            <span>
+                              {
+                                inspection.inspector
+                              }
+                            </span>
 
                           </div>
-
                         </td>
 
                         <td>
-
-                          <span
-                            className={`condition-badge ${inspection.condition
-                              .toLowerCase()
-                              .replaceAll(
-                                ' ',
-                                '-'
-                              )}`}
-                          >
-                            {inspection.condition}
+                          <span className="condition-badge">
+                            {
+                              inspection.condition
+                            }
                           </span>
-
                         </td>
 
                         <td>
+                          {
+                            inspection.cleanliness
+                          }
+                        </td>
 
+                        <td>
                           <div className="cleanliness-score">
 
-                            <div className="mini-score-bar">
-
-                              <div
-                                style={{
-                                  width: `${inspection.cleanliness}%`,
-                                }}
-                              ></div>
-
-                            </div>
-
                             <strong>
-                              {inspection.cleanliness}%
+                              {
+                                inspection.score
+                              }%
                             </strong>
 
+                            <div className="mini-score-bar">
+                              <span
+                                style={{
+                                  width: `${inspection.score}%`,
+                                }}
+                              ></span>
+                            </div>
+
                           </div>
-
                         </td>
 
                         <td>
-
-                          <span className="remarks-text">
-                            {inspection.remarks ||
-                              'No remarks'}
-                          </span>
-
+                          {
+                            inspection.date
+                          }
                         </td>
 
                         <td>
-
                           <span
-                            className={`inspection-status ${inspection.status.toLowerCase()}`}
+                            className={`inspection-status ${inspection.status
+                              .toLowerCase()}`}
                           >
-
-                            <i
-                              className={
-                                inspection.status ===
-                                'Pass'
-                                  ? 'bi bi-check-circle'
-                                  : 'bi bi-x-circle'
-                              }
-                            ></i>
-
-                            {inspection.status}
-
+                            {
+                              inspection.status
+                            }
                           </span>
-
                         </td>
 
                         <td>
-                          {inspection.date}
+                          <span className="remarks-text">
+                            {
+                              inspection.remarks ||
+                                '—'
+                            }
+                          </span>
                         </td>
 
                         <td>
-
                           <button
                             type="button"
                             className="inspection-delete-btn"
@@ -863,38 +1037,11 @@ function RoomInspection() {
                           >
                             <i className="bi bi-trash3"></i>
                           </button>
-
                         </td>
 
                       </tr>
-
                     )
                   )
-
-                ) : (
-
-                  <tr>
-
-                    <td
-                      colSpan="8"
-                      className="inspection-empty"
-                    >
-
-                      <i className="bi bi-clipboard-x"></i>
-
-                      <strong>
-                        No inspection records found
-                      </strong>
-
-                      <span>
-                        Try changing the inspection
-                        filter.
-                      </span>
-
-                    </td>
-
-                  </tr>
-
                 )}
 
               </tbody>
@@ -902,10 +1049,10 @@ function RoomInspection() {
             </table>
 
           </div>
-
         </div>
 
       </div>
+
     </MainLayout>
   )
 }

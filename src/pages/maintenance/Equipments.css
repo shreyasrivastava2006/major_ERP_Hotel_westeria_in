@@ -1,24 +1,17 @@
-/* =========================================
-   EQUIPMENT
-   WISTERIA IN - STANDARD LUXURY THEME
-========================================= */
-
 .equipment-page {
   width: 100%;
   box-sizing: border-box;
-  color: var(--w-text);
+  color: #321c3d;
 }
 
-/* =========================================
-   HEADER
-========================================= */
+/* HEADER */
 
 .equipment-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   gap: 25px;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
 .equipment-header .page-header {
@@ -26,31 +19,75 @@
 }
 
 .back-maintenance-btn {
-  border: 1px solid var(--w-border);
-  background: var(--w-white);
-  color: var(--w-gold-dark);
+  border: 1px solid #e6ddd3;
+  background: #ffffff;
+  color: #704583;
   padding: 11px 17px;
-  border-radius: var(--w-radius-md);
+  border-radius: 10px;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 8px;
-  transition: var(--w-transition);
+  transition: 0.25s ease;
   white-space: nowrap;
 }
 
 .back-maintenance-btn:hover {
-  background: var(--w-cream);
-  border-color: var(--w-gold);
+  background: #f0e8f3;
+  border-color: #b8944e;
   transform: translateY(-1px);
-  box-shadow: var(--w-shadow-gold);
 }
 
-/* =========================================
-   STATS
-========================================= */
+/* HOTEL BAR */
+
+.equipment-hotel-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px 18px;
+  margin-bottom: 22px;
+  background: linear-gradient(135deg, #f0e8f3, #ffffff);
+  border: 1px solid #ddd0e4;
+  border-left: 4px solid #704583;
+  border-radius: 12px;
+}
+
+.equipment-hotel-icon {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  border-radius: 10px;
+  background: #704583;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.equipment-hotel-info span {
+  display: block;
+  color: #b8944e;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+}
+
+.equipment-hotel-info strong {
+  display: block;
+  color: #321c3d;
+  font-size: 15px;
+  margin-top: 2px;
+}
+
+.equipment-hotel-info small {
+  color: #7b6d7f;
+  font-size: 11px;
+}
+
+/* STATS */
 
 .equipment-stats {
   display: grid;
@@ -60,31 +97,29 @@
 }
 
 .equipment-stat-card {
-  background: var(--w-white);
-  border: 1px solid var(--w-border);
-  border-radius: var(--w-radius-lg);
+  background: #ffffff;
+  border: 1px solid #e6ddd3;
+  border-radius: 14px;
   padding: 20px;
   display: flex;
   align-items: center;
   gap: 15px;
-  box-shadow: var(--w-shadow);
-  transition: var(--w-transition);
+  box-shadow: 0 4px 14px rgba(50, 28, 61, 0.06);
+  transition: 0.25s ease;
 }
 
 .equipment-stat-card:hover {
-  border-color: var(--w-gold-light);
+  border-color: #d0bbd8;
   transform: translateY(-2px);
-  box-shadow: var(--w-shadow-medium);
 }
 
 .equipment-stat-icon {
   width: 48px;
   height: 48px;
   min-width: 48px;
-  border-radius: var(--w-radius-md);
-  background: rgba(185, 148, 112, 0.14);
-  border: 1px solid rgba(185, 148, 112, 0.25);
-  color: var(--w-gold-dark);
+  border-radius: 10px;
+  background: #f0e8f3;
+  color: #704583;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -92,37 +127,35 @@
 }
 
 .operational-icon {
-  background: var(--w-success-bg);
-  color: var(--w-success);
+  background: #e8f5ed;
+  color: #3c8b5a;
 }
 
 .maintenance-icon {
-  background: var(--w-warning-bg);
-  color: var(--w-warning);
+  background: #fff4df;
+  color: #b7791f;
 }
 
 .equipment-stat-card span {
-  color: var(--w-muted);
+  color: #7b6d7f;
   font-size: 13px;
 }
 
 .equipment-stat-card strong {
   display: block;
   margin-top: 4px;
-  color: var(--w-text);
+  color: #321c3d;
   font-size: 25px;
 }
 
-/* =========================================
-   MAIN CARD
-========================================= */
+/* MAIN CARD */
 
 .equipment-card {
-  background: var(--w-white);
-  border: 1px solid var(--w-border);
-  border-radius: var(--w-radius-lg);
+  background: #ffffff;
+  border: 1px solid #e6ddd3;
+  border-radius: 14px;
   overflow: hidden;
-  box-shadow: var(--w-shadow);
+  box-shadow: 0 4px 14px rgba(50, 28, 61, 0.06);
 }
 
 .equipment-card-header {
@@ -130,65 +163,62 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--w-border);
+  border-bottom: 1px solid #e6ddd3;
 }
 
 .equipment-card-header h2 {
   margin: 0;
-  color: var(--w-text);
-  font-family: var(--w-font-heading);
-  font-size: 22px;
+  color: #321c3d;
+  font-size: 21px;
   font-weight: 700;
 }
 
 .equipment-card-header p {
   margin: 5px 0 0;
-  color: var(--w-muted);
+  color: #7b6d7f;
   font-size: 13px;
 }
 
 .equipment-count {
-  background: rgba(185, 148, 112, 0.12);
-  color: var(--w-gold-dark);
-  border: 1px solid rgba(185, 148, 112, 0.22);
+  background: #f0e8f3;
+  color: #704583;
+  border: 1px solid #ddd0e4;
   padding: 7px 12px;
   border-radius: 20px;
   font-size: 12px;
   font-weight: 600;
 }
 
-/* =========================================
-   TOOLBAR
-========================================= */
+/* TOOLBAR */
 
 .equipment-toolbar {
   display: flex;
   gap: 15px;
   padding: 18px 22px;
-  border-bottom: 1px solid var(--w-border);
+  border-bottom: 1px solid #e6ddd3;
 }
 
 .equipment-search {
   width: 420px;
   height: 45px;
-  border: 1px solid var(--w-border);
-  border-radius: var(--w-radius-md);
+  border: 1px solid #e6ddd3;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   padding: 0 14px;
-  background: var(--w-background-soft);
+  background: #fbf8f4;
   box-sizing: border-box;
-  transition: var(--w-transition);
+  transition: 0.25s ease;
 }
 
 .equipment-search:focus-within {
-  border-color: var(--w-gold);
-  background: var(--w-white);
-  box-shadow: 0 0 0 3px rgba(185, 148, 112, 0.12);
+  border-color: #704583;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(112, 69, 131, 0.1);
 }
 
 .equipment-search i {
-  color: var(--w-gold-dark);
+  color: #b8944e;
   margin-right: 10px;
 }
 
@@ -197,36 +227,31 @@
   outline: none;
   width: 100%;
   background: transparent;
-  color: var(--w-text);
-  font-family: inherit;
+  color: #321c3d;
   font-size: 14px;
 }
 
 .equipment-search input::placeholder {
-  color: var(--w-muted-light);
+  color: #958796;
 }
 
 .equipment-toolbar select {
   min-width: 170px;
   height: 45px;
-  border: 1px solid var(--w-border);
-  border-radius: var(--w-radius-md);
+  border: 1px solid #e6ddd3;
+  border-radius: 10px;
   padding: 0 14px;
   outline: none;
-  color: var(--w-text);
-  background: var(--w-background-soft);
-  font-family: inherit;
+  color: #321c3d;
+  background: #fbf8f4;
   cursor: pointer;
 }
 
 .equipment-toolbar select:focus {
-  border-color: var(--w-gold);
-  box-shadow: 0 0 0 3px rgba(185, 148, 112, 0.12);
+  border-color: #704583;
 }
 
-/* =========================================
-   TABLE
-========================================= */
+/* TABLE */
 
 .equipment-table-wrapper {
   overflow-x: auto;
@@ -239,20 +264,20 @@
 }
 
 .equipment-table th {
-  background: var(--w-background-soft);
-  color: var(--w-gold-dark);
+  background: #fbf8f4;
+  color: #704583;
   font-size: 12px;
   font-weight: 700;
   text-align: left;
   padding: 14px;
-  border-bottom: 1px solid var(--w-border);
+  border-bottom: 1px solid #e6ddd3;
   white-space: nowrap;
 }
 
 .equipment-table td {
   padding: 16px 14px;
-  border-bottom: 1px solid var(--w-border-light);
-  color: var(--w-text-light);
+  border-bottom: 1px solid #eee7df;
+  color: #6f6374;
   font-size: 13px;
   white-space: nowrap;
 }
@@ -262,22 +287,20 @@
 }
 
 .equipment-table tbody tr:hover {
-  background: var(--w-card-hover);
+  background: #fbf8fc;
 }
 
 .equipment-table td > strong {
-  color: var(--w-text);
+  color: #321c3d;
 }
 
-/* =========================================
-   EQUIPMENT NAME
-========================================= */
+/* EQUIPMENT NAME */
 
 .equipment-name {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: var(--w-text);
+  color: #321c3d;
   font-weight: 600;
 }
 
@@ -285,10 +308,10 @@
   width: 34px;
   height: 34px;
   min-width: 34px;
-  border-radius: var(--w-radius-sm);
-  background: rgba(185, 148, 112, 0.13);
-  border: 1px solid rgba(185, 148, 112, 0.25);
-  color: var(--w-gold-dark);
+  border-radius: 8px;
+  background: #f0e8f3;
+  border: 1px solid #ddd0e4;
+  color: #704583;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -301,40 +324,12 @@
 }
 
 .equipment-location i {
-  color: var(--w-gold-dark);
+  color: #b8944e;
 }
 
-/* =========================================
-   CONDITION
-========================================= */
+/* CONDITION */
 
-.equipment-condition {
-  display: inline-block;
-  padding: 6px 10px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: 600;
-}
-
-.equipment-condition.good {
-  background: var(--w-success-bg);
-  color: var(--w-success);
-}
-
-.equipment-condition.fair {
-  background: var(--w-warning-bg);
-  color: var(--w-warning);
-}
-
-.equipment-condition.needs-service {
-  background: var(--w-danger-bg);
-  color: var(--w-danger);
-}
-
-/* =========================================
-   STATUS
-========================================= */
-
+.equipment-condition,
 .equipment-status {
   display: inline-block;
   padding: 6px 10px;
@@ -343,25 +338,30 @@
   font-weight: 600;
 }
 
+.equipment-condition.good,
 .equipment-status.operational {
-  background: var(--w-success-bg);
-  color: var(--w-success);
+  background: #e8f5ed;
+  color: #3c8b5a;
 }
 
+.equipment-condition.fair,
 .equipment-status.maintenance-due {
-  background: var(--w-warning-bg);
-  color: var(--w-warning);
+  background: #fff4df;
+  color: #b7791f;
 }
 
-/* =========================================
-   ACTION
-========================================= */
+.equipment-condition.needs-service {
+  background: #fdecec;
+  color: #b94a48;
+}
+
+/* ACTION */
 
 .equipment-action-btn {
-  border: 1px solid rgba(185, 148, 112, 0.25);
-  background: rgba(185, 148, 112, 0.12);
-  color: var(--w-gold-dark);
-  border-radius: var(--w-radius-sm);
+  border: 1px solid #ddd0e4;
+  background: #f0e8f3;
+  color: #704583;
+  border-radius: 8px;
   padding: 7px 12px;
   cursor: pointer;
   font-size: 12px;
@@ -369,30 +369,27 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  transition: var(--w-transition);
+  transition: 0.25s ease;
 }
 
 .equipment-action-btn:hover {
-  background: var(--w-gold);
-  color: var(--w-white);
+  background: #704583;
+  color: #ffffff;
   transform: translateY(-1px);
-  box-shadow: var(--w-shadow-gold);
 }
 
-/* =========================================
-   EMPTY STATE
-========================================= */
+/* EMPTY */
 
 .equipment-empty {
   text-align: center;
   padding: 45px 20px !important;
-  color: var(--w-muted) !important;
+  color: #7b6d7f !important;
 }
 
 .equipment-empty i {
   display: block;
   font-size: 28px;
-  color: var(--w-gold);
+  color: #b8944e;
   margin-bottom: 8px;
 }
 
@@ -400,9 +397,7 @@
   font-size: 13px;
 }
 
-/* =========================================
-   RESPONSIVE
-========================================= */
+/* RESPONSIVE */
 
 @media (max-width: 900px) {
   .equipment-stats {
@@ -412,10 +407,6 @@
   .equipment-header {
     flex-direction: column;
     align-items: flex-start;
-  }
-
-  .back-maintenance-btn {
-    align-self: flex-start;
   }
 }
 
@@ -444,7 +435,7 @@
     gap: 12px;
   }
 
-  .equipment-toolbar {
-    padding: 15px;
+  .equipment-hotel-bar {
+    align-items: flex-start;
   }
 }

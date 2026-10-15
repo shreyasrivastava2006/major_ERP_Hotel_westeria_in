@@ -1,12 +1,16 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+
 import MainLayout from '../../layouts/MainLayout'
 import Breadcrumb from '../../components/layout/Breadcrumb'
 import PageHeader from '../../components/layout/PageHeader'
+import { useHotel } from '../../context/HotelContext'
+
 import './Suppliers.css'
 
 function Suppliers() {
   const navigate = useNavigate()
+  const { selectedHotel } = useHotel()
 
   const [suppliers] = useState([
     {
@@ -50,7 +54,7 @@ function Suppliers() {
   const [searchTerm, setSearchTerm] = useState('')
 
   const filteredSuppliers = suppliers.filter((supplier) => {
-    const search = searchTerm.toLowerCase()
+    const search = searchTerm.toLowerCase().trim()
 
     return (
       supplier.name.toLowerCase().includes(search) ||
@@ -62,6 +66,10 @@ function Suppliers() {
 
   const activeSuppliers = suppliers.filter(
     (supplier) => supplier.status === 'Active'
+  ).length
+
+  const inactiveSuppliers = suppliers.filter(
+    (supplier) => supplier.status === 'Inactive'
   ).length
 
   const totalItems = suppliers.reduce(
@@ -82,7 +90,11 @@ function Suppliers() {
 
           <PageHeader
             title="Suppliers"
-            subtitle="Manage inventory suppliers and vendors"
+            subtitle={
+              selectedHotel
+                ? `Manage suppliers for ${selectedHotel.name}`
+                : 'Manage inventory suppliers and vendors'
+            }
           />
 
           <button
@@ -96,13 +108,40 @@ function Suppliers() {
 
         </div>
 
+        {/* SELECTED PROPERTY */}
+
+        {selectedHotel && (
+          <div className="suppliers-hotel-bar">
+
+            <div className="suppliers-hotel-icon">
+              <i className="bi bi-building"></i>
+            </div>
+
+            <div className="suppliers-hotel-info">
+
+              <span>SELECTED PROPERTY</span>
+
+              <strong>{selectedHotel.name}</strong>
+
+              <small>
+                {selectedHotel.code} • {selectedHotel.category} •{' '}
+                {selectedHotel.address.city}, {selectedHotel.address.state}
+              </small>
+
+            </div>
+
+          </div>
+        )}
+
         {/* STATS */}
 
         <div className="supplier-stats">
 
           <div className="supplier-stat">
 
-            <i className="bi bi-truck"></i>
+            <div className="supplier-stat-icon purple">
+              <i className="bi bi-truck"></i>
+            </div>
 
             <div>
               <span>Total Suppliers</span>
@@ -113,7 +152,9 @@ function Suppliers() {
 
           <div className="supplier-stat">
 
-            <i className="bi bi-check-circle"></i>
+            <div className="supplier-stat-icon green">
+              <i className="bi bi-check-circle"></i>
+            </div>
 
             <div>
               <span>Active Suppliers</span>
@@ -124,11 +165,26 @@ function Suppliers() {
 
           <div className="supplier-stat">
 
-            <i className="bi bi-box-seam"></i>
+            <div className="supplier-stat-icon gold">
+              <i className="bi bi-box-seam"></i>
+            </div>
 
             <div>
               <span>Items Supplied</span>
               <strong>{totalItems}</strong>
+            </div>
+
+          </div>
+
+          <div className="supplier-stat">
+
+            <div className="supplier-stat-icon red">
+              <i className="bi bi-pause-circle"></i>
+            </div>
+
+            <div>
+              <span>Inactive Suppliers</span>
+              <strong>{inactiveSuppliers}</strong>
             </div>
 
           </div>
@@ -143,7 +199,11 @@ function Suppliers() {
 
             <div>
               <h2>Supplier List</h2>
-              <p>All registered inventory suppliers</p>
+              <p>
+                {selectedHotel
+                  ? `Registered suppliers for ${selectedHotel.name}`
+                  : 'All registered inventory suppliers'}
+              </p>
             </div>
 
             <div className="supplier-search">
@@ -159,8 +219,22 @@ function Suppliers() {
                 placeholder="Search suppliers..."
               />
 
+              {searchTerm && (
+                <button
+                  type="button"
+                  className="supplier-clear-btn"
+                  onClick={() => setSearchTerm('')}
+                >
+                  <i className="bi bi-x"></i>
+                </button>
+              )}
+
             </div>
 
+          </div>
+
+          <div className="supplier-result">
+            Showing {filteredSuppliers.length} of {suppliers.length} suppliers
           </div>
 
           <div className="suppliers-table-wrapper">
@@ -189,10 +263,15 @@ function Suppliers() {
                       className="supplier-empty"
                     >
                       <i className="bi bi-truck"></i>
-                      <strong>No suppliers found</strong>
+
+                      <strong>
+                        No suppliers found
+                      </strong>
+
                       <span>
                         Try a different search term.
                       </span>
+
                     </td>
                   </tr>
 

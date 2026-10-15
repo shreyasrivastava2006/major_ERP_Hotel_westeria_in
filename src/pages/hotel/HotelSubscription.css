@@ -1,0 +1,596 @@
+.hotel-subscription-page {
+  width: 100%;
+}
+
+/* ================================
+   HEADER
+================================ */
+
+.hotel-subscription-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.hotel-subscription-back-btn {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 16px;
+  border: 1px solid var(--w-border);
+  border-radius: 9px;
+  background: var(--w-white);
+  color: var(--w-text);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.hotel-subscription-back-btn:hover {
+  border-color: var(--w-gold);
+  color: var(--w-gold-dark);
+  background: rgba(201, 162, 74, 0.05);
+}
+
+/* ================================
+   CURRENT SUBSCRIPTION
+================================ */
+
+.hotel-subscription-current {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(201, 162, 74, 0.3);
+  border-radius: 14px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(201, 162, 74, 0.09),
+      rgba(106, 52, 145, 0.04)
+    ),
+    var(--w-white);
+  box-shadow: var(--w-shadow);
+}
+
+.hotel-subscription-current-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.hotel-subscription-current-icon {
+  width: 58px;
+  height: 58px;
+  min-width: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 13px;
+  background: var(--w-gold);
+  color: #171018;
+  font-size: 23px;
+}
+
+.hotel-subscription-label {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--w-gold-dark);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.hotel-subscription-current h2 {
+  margin: 0 0 3px;
+  color: var(--w-text);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.hotel-subscription-current p {
+  margin: 0;
+  color: var(--w-muted);
+  font-size: 10px;
+}
+
+.hotel-subscription-current-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.hotel-subscription-active {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 11px;
+  border-radius: 20px;
+  background: rgba(34, 197, 94, 0.1);
+  color: #16803b;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.hotel-subscription-renewal {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--w-muted);
+  font-size: 10px;
+}
+
+/* ================================
+   BILLING CYCLE
+================================ */
+
+.hotel-subscription-billing {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 22px;
+  margin-bottom: 20px;
+  background: var(--w-white);
+  border: 1px solid var(--w-border);
+  border-radius: 12px;
+  box-shadow: var(--w-shadow);
+}
+
+.hotel-subscription-billing h3 {
+  margin: 0 0 4px;
+  color: var(--w-text);
+  font-size: 14px;
+}
+
+.hotel-subscription-billing p {
+  margin: 0;
+  color: var(--w-muted);
+  font-size: 10px;
+}
+
+.hotel-subscription-cycle {
+  display: flex;
+  align-items: center;
+  padding: 3px;
+  border: 1px solid var(--w-border);
+  border-radius: 9px;
+  background: var(--w-background-soft);
+}
+
+.hotel-subscription-cycle button {
+  min-height: 35px;
+  padding: 0 15px;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--w-muted);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.hotel-subscription-cycle button.active {
+  background: var(--w-white);
+  color: var(--w-gold-dark);
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.07);
+}
+
+.hotel-subscription-cycle button span {
+  margin-left: 5px;
+  color: #16803b;
+  font-size: 8px;
+}
+
+/* ================================
+   PLANS
+================================ */
+
+.hotel-subscription-plans {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.hotel-subscription-plan {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 22px;
+  background: var(--w-white);
+  border: 1px solid var(--w-border);
+  border-radius: 14px;
+  box-shadow: var(--w-shadow);
+  transition: all 0.25s ease;
+}
+
+.hotel-subscription-plan:hover {
+  border-color: rgba(201, 162, 74, 0.5);
+  transform: translateY(-2px);
+}
+
+.hotel-subscription-plan.selected {
+  border-color: var(--w-gold);
+  box-shadow: var(--w-shadow-gold);
+}
+
+.hotel-subscription-popular {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  padding: 6px 10px;
+  border-radius: 0 0 7px 7px;
+  background: var(--w-gold);
+  color: #171018;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.hotel-subscription-plan-header {
+  margin-bottom: 16px;
+}
+
+.hotel-subscription-plan-icon {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  background: rgba(201, 162, 74, 0.1);
+  color: var(--w-gold-dark);
+  font-size: 17px;
+}
+
+.hotel-subscription-plan-header h3 {
+  margin: 0 0 5px;
+  color: var(--w-text);
+  font-size: 18px;
+}
+
+.hotel-subscription-plan-header p {
+  min-height: 30px;
+  margin: 0;
+  color: var(--w-muted);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.hotel-subscription-price {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.hotel-subscription-price strong {
+  color: var(--w-text);
+  font-size: 27px;
+  font-weight: 800;
+}
+
+.hotel-subscription-price span {
+  color: var(--w-muted);
+  font-size: 10px;
+}
+
+.hotel-subscription-divider {
+  height: 1px;
+  margin: 18px 0;
+  background: var(--w-border);
+}
+
+.hotel-subscription-features {
+  flex: 1;
+}
+
+.hotel-subscription-feature-title {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--w-text);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.hotel-subscription-feature {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 9px;
+  color: var(--w-muted);
+  font-size: 10px;
+}
+
+.hotel-subscription-feature i {
+  color: #16803b;
+  font-size: 11px;
+}
+
+.hotel-subscription-plan-btn {
+  width: 100%;
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 15px;
+  border: 1px solid var(--w-gold);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--w-gold-dark);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.hotel-subscription-plan-btn:hover {
+  background: rgba(201, 162, 74, 0.08);
+}
+
+.hotel-subscription-plan-btn.current {
+  background: var(--w-gold);
+  color: #171018;
+}
+
+.hotel-subscription-plan-btn.current:hover {
+  background: var(--w-gold-light);
+}
+
+/* ================================
+   INFORMATION
+================================ */
+
+.hotel-subscription-info {
+  margin-bottom: 20px;
+  background: var(--w-white);
+  border: 1px solid var(--w-border);
+  border-radius: 14px;
+  box-shadow: var(--w-shadow);
+  overflow: hidden;
+}
+
+.hotel-subscription-info-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--w-border);
+}
+
+.hotel-subscription-info-icon {
+  width: 39px;
+  height: 39px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  background: rgba(106, 52, 145, 0.09);
+  color: var(--w-purple, #6a3491);
+}
+
+.hotel-subscription-info-header h2 {
+  margin: 0 0 3px;
+  color: var(--w-text);
+  font-size: 15px;
+}
+
+.hotel-subscription-info-header p {
+  margin: 0;
+  color: var(--w-muted);
+  font-size: 9px;
+}
+
+.hotel-subscription-info-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.hotel-subscription-info-grid > div {
+  padding: 18px 20px;
+  border-right: 1px solid var(--w-border);
+}
+
+.hotel-subscription-info-grid > div:last-child {
+  border-right: none;
+}
+
+.hotel-subscription-info-grid span {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--w-muted);
+  font-size: 9px;
+}
+
+.hotel-subscription-info-grid strong {
+  color: var(--w-text);
+  font-size: 12px;
+}
+
+.hotel-subscription-info-grid .subscription-status {
+  color: #16803b;
+}
+
+/* ================================
+   ACTIONS
+================================ */
+
+.hotel-subscription-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 18px 20px;
+  background: var(--w-white);
+  border: 1px solid var(--w-border);
+  border-radius: 12px;
+  box-shadow: var(--w-shadow);
+}
+
+.hotel-subscription-success {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-right: auto;
+  color: #16803b;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.hotel-subscription-cancel,
+.hotel-subscription-save {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 18px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.hotel-subscription-cancel {
+  border: 1px solid var(--w-border);
+  background: var(--w-white);
+  color: var(--w-text);
+}
+
+.hotel-subscription-cancel:hover {
+  border-color: var(--w-gold);
+  color: var(--w-gold-dark);
+}
+
+.hotel-subscription-save {
+  border: 1px solid var(--w-gold);
+  background: var(--w-gold);
+  color: #171018;
+}
+
+.hotel-subscription-save:hover {
+  background: var(--w-gold-light);
+  transform: translateY(-1px);
+  box-shadow: var(--w-shadow-gold);
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 1000px) {
+  .hotel-subscription-plans {
+    grid-template-columns: 1fr;
+  }
+
+  .hotel-subscription-plan {
+    min-height: auto;
+  }
+
+  .hotel-subscription-info-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hotel-subscription-info-grid > div:nth-child(2) {
+    border-right: none;
+  }
+
+  .hotel-subscription-info-grid > div:nth-child(3),
+  .hotel-subscription-info-grid > div:nth-child(4) {
+    border-top: 1px solid var(--w-border);
+  }
+}
+
+@media (max-width: 700px) {
+  .hotel-subscription-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .hotel-subscription-back-btn {
+    width: 100%;
+  }
+
+  .hotel-subscription-current {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .hotel-subscription-current-right {
+    align-items: flex-start;
+  }
+
+  .hotel-subscription-billing {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .hotel-subscription-cycle {
+    width: 100%;
+  }
+
+  .hotel-subscription-cycle button {
+    flex: 1;
+  }
+}
+
+@media (max-width: 500px) {
+  .hotel-subscription-current,
+  .hotel-subscription-plan {
+    padding: 18px;
+  }
+
+  .hotel-subscription-current-left {
+    align-items: flex-start;
+  }
+
+  .hotel-subscription-current-icon {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+  }
+
+  .hotel-subscription-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hotel-subscription-info-grid > div {
+    border-right: none;
+    border-bottom: 1px solid var(--w-border);
+  }
+
+  .hotel-subscription-info-grid > div:nth-child(3),
+  .hotel-subscription-info-grid > div:nth-child(4) {
+    border-top: none;
+  }
+
+  .hotel-subscription-info-grid > div:last-child {
+    border-bottom: none;
+  }
+
+  .hotel-subscription-actions {
+    flex-direction: column-reverse;
+  }
+
+  .hotel-subscription-cancel,
+  .hotel-subscription-save {
+    width: 100%;
+  }
+
+  .hotel-subscription-success {
+    width: 100%;
+    justify-content: center;
+    margin: 0 0 5px;
+  }
+}

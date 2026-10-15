@@ -1,134 +1,196 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import MainLayout from '../../layouts/MainLayout'
 import Breadcrumb from '../../components/layout/Breadcrumb'
 import PageHeader from '../../components/layout/PageHeader'
+import { useHotelData } from '../../context/HotelDataContext'
+import { useHotel } from '../../context/HotelContext'
 import './Orders.css'
 
 function Orders() {
   const navigate = useNavigate()
+  const { selectedHotel } = useHotel()
 
-  const [orders, setOrders] = useState([
-    {
-      id: 1,
-      orderNo: 'ORD-1001',
-      guest: 'Rahul Sharma',
-      room: '101',
-      items: 'Paneer Tikka, Butter Naan',
-      amount: 480,
-      orderType: 'Room Service',
-      status: 'Pending',
-      payment: 'Pending',
-      date: '28 Sep 2026',
-    },
-    {
-      id: 2,
-      orderNo: 'ORD-1002',
-      guest: 'Priya Verma',
-      room: '201',
-      items: 'Chicken Biryani, Gulab Jamun',
-      amount: 600,
-      orderType: 'Room Service',
-      status: 'Preparing',
-      payment: 'Paid',
-      date: '28 Sep 2026',
-    },
-    {
-      id: 3,
-      orderNo: 'ORD-1003',
-      guest: 'Aman Singh',
-      room: '102',
-      items: 'Dal Makhani, Butter Naan',
-      amount: 360,
-      orderType: 'Restaurant',
-      status: 'Ready',
-      payment: 'Paid',
-      date: '27 Sep 2026',
-    },
-    {
-      id: 4,
-      orderNo: 'ORD-1004',
-      guest: 'Neha Kapoor',
-      room: '205',
-      items: 'Chicken Tikka, Garlic Naan',
-      amount: 490,
-      orderType: 'Room Service',
-      status: 'Completed',
-      payment: 'Paid',
-      date: '27 Sep 2026',
-    },
-    {
-      id: 5,
-      orderNo: 'ORD-1005',
-      guest: 'Vikash Yadav',
-      room: '302',
-      items: 'Gulab Jamun',
-      amount: 150,
-      orderType: 'Takeaway',
-      status: 'Completed',
-      payment: 'Paid',
-      date: '26 Sep 2026',
-    },
-  ])
+  const {
+    restaurantOrders,
+    updateRestaurantOrder,
+    deleteRestaurantOrder,
+  } = useHotelData()
 
   const [search, setSearch] = useState('')
   const [statusFilter, setStatusFilter] = useState('All')
   const [typeFilter, setTypeFilter] = useState('All')
+  const [paymentFilter, setPaymentFilter] = useState('All')
+
+  const hotelOrders = useMemo(() => {
+    if (!selectedHotel?.id) {
+      return restaurantOrders || []
+    }
+
+    const hasHotelSpecificOrders = restaurantOrders?.some(
+      (order) => order.hotelId
+    )
+
+    if (!hasHotelSpecificOrders) {
+      return restaurantOrders || []
+    }
+
+    return (restaurantOrders || []).filter(
+      (order) => order.hotelId === selectedHotel.id
+    )
+  }, [restaurantOrders, selectedHotel])
+
+  const filteredOrders = useMemo(() => {
+    const searchText = search.toLowerCase().trim()
+
+    return hotelOrders.filter((order) => {
+
+      const itemsText = Array.isArray(order.items)
+        ? order.items
+            .map((item) => item.name)
+            .join(' ')
+            .toLowerCase()
+        : String(order.items || '').toLowerCase()
+
+      const guestName = String(
+        order.guestName || order.guest || ''
+      ).toLowerCase()
+
+      const roomNumber = String(
+        order.roomNumber || order.room || ''
+      ).toLowerCase()
+
+      const orderNo = String(order.orderNo || '').toLowerCase()
+
+      const matchesSearch =
+        !searchText ||
+        orderNo.includes(searchText) ||
+        guestName.includes(searchText) ||
+        roomNumber.includes(searchText) ||
+        itemsText.includes(searchText)
+
+      const matchesStatus =
+        statusFilter === 'All' ||
+        order.status === statusFilter
+
+      const matchesType =
+        typeFilter === 'All' ||
+        order.orderType === typeFilter
+
+      const paymentStatus =
+        order.paymentStatus || order.payment || 'Pending'
+
+      const matchesPayment =
+        paymentFilter === 'All' ||
+        paymentStatus === paymentFilter
+
+      return (
+        matchesSearch &&
+        matchesStatus &&
+        matchesType &&
+        matchesPayment
+      )
+    })
+  }, [
+    hotelOrders,
+    search,
+    statusFilter,
+    typeFilter,
+    paymentFilter,
+  ])
+
+  const totalOrders = hotelOrders.length
+
+  const pendingOrders = hotelOrders.filter(
+    (order) => order.status === 'Pending'
+  ).length
+
+  const preparingOrders = hotelOrders.filter(
+    (order) => order.status === 'Preparing'
+  ).length
+
+  const readyOrders = hotelOrders.filter(
+    (order) => order.status === 'Ready'
+  ).length
+
+  const completedOrders = hotelOrders.filter(
+    (order) => order.status === 'Completed'
+  ).length
+
+  const totalRevenue = hotelOrders
+    .filter((order) => order.status !== 'Cancelled')
+    .reduce(
+      (total, order) =>
+        total + Number(order.totalAmount || order.amount || 0),
+      0
+    )
 
   const updateStatus = (id, newStatus) => {
-    setOrders((prev) =>
-      prev.map((order) =>
-        order.id === id
-          ? { ...order, status: newStatus }
-          : order
-      )
+    updateRestaurantOrder(id, {
+      status: newStatus,
+    })
+  }
+
+  const updatePayment = (id, newPayment) => {
+    updateRestaurantOrder(id, {
+      paymentStatus: newPayment,
+      payment: newPayment,
+    })
+  }
+
+  const handleDelete = (order) => {
+    const confirmDelete = window.confirm(
+      `Delete order ${order.orderNo}?`
     )
+
+    if (!confirmDelete) {
+      return
+    }
+
+    deleteRestaurantOrder(order.id)
   }
 
   const clearFilters = () => {
     setSearch('')
     setStatusFilter('All')
     setTypeFilter('All')
+    setPaymentFilter('All')
   }
 
-  const filteredOrders = orders.filter((order) => {
-    const searchText = search.toLowerCase()
+  const formatCurrency = (amount) => {
+    return `₹${Number(amount || 0).toLocaleString('en-IN', {
+      maximumFractionDigits: 0,
+    })}`
+  }
 
-    const matchesSearch =
-      order.orderNo.toLowerCase().includes(searchText) ||
-      order.guest.toLowerCase().includes(searchText) ||
-      order.room.toLowerCase().includes(searchText) ||
-      order.items.toLowerCase().includes(searchText)
+  const formatDate = (order) => {
+    if (order.date) {
+      return order.date
+    }
 
-    const matchesStatus =
-      statusFilter === 'All' ||
-      order.status === statusFilter
+    if (order.orderDate) {
+      return new Date(order.orderDate).toLocaleDateString(
+        'en-IN',
+        {
+          day: '2-digit',
+          month: 'short',
+          year: 'numeric',
+        }
+      )
+    }
 
-    const matchesType =
-      typeFilter === 'All' ||
-      order.orderType === typeFilter
+    return '—'
+  }
 
-    return matchesSearch && matchesStatus && matchesType
-  })
+  const getItemsText = (order) => {
+    if (!Array.isArray(order.items)) {
+      return order.items || 'No items'
+    }
 
-  const totalOrders = orders.length
-
-  const pendingOrders = orders.filter(
-    (order) => order.status === 'Pending'
-  ).length
-
-  const preparingOrders = orders.filter(
-    (order) => order.status === 'Preparing'
-  ).length
-
-  const completedOrders = orders.filter(
-    (order) => order.status === 'Completed'
-  ).length
-
-  const totalRevenue = orders.reduce(
-    (total, order) => total + order.amount,
-    0
-  )
+    return order.items
+      .map((item) => `${item.name} × ${item.quantity}`)
+      .join(', ')
+  }
 
   return (
     <MainLayout>
@@ -141,7 +203,22 @@ function Orders() {
 
       <div className="orders-page">
 
-        {/* Stats */}
+        {/* HOTEL BAR */}
+
+        {selectedHotel && (
+          <div className="orders-hotel-bar">
+            <div className="orders-hotel-icon">
+              <i className="bi bi-building"></i>
+            </div>
+
+            <div>
+              <span>Currently Managing</span>
+              <strong>{selectedHotel.name}</strong>
+            </div>
+          </div>
+        )}
+
+        {/* STATS */}
 
         <div className="orders-stats">
 
@@ -191,7 +268,7 @@ function Orders() {
 
         </div>
 
-        {/* Revenue */}
+        {/* REVENUE */}
 
         <div className="orders-revenue">
           <div className="orders-revenue-icon">
@@ -200,13 +277,11 @@ function Orders() {
 
           <div>
             <span>Total Order Revenue</span>
-            <strong>
-              ₹{totalRevenue.toLocaleString('en-IN')}
-            </strong>
+            <strong>{formatCurrency(totalRevenue)}</strong>
           </div>
         </div>
 
-        {/* Filters */}
+        {/* FILTERS */}
 
         <div className="orders-filter-card">
 
@@ -215,7 +290,7 @@ function Orders() {
 
             <input
               type="text"
-              placeholder="Search order, guest or room..."
+              placeholder="Search order, guest, room or item..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
@@ -230,6 +305,7 @@ function Orders() {
             <option value="Preparing">Preparing</option>
             <option value="Ready">Ready</option>
             <option value="Completed">Completed</option>
+            <option value="Cancelled">Cancelled</option>
           </select>
 
           <select
@@ -240,6 +316,16 @@ function Orders() {
             <option value="Room Service">Room Service</option>
             <option value="Restaurant">Restaurant</option>
             <option value="Takeaway">Takeaway</option>
+          </select>
+
+          <select
+            value={paymentFilter}
+            onChange={(e) => setPaymentFilter(e.target.value)}
+          >
+            <option value="All">All Payments</option>
+            <option value="Pending">Pending</option>
+            <option value="Paid">Paid</option>
+            <option value="Partial">Partial</option>
           </select>
 
           <button
@@ -262,21 +348,25 @@ function Orders() {
 
         </div>
 
-        {/* Table */}
+        {/* TABLE */}
 
         <div className="orders-table-card">
 
           <div className="orders-table-header">
+
             <div>
               <h2>Order List</h2>
+
               <p>
-                Showing {filteredOrders.length} of {orders.length} orders
+                Showing {filteredOrders.length} of {hotelOrders.length}{' '}
+                orders
               </p>
             </div>
 
             <span className="orders-result">
               {filteredOrders.length} Results
             </span>
+
           </div>
 
           <div className="orders-table-wrapper">
@@ -294,110 +384,179 @@ function Orders() {
                   <th>PAYMENT</th>
                   <th>STATUS</th>
                   <th>DATE</th>
+                  <th>ACTION</th>
                 </tr>
               </thead>
 
               <tbody>
 
                 {filteredOrders.length > 0 ? (
-                  filteredOrders.map((order) => (
-                    <tr key={order.id}>
+                  filteredOrders.map((order) => {
 
-                      <td>
-                        <span className="order-number">
-                          #{order.orderNo}
-                        </span>
-                      </td>
+                    const payment =
+                      order.paymentStatus ||
+                      order.payment ||
+                      'Pending'
 
-                      <td>
-                        <strong className="order-guest">
-                          {order.guest}
-                        </strong>
-                      </td>
+                    return (
+                      <tr key={order.id}>
 
-                      <td>
-                        <span className="order-room">
-                          Room {order.room}
-                        </span>
-                      </td>
+                        <td>
+                          <span className="order-number">
+                            #{order.orderNo}
+                          </span>
+                        </td>
 
-                      <td>
-                        <span className="order-items">
-                          {order.items}
-                        </span>
-                      </td>
+                        <td>
+                          <strong className="order-guest">
+                            {order.guestName || order.guest}
+                          </strong>
+                        </td>
 
-                      <td>
-                        <span className="order-type">
-                          {order.orderType}
-                        </span>
-                      </td>
+                        <td>
+                          <span className="order-room">
+                            {order.roomNumber
+                              ? `Room ${order.roomNumber}`
+                              : '—'}
+                          </span>
+                        </td>
 
-                      <td>
-                        <strong className="order-amount">
-                          ₹{order.amount.toLocaleString('en-IN')}
-                        </strong>
-                      </td>
+                        <td>
+                          <span className="order-items">
+                            {getItemsText(order)}
+                          </span>
+                        </td>
 
-                      <td>
-                        <span
-                          className={`payment-status ${
-                            order.payment.toLowerCase()
-                          }`}
-                        >
-                          {order.payment}
-                        </span>
-                      </td>
+                        <td>
+                          <span className="order-type">
+                            {order.orderType}
+                          </span>
+                        </td>
 
-                      <td>
-                        <select
-                          className={`order-status-select ${order.status
-                            .toLowerCase()
-                            .replace(' ', '-')}`}
-                          value={order.status}
-                          onChange={(e) =>
-                            updateStatus(
-                              order.id,
-                              e.target.value
+                        <td>
+                          <strong className="order-amount">
+                            {formatCurrency(
+                              order.totalAmount || order.amount
+                            )}
+                          </strong>
+                        </td>
+
+                        <td>
+                          <select
+                            className={`payment-status-select ${payment
+                              .toLowerCase()
+                              .replace(/\s+/g, '-')}`}
+                            value={payment}
+                            onChange={(e) =>
+                              updatePayment(
+                                order.id,
+                                e.target.value
+                              )
+                            }
+                          >
+                            <option value="Pending">
+                              Pending
+                            </option>
+
+                            <option value="Partial">
+                              Partial
+                            </option>
+
+                            <option value="Paid">
+                              Paid
+                            </option>
+                          </select>
+                        </td>
+
+                        <td>
+                          <select
+                            className={`order-status-select ${String(
+                              order.status || 'Pending'
                             )
-                          }
-                        >
-                          <option value="Pending">
-                            Pending
-                          </option>
+                              .toLowerCase()
+                              .replace(/\s+/g, '-')}`}
+                            value={order.status || 'Pending'}
+                            onChange={(e) =>
+                              updateStatus(
+                                order.id,
+                                e.target.value
+                              )
+                            }
+                          >
+                            <option value="Pending">
+                              Pending
+                            </option>
 
-                          <option value="Preparing">
-                            Preparing
-                          </option>
+                            <option value="Preparing">
+                              Preparing
+                            </option>
 
-                          <option value="Ready">
-                            Ready
-                          </option>
+                            <option value="Ready">
+                              Ready
+                            </option>
 
-                          <option value="Completed">
-                            Completed
-                          </option>
-                        </select>
-                      </td>
+                            <option value="Completed">
+                              Completed
+                            </option>
 
-                      <td>
-                        <span className="order-date">
-                          {order.date}
-                        </span>
-                      </td>
+                            <option value="Cancelled">
+                              Cancelled
+                            </option>
+                          </select>
+                        </td>
 
-                    </tr>
-                  ))
+                        <td>
+                          <span className="order-date">
+                            {formatDate(order)}
+                          </span>
+                        </td>
+
+                        <td>
+                          <button
+                            type="button"
+                            className="order-delete-btn"
+                            title="Delete Order"
+                            onClick={() =>
+                              handleDelete(order)
+                            }
+                          >
+                            <i className="bi bi-trash3"></i>
+                          </button>
+                        </td>
+
+                      </tr>
+                    )
+                  })
                 ) : (
                   <tr>
-                    <td colSpan="9">
+                    <td colSpan="10">
+
                       <div className="orders-empty">
+
                         <i className="bi bi-receipt"></i>
+
                         <h3>No Orders Found</h3>
+
                         <p>
-                          Try changing your search or filters.
+                          {hotelOrders.length === 0
+                            ? 'No restaurant orders have been created yet.'
+                            : 'Try changing your search or filters.'}
                         </p>
+
+                        {hotelOrders.length === 0 && (
+                          <button
+                            type="button"
+                            onClick={() =>
+                              navigate('/restaurant/new-order')
+                            }
+                          >
+                            <i className="bi bi-plus-lg"></i>
+                            Create Order
+                          </button>
+                        )}
+
                       </div>
+
                     </td>
                   </tr>
                 )}
@@ -407,6 +566,7 @@ function Orders() {
             </table>
 
           </div>
+
         </div>
 
       </div>

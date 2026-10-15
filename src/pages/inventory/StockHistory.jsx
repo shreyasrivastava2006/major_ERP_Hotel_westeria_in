@@ -3,119 +3,92 @@ import { useNavigate } from 'react-router-dom'
 import MainLayout from '../../layouts/MainLayout'
 import Breadcrumb from '../../components/layout/Breadcrumb'
 import PageHeader from '../../components/layout/PageHeader'
-import './StockHistory.css'
+import './Suppliers.css'
 
-function StockHistory() {
+function Suppliers() {
   const navigate = useNavigate()
 
-  const [history] = useState([
+  const [suppliers] = useState([
     {
       id: 1,
-      date: '14 Sep 2026',
-      item: 'Bath Towels',
-      type: 'Stock In',
-      quantity: 50,
-      unit: 'Pieces',
-      reference: 'PO-1001',
-      user: 'Admin'
+      name: 'Royal Supplies',
+      contact: 'Rajesh Kumar',
+      phone: '+91 98765 43210',
+      email: 'royalsupplies@gmail.com',
+      items: 12,
+      status: 'Active'
     },
     {
       id: 2,
-      date: '13 Sep 2026',
-      item: 'Shampoo',
-      type: 'Stock Out',
-      quantity: 15,
-      unit: 'Bottles',
-      reference: 'REQ-204',
-      user: 'Housekeeping'
+      name: 'Hotel Essentials',
+      contact: 'Amit Sharma',
+      phone: '+91 98765 12345',
+      email: 'hotelessentials@gmail.com',
+      items: 8,
+      status: 'Active'
     },
     {
       id: 3,
-      date: '12 Sep 2026',
-      item: 'Coffee Powder',
-      type: 'Stock In',
-      quantity: 25,
-      unit: 'Kg',
-      reference: 'PO-1002',
-      user: 'Manager'
+      name: 'Fresh Foods',
+      contact: 'Neeraj Singh',
+      phone: '+91 91234 56789',
+      email: 'freshfoods@gmail.com',
+      items: 15,
+      status: 'Active'
     },
     {
       id: 4,
-      date: '11 Sep 2026',
-      item: 'Bed Sheets',
-      type: 'Stock Out',
-      quantity: 10,
-      unit: 'Pieces',
-      reference: 'REQ-201',
-      user: 'Housekeeping'
-    },
-    {
-      id: 5,
-      date: '10 Sep 2026',
-      item: 'Mineral Water',
-      type: 'Stock Out',
-      quantity: 40,
-      unit: 'Bottles',
-      reference: 'REQ-198',
-      user: 'Restaurant'
+      name: 'Aqua Distributors',
+      contact: 'Vikas Verma',
+      phone: '+91 99887 66554',
+      email: 'aquadistributors@gmail.com',
+      items: 5,
+      status: 'Inactive'
     }
   ])
 
   const [searchTerm, setSearchTerm] = useState('')
-  const [transactionFilter, setTransactionFilter] =
-    useState('All Transactions')
-  const [itemFilter, setItemFilter] =
-    useState('All Items')
 
-  const filteredHistory = history.filter((item) => {
-    const matchesSearch =
-      item.item.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.reference.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.user.toLowerCase().includes(searchTerm.toLowerCase())
-
-    const matchesTransaction =
-      transactionFilter === 'All Transactions' ||
-      item.type === transactionFilter
-
-    const matchesItem =
-      itemFilter === 'All Items' ||
-      item.item === itemFilter
+  const filteredSuppliers = suppliers.filter((supplier) => {
+    const search = searchTerm.toLowerCase()
 
     return (
-      matchesSearch &&
-      matchesTransaction &&
-      matchesItem
+      supplier.name.toLowerCase().includes(search) ||
+      supplier.contact.toLowerCase().includes(search) ||
+      supplier.phone.toLowerCase().includes(search) ||
+      supplier.email.toLowerCase().includes(search)
     )
   })
 
-  const stockInCount = history.filter(
-    (item) => item.type === 'Stock In'
+  const activeSuppliers = suppliers.filter(
+    (supplier) => supplier.status === 'Active'
   ).length
 
-  const stockOutCount = history.filter(
-    (item) => item.type === 'Stock Out'
-  ).length
+  const totalItems = suppliers.reduce(
+    (total, supplier) => total + supplier.items,
+    0
+  )
 
   return (
     <MainLayout>
 
-      <div className="stock-history-page">
+      <div className="suppliers-page">
 
         <Breadcrumb
-          items={['Inventory', 'Stock History']}
+          items={['Inventory', 'Suppliers']}
         />
 
-        <div className="stock-history-header">
+        <div className="suppliers-header">
 
           <PageHeader
-            title="Stock History"
-            subtitle="Track all inventory stock movements"
+            title="Suppliers"
+            subtitle="Manage inventory suppliers and vendors"
           />
 
           <button
             type="button"
             onClick={() => navigate('/inventory')}
-            className="back-stock-btn"
+            className="back-suppliers-btn"
           >
             <i className="bi bi-arrow-left"></i>
             Back to Inventory
@@ -123,34 +96,57 @@ function StockHistory() {
 
         </div>
 
-        {/* SUMMARY */}
+        {/* STATS */}
 
-        <div className="stock-summary">
+        <div className="supplier-stats">
 
-          <div>
-            <span>Total Transactions</span>
-            <strong>{history.length}</strong>
+          <div className="supplier-stat">
+
+            <i className="bi bi-truck"></i>
+
+            <div>
+              <span>Total Suppliers</span>
+              <strong>{suppliers.length}</strong>
+            </div>
+
           </div>
 
-          <div>
-            <span>Stock In</span>
-            <strong>{stockInCount}</strong>
+          <div className="supplier-stat">
+
+            <i className="bi bi-check-circle"></i>
+
+            <div>
+              <span>Active Suppliers</span>
+              <strong>{activeSuppliers}</strong>
+            </div>
+
           </div>
 
-          <div>
-            <span>Stock Out</span>
-            <strong>{stockOutCount}</strong>
+          <div className="supplier-stat">
+
+            <i className="bi bi-box-seam"></i>
+
+            <div>
+              <span>Items Supplied</span>
+              <strong>{totalItems}</strong>
+            </div>
+
           </div>
 
         </div>
 
-        {/* HISTORY CARD */}
+        {/* SUPPLIERS CARD */}
 
-        <div className="stock-history-card">
+        <div className="suppliers-card">
 
-          <div className="stock-filter-bar">
+          <div className="suppliers-card-header">
 
-            <div className="stock-search">
+            <div>
+              <h2>Supplier List</h2>
+              <p>All registered inventory suppliers</p>
+            </div>
+
+            <div className="supplier-search">
 
               <i className="bi bi-search"></i>
 
@@ -160,116 +156,106 @@ function StockHistory() {
                 onChange={(e) =>
                   setSearchTerm(e.target.value)
                 }
-                placeholder="Search stock history..."
+                placeholder="Search suppliers..."
               />
 
             </div>
 
-            <select
-              value={transactionFilter}
-              onChange={(e) =>
-                setTransactionFilter(e.target.value)
-              }
-            >
-              <option>All Transactions</option>
-              <option>Stock In</option>
-              <option>Stock Out</option>
-            </select>
-
-            <select
-              value={itemFilter}
-              onChange={(e) =>
-                setItemFilter(e.target.value)
-              }
-            >
-              <option>All Items</option>
-              <option>Bath Towels</option>
-              <option>Shampoo</option>
-              <option>Coffee Powder</option>
-              <option>Bed Sheets</option>
-              <option>Mineral Water</option>
-            </select>
-
           </div>
 
-          <div className="stock-table-wrapper">
+          <div className="suppliers-table-wrapper">
 
-            <table className="stock-table">
+            <table className="suppliers-table">
 
               <thead>
                 <tr>
-                  <th>Date</th>
-                  <th>Item</th>
-                  <th>Transaction</th>
-                  <th>Quantity</th>
-                  <th>Unit</th>
-                  <th>Reference</th>
-                  <th>Updated By</th>
+                  <th>Supplier</th>
+                  <th>Contact Person</th>
+                  <th>Phone</th>
+                  <th>Email</th>
+                  <th>Items</th>
+                  <th>Status</th>
+                  <th>Action</th>
                 </tr>
               </thead>
 
               <tbody>
 
-                {filteredHistory.length === 0 ? (
+                {filteredSuppliers.length === 0 ? (
 
                   <tr>
                     <td
                       colSpan="7"
-                      className="stock-empty"
+                      className="supplier-empty"
                     >
-                      <i className="bi bi-clock-history"></i>
-                      <strong>No stock history found</strong>
+                      <i className="bi bi-truck"></i>
+                      <strong>No suppliers found</strong>
                       <span>
-                        Try changing your search or filters.
+                        Try a different search term.
                       </span>
                     </td>
                   </tr>
 
                 ) : (
 
-                  filteredHistory.map((item) => (
+                  filteredSuppliers.map((supplier) => (
 
-                    <tr key={item.id}>
-
-                      <td>{item.date}</td>
+                    <tr key={supplier.id}>
 
                       <td>
-                        <strong>{item.item}</strong>
+
+                        <div className="supplier-name">
+
+                          <div className="supplier-icon">
+                            <i className="bi bi-building"></i>
+                          </div>
+
+                          <strong>
+                            {supplier.name}
+                          </strong>
+
+                        </div>
+
+                      </td>
+
+                      <td>{supplier.contact}</td>
+
+                      <td>{supplier.phone}</td>
+
+                      <td>{supplier.email}</td>
+
+                      <td>
+                        <strong>{supplier.items}</strong>
                       </td>
 
                       <td>
 
                         <span
-                          className={`transaction-badge ${
-                            item.type === 'Stock In'
-                              ? 'stock-in'
-                              : 'stock-out'
+                          className={`supplier-status ${
+                            supplier.status.toLowerCase()
                           }`}
                         >
-
-                          <i
-                            className={
-                              item.type === 'Stock In'
-                                ? 'bi bi-arrow-down-left'
-                                : 'bi bi-arrow-up-right'
-                            }
-                          ></i>
-
-                          {item.type}
-
+                          {supplier.status}
                         </span>
 
                       </td>
 
                       <td>
-                        <strong>{item.quantity}</strong>
+
+                        <button
+                          type="button"
+                          className="view-supplier-btn"
+                          onClick={() =>
+                            alert(
+                              `Supplier: ${supplier.name}`
+                            )
+                          }
+                          title="View Supplier"
+                        >
+                          <i className="bi bi-eye"></i>
+                        </button>
+
                       </td>
-
-                      <td>{item.unit}</td>
-
-                      <td>{item.reference}</td>
-
-                      <td>{item.user}</td>
 
                     </tr>
 
@@ -291,4 +277,4 @@ function StockHistory() {
   )
 }
 
-export default StockHistory
+export default Suppliers

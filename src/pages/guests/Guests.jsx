@@ -73,15 +73,9 @@ function Guests() {
 
       const matchesSearch =
         !search ||
-        guest.name
-          ?.toLowerCase()
-          .includes(search) ||
-        guest.email
-          ?.toLowerCase()
-          .includes(search) ||
-        guest.phone
-          ?.toLowerCase()
-          .includes(search) ||
+        guest.name?.toLowerCase().includes(search) ||
+        guest.email?.toLowerCase().includes(search) ||
+        guest.phone?.toLowerCase().includes(search) ||
         String(guest.room || "")
           .toLowerCase()
           .includes(search);
@@ -100,7 +94,7 @@ function Guests() {
   };
 
   /* ==============================
-     OPEN DETAILS
+     VIEW DETAILS
   ============================== */
 
   const handleViewDetails = (guest) => {
@@ -117,6 +111,7 @@ function Guests() {
 
   return (
     <MainLayout>
+
       <Breadcrumb items={["Guests"]} />
 
       <PageHeader
@@ -130,9 +125,7 @@ function Guests() {
 
       <div className="guests-page">
 
-        {/* =================================
-            SELECTED HOTEL
-        ================================= */}
+        {/* SELECTED HOTEL */}
 
         {selectedHotel && (
           <div className="guests-hotel-bar">
@@ -160,9 +153,7 @@ function Guests() {
           </div>
         )}
 
-        {/* =================================
-            ACTION
-        ================================= */}
+        {/* ACTION */}
 
         <div className="guest-actions">
 
@@ -173,6 +164,7 @@ function Guests() {
               setShowAddGuest((prev) => !prev)
             }
           >
+
             <i
               className={
                 showAddGuest
@@ -184,13 +176,12 @@ function Guests() {
             {showAddGuest
               ? "Close Form"
               : "Add New Guest"}
+
           </button>
 
         </div>
 
-        {/* =================================
-            ADD GUEST
-        ================================= */}
+        {/* ADD GUEST */}
 
         {showAddGuest && (
           <AddGuest
@@ -198,9 +189,7 @@ function Guests() {
           />
         )}
 
-        {/* =================================
-            FILTER
-        ================================= */}
+        {/* FILTER */}
 
         <GuestFilter
           status={statusFilter}
@@ -210,9 +199,7 @@ function Guests() {
           onClear={handleClearFilters}
         />
 
-        {/* =================================
-            LIST HEADER
-        ================================= */}
+        {/* HEADER */}
 
         <div className="guests-list-header">
 
@@ -221,8 +208,7 @@ function Guests() {
             <h2>Hotel Guests</h2>
 
             <p>
-              Showing{" "}
-              {filteredGuests.length} of{" "}
+              Showing {filteredGuests.length} of{" "}
               {guests.length} guest records
             </p>
 
@@ -234,9 +220,7 @@ function Guests() {
 
         </div>
 
-        {/* =================================
-            GUEST CARDS
-        ================================= */}
+        {/* GUEST LIST */}
 
         {filteredGuests.length > 0 ? (
 
@@ -281,20 +265,17 @@ function Guests() {
 
         )}
 
-        {/* =================================
-            DETAILS
-        ================================= */}
+        {/* DETAILS */}
 
         {selectedGuest && (
-
           <GuestDetails
             guest={selectedGuest}
             onClose={handleCloseDetails}
           />
-
         )}
 
       </div>
+
     </MainLayout>
   );
 }

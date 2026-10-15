@@ -1,10 +1,13 @@
-import { NavLink } from 'react-router-dom'
-import './SuperAdminSidebar.css'
+import { NavLink } from "react-router-dom";
+import "./SuperAdminSidebar.css";
 
 function SuperAdminSidebar({ isOpen, onLogout }) {
   return (
-    <aside className={`super-admin-sidebar ${isOpen ? 'open' : 'closed'}`}>
-
+    <aside
+      className={`super-admin-sidebar ${
+        isOpen ? "open" : "closed"
+      }`}
+    >
       {/* LOGO */}
       <div className="super-sidebar-logo">
         <div className="super-logo-circle">W</div>
@@ -20,8 +23,9 @@ function SuperAdminSidebar({ isOpen, onLogout }) {
       {/* MENU */}
       <nav className="super-sidebar-menu">
 
+        {/* MAIN */}
         <div className="super-menu-title">
-          {isOpen && 'MAIN'}
+          {isOpen && "MAIN"}
         </div>
 
         <NavLink
@@ -33,9 +37,9 @@ function SuperAdminSidebar({ isOpen, onLogout }) {
           {isOpen && <span>Dashboard</span>}
         </NavLink>
 
-
+        {/* HOTEL MANAGEMENT */}
         <div className="super-menu-title">
-          {isOpen && 'HOTEL MANAGEMENT'}
+          {isOpen && "HOTEL MANAGEMENT"}
         </div>
 
         <NavLink
@@ -46,17 +50,9 @@ function SuperAdminSidebar({ isOpen, onLogout }) {
           {isOpen && <span>Hotels</span>}
         </NavLink>
 
-        <NavLink
-          to="/super-admin/hotels/add"
-          className="super-sidebar-link"
-        >
-          <i className="bi bi-building-add"></i>
-          {isOpen && <span>Add Hotel</span>}
-        </NavLink>
-
-
+        {/* USER MANAGEMENT */}
         <div className="super-menu-title">
-          {isOpen && 'USER MANAGEMENT'}
+          {isOpen && "USER MANAGEMENT"}
         </div>
 
         <NavLink
@@ -67,9 +63,9 @@ function SuperAdminSidebar({ isOpen, onLogout }) {
           {isOpen && <span>Users</span>}
         </NavLink>
 
-
+        {/* SUBSCRIPTION */}
         <div className="super-menu-title">
-          {isOpen && 'SUBSCRIPTION'}
+          {isOpen && "SUBSCRIPTION"}
         </div>
 
         <NavLink
@@ -88,9 +84,9 @@ function SuperAdminSidebar({ isOpen, onLogout }) {
           {isOpen && <span>Subscriptions</span>}
         </NavLink>
 
-
+        {/* REPORTS */}
         <div className="super-menu-title">
-          {isOpen && 'REPORTS'}
+          {isOpen && "REPORTS"}
         </div>
 
         <NavLink
@@ -109,9 +105,9 @@ function SuperAdminSidebar({ isOpen, onLogout }) {
           {isOpen && <span>Revenue Report</span>}
         </NavLink>
 
-
+        {/* SYSTEM */}
         <div className="super-menu-title">
-          {isOpen && 'SYSTEM'}
+          {isOpen && "SYSTEM"}
         </div>
 
         <NavLink
@@ -140,7 +136,6 @@ function SuperAdminSidebar({ isOpen, onLogout }) {
 
       </nav>
 
-
       {/* LOGOUT */}
       <div className="super-sidebar-bottom">
         <button
@@ -152,9 +147,8 @@ function SuperAdminSidebar({ isOpen, onLogout }) {
           {isOpen && <span>Logout</span>}
         </button>
       </div>
-
     </aside>
-  )
+  );
 }
 
-export default SuperAdminSidebar
+export default SuperAdminSidebar;

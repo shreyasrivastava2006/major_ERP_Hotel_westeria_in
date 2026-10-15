@@ -1,33 +1,65 @@
+import { useMemo } from 'react'
+import { Link } from 'react-router-dom'
+
 import MainLayout from '../../layouts/MainLayout'
 import PageHeader from '../../components/layout/PageHeader'
 import Breadcrumb from '../../components/layout/Breadcrumb'
 
-import reservations from '../../data/reservations'
-import rooms from '../../data/rooms'
-import guests from '../../data/guests'
-
 import { useHotel } from '../../context/HotelContext'
+import { useHotelData } from '../../context/HotelDataContext'
 
 import './FrontOffice.css'
 
 function FrontOffice() {
   const { selectedHotel } = useHotel()
 
+  const {
+    rooms,
+    guests,
+    reservations,
+  } = useHotelData()
+
   const today = new Date().toISOString().split('T')[0]
 
-  const todayCheckIns = reservations.filter(
-    (reservation) => reservation.checkIn === today
-  )
+  // ================================
+  // TODAY'S CHECK-IN
+  // ================================
 
-  const todayCheckOuts = reservations.filter(
-    (reservation) => reservation.checkOut === today
-  )
+  const todayCheckIns = useMemo(() => {
+    return reservations.filter(
+      (reservation) =>
+        reservation.checkIn === today &&
+        reservation.status !== 'Cancelled'
+    )
+  }, [reservations, today])
 
-  const activeGuests = reservations.filter(
-    (reservation) =>
-      reservation.status === 'Confirmed' ||
-      reservation.status === 'Checked In'
-  )
+  // ================================
+  // TODAY'S CHECK-OUT
+  // ================================
+
+  const todayCheckOuts = useMemo(() => {
+    return reservations.filter(
+      (reservation) =>
+        reservation.checkOut === today &&
+        reservation.status !== 'Cancelled'
+    )
+  }, [reservations, today])
+
+  // ================================
+  // ACTIVE GUESTS
+  // ================================
+
+  const activeGuests = useMemo(() => {
+    return reservations.filter(
+      (reservation) =>
+        reservation.status === 'Confirmed' ||
+        reservation.status === 'Checked In'
+    )
+  }, [reservations])
+
+  // ================================
+  // ROOM STATUS
+  // ================================
 
   const availableRooms = rooms.filter(
     (room) => room.status === 'Available'
@@ -45,28 +77,36 @@ function FrontOffice() {
     (room) => room.status === 'Maintenance'
   )
 
+  // ================================
+  // QUICK ACTIONS
+  // ================================
+
   const quickActions = [
     {
       title: 'Check-In',
-      description: 'Register arriving guests and assign rooms',
+      description:
+        'Register arriving guests and assign rooms',
       icon: 'bi-box-arrow-in-right',
       path: '/front-office/checkin',
     },
     {
       title: 'Check-Out',
-      description: 'Process departures and complete billing',
+      description:
+        'Process departures and complete billing',
       icon: 'bi-box-arrow-right',
       path: '/front-office/checkout',
     },
     {
       title: 'Guest Requests',
-      description: 'Manage guest service requests',
+      description:
+        'Manage guest service requests',
       icon: 'bi-chat-left-text',
       path: '/front-office/guest-requests',
     },
     {
       title: 'Room Transfer',
-      description: 'Transfer guests to another room',
+      description:
+        'Transfer guests to another room',
       icon: 'bi-arrow-left-right',
       path: '/front-office/room-transfer',
     },
@@ -87,7 +127,9 @@ function FrontOffice() {
 
       <div className="front-office-page">
 
-        {/* SELECTED HOTEL */}
+        {/* ========================================
+            SELECTED HOTEL
+        ======================================== */}
 
         {selectedHotel && (
           <div className="front-office-hotel-bar">
@@ -97,87 +139,123 @@ function FrontOffice() {
             </div>
 
             <div className="front-office-hotel-info">
-
               <span>SELECTED PROPERTY</span>
 
-              <strong>{selectedHotel.name}</strong>
+              <strong>
+                {selectedHotel.name}
+              </strong>
 
               <small>
-                {selectedHotel.code} • {selectedHotel.category} •{' '}
-                {selectedHotel.address.city},{' '}
-                {selectedHotel.address.state}
+                {selectedHotel.code} •{' '}
+                {selectedHotel.category} •{' '}
+                {selectedHotel.address?.city},{' '}
+                {selectedHotel.address?.state}
               </small>
-
             </div>
 
           </div>
         )}
 
-        {/* SUMMARY STATS */}
+        {/* ========================================
+            SUMMARY STATS
+        ======================================== */}
 
         <div className="front-office-stats">
 
           <div className="front-office-stat">
+
             <div className="front-office-stat-icon purple">
               <i className="bi bi-person-check"></i>
             </div>
 
             <div>
               <span>Active Guests</span>
-              <strong>{activeGuests.length}</strong>
-              <small>Current reservations</small>
+
+              <strong>
+                {activeGuests.length}
+              </strong>
+
+              <small>
+                Current reservations
+              </small>
             </div>
+
           </div>
 
           <div className="front-office-stat">
+
             <div className="front-office-stat-icon gold">
               <i className="bi bi-box-arrow-in-right"></i>
             </div>
 
             <div>
               <span>Today's Check-Ins</span>
-              <strong>{todayCheckIns.length}</strong>
-              <small>Expected arrivals</small>
+
+              <strong>
+                {todayCheckIns.length}
+              </strong>
+
+              <small>
+                Expected arrivals
+              </small>
             </div>
+
           </div>
 
           <div className="front-office-stat">
+
             <div className="front-office-stat-icon blue">
               <i className="bi bi-box-arrow-right"></i>
             </div>
 
             <div>
               <span>Today's Check-Outs</span>
-              <strong>{todayCheckOuts.length}</strong>
-              <small>Expected departures</small>
+
+              <strong>
+                {todayCheckOuts.length}
+              </strong>
+
+              <small>
+                Expected departures
+              </small>
             </div>
+
           </div>
 
           <div className="front-office-stat">
+
             <div className="front-office-stat-icon green">
               <i className="bi bi-door-open"></i>
             </div>
 
             <div>
               <span>Available Rooms</span>
+
               <strong>
-                {selectedHotel?.rooms?.available ??
-                  availableRooms.length}
+                {availableRooms.length}
               </strong>
-              <small>Ready for guests</small>
+
+              <small>
+                Ready for guests
+              </small>
             </div>
+
           </div>
 
         </div>
 
-        {/* QUICK ACTIONS */}
+        {/* ========================================
+            QUICK ACTIONS
+        ======================================== */}
 
         <section className="front-office-section">
 
           <div className="front-office-section-header">
 
             <div>
-              <h2>Front Office Operations</h2>
+              <h2>
+                Front Office Operations
+              </h2>
 
               <p>
                 Quickly access daily guest management operations
@@ -189,21 +267,28 @@ function FrontOffice() {
           <div className="front-office-actions">
 
             {quickActions.map((action) => (
-              <a
-                href={action.path}
+
+              <Link
+                to={action.path}
                 className="front-office-action-card"
                 key={action.title}
               >
 
                 <div className="front-office-action-icon">
-                  <i className={`bi ${action.icon}`}></i>
+                  <i
+                    className={`bi ${action.icon}`}
+                  ></i>
                 </div>
 
                 <div className="front-office-action-content">
 
-                  <h3>{action.title}</h3>
+                  <h3>
+                    {action.title}
+                  </h3>
 
-                  <p>{action.description}</p>
+                  <p>
+                    {action.description}
+                  </p>
 
                   <span>
                     Open
@@ -212,26 +297,34 @@ function FrontOffice() {
 
                 </div>
 
-              </a>
+              </Link>
+
             ))}
 
           </div>
 
         </section>
 
-        {/* TODAY'S ACTIVITY */}
+        {/* ========================================
+            TODAY'S ACTIVITY
+        ======================================== */}
 
         <div className="front-office-columns">
 
-          {/* CHECK INS */}
+          {/* CHECK-IN */}
 
           <section className="front-office-panel">
 
             <div className="front-office-panel-header">
 
               <div>
-                <h2>Today's Check-Ins</h2>
-                <p>Guests expected to arrive today</p>
+                <h2>
+                  Today's Check-Ins
+                </h2>
+
+                <p>
+                  Guests expected to arrive today
+                </p>
               </div>
 
               <span className="panel-count">
@@ -245,11 +338,13 @@ function FrontOffice() {
               {todayCheckIns.length === 0 ? (
 
                 <div className="front-office-empty">
+
                   <i className="bi bi-calendar-check"></i>
 
                   <p>
                     No check-ins scheduled for today.
                   </p>
+
                 </div>
 
               ) : (
@@ -262,23 +357,33 @@ function FrontOffice() {
                   >
 
                     <div className="guest-avatar">
-                      {reservation.guestName
-                        ?.charAt(0)
+                      {(
+                        reservation.guestName ||
+                        reservation.guest ||
+                        'G'
+                      )
+                        .charAt(0)
                         .toUpperCase()}
                     </div>
 
                     <div className="guest-info">
 
                       <strong>
-                        {reservation.guestName}
+                        {reservation.guestName ||
+                          reservation.guest ||
+                          'Unknown Guest'}
                       </strong>
 
                       <span>
-                        Room {reservation.roomNumber}
+                        Room{' '}
+                        {reservation.roomNumber ||
+                          reservation.room ||
+                          'Not Assigned'}
                       </span>
 
                       <small>
-                        {reservation.reservationNo}
+                        {reservation.reservationNo ||
+                          `RES-${reservation.id}`}
                       </small>
 
                     </div>
@@ -290,21 +395,27 @@ function FrontOffice() {
                   </div>
 
                 ))
+
               )}
 
             </div>
 
           </section>
 
-          {/* CHECK OUTS */}
+          {/* CHECK-OUT */}
 
           <section className="front-office-panel">
 
             <div className="front-office-panel-header">
 
               <div>
-                <h2>Today's Check-Outs</h2>
-                <p>Guests expected to depart today</p>
+                <h2>
+                  Today's Check-Outs
+                </h2>
+
+                <p>
+                  Guests expected to depart today
+                </p>
               </div>
 
               <span className="panel-count">
@@ -337,23 +448,33 @@ function FrontOffice() {
                   >
 
                     <div className="guest-avatar checkout">
-                      {reservation.guestName
-                        ?.charAt(0)
+                      {(
+                        reservation.guestName ||
+                        reservation.guest ||
+                        'G'
+                      )
+                        .charAt(0)
                         .toUpperCase()}
                     </div>
 
                     <div className="guest-info">
 
                       <strong>
-                        {reservation.guestName}
+                        {reservation.guestName ||
+                          reservation.guest ||
+                          'Unknown Guest'}
                       </strong>
 
                       <span>
-                        Room {reservation.roomNumber}
+                        Room{' '}
+                        {reservation.roomNumber ||
+                          reservation.room ||
+                          'Not Assigned'}
                       </span>
 
                       <small>
-                        {reservation.reservationNo}
+                        {reservation.reservationNo ||
+                          `RES-${reservation.id}`}
                       </small>
 
                     </div>
@@ -365,6 +486,7 @@ function FrontOffice() {
                   </div>
 
                 ))
+
               )}
 
             </div>
@@ -373,14 +495,18 @@ function FrontOffice() {
 
         </div>
 
-        {/* ROOM STATUS */}
+        {/* ========================================
+            ROOM STATUS
+        ======================================== */}
 
         <section className="front-office-section">
 
           <div className="front-office-section-header">
 
             <div>
-              <h2>Room Status</h2>
+              <h2>
+                Room Status
+              </h2>
 
               <p>
                 Current room availability overview
@@ -388,7 +514,7 @@ function FrontOffice() {
             </div>
 
             <div className="room-status-total">
-              {selectedHotel?.rooms?.total ?? rooms.length} Total Rooms
+              {rooms.length} Total Rooms
             </div>
 
           </div>
@@ -403,10 +529,8 @@ function FrontOffice() {
 
               <div>
                 <span>Available</span>
-
                 <strong>
-                  {selectedHotel?.rooms?.available ??
-                    availableRooms.length}
+                  {availableRooms.length}
                 </strong>
               </div>
 
@@ -420,10 +544,8 @@ function FrontOffice() {
 
               <div>
                 <span>Occupied</span>
-
                 <strong>
-                  {selectedHotel?.rooms?.occupied ??
-                    occupiedRooms.length}
+                  {occupiedRooms.length}
                 </strong>
               </div>
 
@@ -437,7 +559,6 @@ function FrontOffice() {
 
               <div>
                 <span>Cleaning</span>
-
                 <strong>
                   {cleaningRooms.length}
                 </strong>
@@ -453,10 +574,8 @@ function FrontOffice() {
 
               <div>
                 <span>Maintenance</span>
-
                 <strong>
-                  {selectedHotel?.rooms?.maintenance ??
-                    maintenanceRooms.length}
+                  {maintenanceRooms.length}
                 </strong>
               </div>
 
@@ -466,14 +585,18 @@ function FrontOffice() {
 
         </section>
 
-        {/* GUEST OVERVIEW */}
+        {/* ========================================
+            GUEST OVERVIEW
+        ======================================== */}
 
         <section className="front-office-section">
 
           <div className="front-office-section-header">
 
             <div>
-              <h2>Guest Overview</h2>
+              <h2>
+                Guest Overview
+              </h2>
 
               <p>
                 Registered guests in the hotel system
@@ -486,46 +609,61 @@ function FrontOffice() {
 
           </div>
 
-          <div className="guest-overview-grid">
+          {guests.length === 0 ? (
 
-            {guests.map((guest) => (
+            <div className="front-office-empty">
+              <i className="bi bi-people"></i>
+              <p>
+                No guests registered yet.
+              </p>
+            </div>
 
-              <div
-                className="guest-overview-card"
-                key={guest.id}
-              >
+          ) : (
 
-                <div className="guest-avatar large">
-                  {guest.name
-                    ?.charAt(0)
-                    .toUpperCase()}
+            <div className="guest-overview-grid">
+
+              {guests.map((guest) => (
+
+                <div
+                  className="guest-overview-card"
+                  key={guest.id}
+                >
+
+                  <div className="guest-avatar large">
+                    {(guest.name || 'G')
+                      .charAt(0)
+                      .toUpperCase()}
+                  </div>
+
+                  <div className="guest-overview-info">
+
+                    <h3>
+                      {guest.name || 'Guest'}
+                    </h3>
+
+                    <p>
+                      <i className="bi bi-envelope"></i>
+                      {guest.email || 'No email'}
+                    </p>
+
+                    <p>
+                      <i className="bi bi-telephone"></i>
+                      {guest.phone || 'No phone'}
+                    </p>
+
+                  </div>
+
+                  <span className="guest-active">
+                    {guest.status || 'Active'}
+                  </span>
+
                 </div>
 
-                <div className="guest-overview-info">
+              ))}
 
-                  <h3>{guest.name}</h3>
+            </div>
 
-                  <p>
-                    <i className="bi bi-envelope"></i>
-                    {guest.email}
-                  </p>
-
-                  <p>
-                    <i className="bi bi-telephone"></i>
-                    {guest.phone}
-                  </p>
-
-                </div>
-
-                <span className="guest-active">
-                  {guest.status}
-                </span>
-
-              </div>
-
-            ))}
-
-          </div>
+          )}
 
         </section>
 

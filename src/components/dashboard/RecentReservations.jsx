@@ -66,4 +66,4 @@ function RecentReservations() {
   )
 }
 
-export default RecentReservations
+export default RecentReservations   

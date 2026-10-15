@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import MainLayout from '../../layouts/MainLayout'
+import Breadcrumb from '../../components/layout/Breadcrumb'
+import PageHeader from '../../components/layout/PageHeader'
 import './ServicesRequest.css'
 
 function ServicesRequest() {
@@ -59,35 +62,35 @@ function ServicesRequest() {
   const handleChange = (e) => {
     const { name, value } = e.target
 
-    setFormData({
-      ...formData,
+    setFormData((prev) => ({
+      ...prev,
       [name]: value
-    })
+    }))
   }
 
   const addRequest = (e) => {
     e.preventDefault()
 
     if (
-      formData.guest === '' ||
-      formData.room === '' ||
-      formData.date === ''
+      !formData.guest.trim() ||
+      !formData.room.trim() ||
+      !formData.date
     ) {
       return
     }
 
     const newRequest = {
       id: Date.now(),
-      requestNo: '#SR-' + (1000 + requests.length + 1),
-      guest: formData.guest,
-      room: formData.room,
+      requestNo: `#SR-${1000 + requests.length + 1}`,
+      guest: formData.guest.trim(),
+      room: formData.room.trim(),
       service: formData.service,
       priority: formData.priority,
       date: formData.date,
       status: formData.status
     }
 
-    setRequests([...requests, newRequest])
+    setRequests((prev) => [...prev, newRequest])
 
     setFormData({
       guest: '',
@@ -102,8 +105,8 @@ function ServicesRequest() {
   }
 
   const updateStatus = (id, newStatus) => {
-    setRequests(
-      requests.map((request) =>
+    setRequests((prev) =>
+      prev.map((request) =>
         request.id === id
           ? {
               ...request,
@@ -115,8 +118,8 @@ function ServicesRequest() {
   }
 
   const deleteRequest = (id) => {
-    setRequests(
-      requests.filter((request) => request.id !== id)
+    setRequests((prev) =>
+      prev.filter((request) => request.id !== id)
     )
   }
 
@@ -135,426 +138,372 @@ function ServicesRequest() {
   ).length
 
   const highPriority = requests.filter(
-    (request) => request.priority === 'High'
+    (request) =>
+      request.priority === 'High' ||
+      request.priority === 'Urgent'
   ).length
 
   return (
-    <div className="service-request-page">
+    <MainLayout>
+      <div className="service-request-page">
 
-      <div className="service-request-header">
+        <Breadcrumb
+          items={['Services', 'Service Requests']}
+        />
 
-        <div>
-          <h1>Service Requests</h1>
-          <p>
-            Manage and track special requests from hotel guests
-          </p>
-        </div>
+        <div className="service-request-header">
 
-        <button
-          type="button"
-          className="add-service-request-btn"
-          onClick={() => setShowForm(!showForm)}
-        >
-          <i className="bi bi-plus-lg"></i>
-          New Service Request
-        </button>
+          <PageHeader
+            title="Service Requests"
+            subtitle="Manage and track special requests from hotel guests"
+          />
 
-      </div>
-
-      <div className="service-request-stats">
-
-        <div className="service-request-stat-card">
-
-          <div className="service-request-stat-icon">
-            <i className="bi bi-list-check"></i>
-          </div>
-
-          <div>
-            <span>Total Requests</span>
-            <h2>{totalRequests}</h2>
-          </div>
+          <button
+            type="button"
+            className="add-service-request-btn"
+            onClick={() => setShowForm(!showForm)}
+          >
+            <i className="bi bi-plus-lg"></i>
+            {showForm
+              ? 'Close Form'
+              : 'New Service Request'}
+          </button>
 
         </div>
 
-        <div className="service-request-stat-card">
+        {/* STATS */}
 
-          <div className="service-request-stat-icon pending">
-            <i className="bi bi-clock-fill"></i>
-          </div>
+        <div className="service-request-stats">
 
-          <div>
-            <span>Pending</span>
-            <h2>{pendingRequests}</h2>
-          </div>
-
-        </div>
-
-        <div className="service-request-stat-card">
-
-          <div className="service-request-stat-icon processing">
-            <i className="bi bi-arrow-repeat"></i>
-          </div>
-
-          <div>
-            <span>Processing</span>
-            <h2>{processingRequests}</h2>
-          </div>
-
-        </div>
-
-        <div className="service-request-stat-card">
-
-          <div className="service-request-stat-icon completed">
-            <i className="bi bi-check-circle-fill"></i>
-          </div>
-
-          <div>
-            <span>Completed</span>
-            <h2>{completedRequests}</h2>
-          </div>
-
-        </div>
-
-      </div>
-
-      <div className="service-request-priority-card">
-
-        <div className="service-request-priority-icon">
-          <i className="bi bi-exclamation-triangle-fill"></i>
-        </div>
-
-        <div>
-          <span>High Priority Requests</span>
-          <h2>{highPriority}</h2>
-        </div>
-
-      </div>
-
-      {showForm && (
-
-        <div className="service-request-form-card">
-
-          <div className="service-request-form-header">
+          <div className="service-request-stat-card">
+            <div className="service-request-stat-icon">
+              <i className="bi bi-list-check"></i>
+            </div>
 
             <div>
-              <h2>New Service Request</h2>
-              <p>
-                Enter guest service request details
-              </p>
+              <span>Total Requests</span>
+              <h2>{totalRequests}</h2>
             </div>
-
-            <button
-              type="button"
-              className="close-service-request-btn"
-              onClick={() => setShowForm(false)}
-            >
-              <i className="bi bi-x-lg"></i>
-            </button>
-
           </div>
 
-          <form onSubmit={addRequest}>
-
-            <div className="service-request-form-grid">
-
-              <div className="service-request-input-group">
-
-                <label>Guest Name</label>
-
-                <input
-                  type="text"
-                  name="guest"
-                  placeholder="Enter guest name"
-                  value={formData.guest}
-                  onChange={handleChange}
-                />
-
-              </div>
-
-              <div className="service-request-input-group">
-
-                <label>Room Number</label>
-
-                <input
-                  type="text"
-                  name="room"
-                  placeholder="e.g. Room 205"
-                  value={formData.room}
-                  onChange={handleChange}
-                />
-
-              </div>
-
-              <div className="service-request-input-group">
-
-                <label>Service</label>
-
-                <select
-                  name="service"
-                  value={formData.service}
-                  onChange={handleChange}
-                >
-                  <option value="Airport Transfer">
-                    Airport Transfer
-                  </option>
-
-                  <option value="Spa & Massage">
-                    Spa & Massage
-                  </option>
-
-                  <option value="Room Decoration">
-                    Room Decoration
-                  </option>
-
-                  <option value="Car Rental">
-                    Car Rental
-                  </option>
-
-                  <option value="Restaurant Reservation">
-                    Restaurant Reservation
-                  </option>
-
-                  <option value="Wake Up Call">
-                    Wake Up Call
-                  </option>
-
-                  <option value="Other">
-                    Other
-                  </option>
-                </select>
-
-              </div>
-
-              <div className="service-request-input-group">
-
-                <label>Priority</label>
-
-                <select
-                  name="priority"
-                  value={formData.priority}
-                  onChange={handleChange}
-                >
-                  <option value="Normal">
-                    Normal
-                  </option>
-
-                  <option value="High">
-                    High
-                  </option>
-
-                  <option value="Urgent">
-                    Urgent
-                  </option>
-                </select>
-
-              </div>
-
-              <div className="service-request-input-group">
-
-                <label>Required Date</label>
-
-                <input
-                  type="date"
-                  name="date"
-                  value={formData.date}
-                  onChange={handleChange}
-                />
-
-              </div>
-
-              <div className="service-request-input-group">
-
-                <label>Status</label>
-
-                <select
-                  name="status"
-                  value={formData.status}
-                  onChange={handleChange}
-                >
-                  <option value="Pending">
-                    Pending
-                  </option>
-
-                  <option value="Processing">
-                    Processing
-                  </option>
-
-                  <option value="Completed">
-                    Completed
-                  </option>
-
-                </select>
-
-              </div>
-
+          <div className="service-request-stat-card">
+            <div className="service-request-stat-icon pending">
+              <i className="bi bi-clock-fill"></i>
             </div>
 
-            <div className="service-request-form-actions">
+            <div>
+              <span>Pending</span>
+              <h2>{pendingRequests}</h2>
+            </div>
+          </div>
+
+          <div className="service-request-stat-card">
+            <div className="service-request-stat-icon processing">
+              <i className="bi bi-arrow-repeat"></i>
+            </div>
+
+            <div>
+              <span>Processing</span>
+              <h2>{processingRequests}</h2>
+            </div>
+          </div>
+
+          <div className="service-request-stat-card">
+            <div className="service-request-stat-icon completed">
+              <i className="bi bi-check-circle-fill"></i>
+            </div>
+
+            <div>
+              <span>Completed</span>
+              <h2>{completedRequests}</h2>
+            </div>
+          </div>
+
+        </div>
+
+        {/* PRIORITY */}
+
+        <div className="service-request-priority-card">
+
+          <div className="service-request-priority-icon">
+            <i className="bi bi-exclamation-triangle-fill"></i>
+          </div>
+
+          <div>
+            <span>High Priority Requests</span>
+            <h2>{highPriority}</h2>
+          </div>
+
+        </div>
+
+        {/* FORM */}
+
+        {showForm && (
+          <div className="service-request-form-card">
+
+            <div className="service-request-form-header">
+
+              <div>
+                <h2>New Service Request</h2>
+                <p>
+                  Enter guest service request details
+                </p>
+              </div>
 
               <button
                 type="button"
-                className="cancel-service-request-btn"
+                className="close-service-request-btn"
                 onClick={() => setShowForm(false)}
               >
-                Cancel
-              </button>
-
-              <button
-                type="submit"
-                className="save-service-request-btn"
-              >
-                <i className="bi bi-check-lg"></i>
-                Save Request
+                <i className="bi bi-x-lg"></i>
               </button>
 
             </div>
 
-          </form>
+            <form onSubmit={addRequest}>
 
-        </div>
+              <div className="service-request-form-grid">
 
-      )}
+                <div className="service-request-input-group">
+                  <label>Guest Name</label>
 
-      <div className="service-request-table-card">
+                  <input
+                    type="text"
+                    name="guest"
+                    placeholder="Enter guest name"
+                    value={formData.guest}
+                    onChange={handleChange}
+                  />
+                </div>
 
-        <div className="service-request-table-header">
+                <div className="service-request-input-group">
+                  <label>Room Number</label>
 
-          <div>
-            <h2>Guest Service Requests</h2>
-            <p>
-              Track all special service requests
-            </p>
+                  <input
+                    type="text"
+                    name="room"
+                    placeholder="e.g. Room 205"
+                    value={formData.room}
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div className="service-request-input-group">
+                  <label>Service</label>
+
+                  <select
+                    name="service"
+                    value={formData.service}
+                    onChange={handleChange}
+                  >
+                    <option>Airport Transfer</option>
+                    <option>Spa & Massage</option>
+                    <option>Room Decoration</option>
+                    <option>Car Rental</option>
+                    <option>Restaurant Reservation</option>
+                    <option>Wake Up Call</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+
+                <div className="service-request-input-group">
+                  <label>Priority</label>
+
+                  <select
+                    name="priority"
+                    value={formData.priority}
+                    onChange={handleChange}
+                  >
+                    <option>Normal</option>
+                    <option>High</option>
+                    <option>Urgent</option>
+                  </select>
+                </div>
+
+                <div className="service-request-input-group">
+                  <label>Required Date</label>
+
+                  <input
+                    type="date"
+                    name="date"
+                    value={formData.date}
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div className="service-request-input-group">
+                  <label>Status</label>
+
+                  <select
+                    name="status"
+                    value={formData.status}
+                    onChange={handleChange}
+                  >
+                    <option>Pending</option>
+                    <option>Processing</option>
+                    <option>Completed</option>
+                  </select>
+                </div>
+
+              </div>
+
+              <div className="service-request-form-actions">
+
+                <button
+                  type="button"
+                  className="cancel-service-request-btn"
+                  onClick={() => setShowForm(false)}
+                >
+                  Cancel
+                </button>
+
+                <button
+                  type="submit"
+                  className="save-service-request-btn"
+                >
+                  <i className="bi bi-check-lg"></i>
+                  Save Request
+                </button>
+
+              </div>
+
+            </form>
+          </div>
+        )}
+
+        {/* TABLE */}
+
+        <div className="service-request-table-card">
+
+          <div className="service-request-table-header">
+
+            <div>
+              <h2>Guest Service Requests</h2>
+              <p>
+                Track all special service requests
+              </p>
+            </div>
+
           </div>
 
-        </div>
+          <div className="service-request-table-wrapper">
 
-        <div className="service-request-table-wrapper">
+            <table className="service-request-table">
 
-          <table className="service-request-table">
-
-            <thead>
-
-              <tr>
-                <th>Request</th>
-                <th>Guest</th>
-                <th>Room</th>
-                <th>Service</th>
-                <th>Priority</th>
-                <th>Date</th>
-                <th>Status</th>
-                <th>Action</th>
-              </tr>
-
-            </thead>
-
-            <tbody>
-
-              {requests.map((request) => (
-
-                <tr key={request.id}>
-
-                  <td>
-                    <span className="service-request-number">
-                      {request.requestNo}
-                    </span>
-                  </td>
-
-                  <td>
-                    <strong>
-                      {request.guest}
-                    </strong>
-                  </td>
-
-                  <td>
-                    <span className="service-request-room">
-                      {request.room}
-                    </span>
-                  </td>
-
-                  <td>
-                    <span className="service-request-name">
-                      {request.service}
-                    </span>
-                  </td>
-
-                  <td>
-
-                    <span
-                      className={
-                        'service-request-priority ' +
-                        request.priority.toLowerCase()
-                      }
-                    >
-                      {request.priority}
-                    </span>
-
-                  </td>
-
-                  <td>
-                    {request.date}
-                  </td>
-
-                  <td>
-
-                    <select
-                      className={
-                        'service-request-status ' +
-                        request.status
-                          .toLowerCase()
-                          .replace(/\s+/g, '-')
-                      }
-                      value={request.status}
-                      onChange={(e) =>
-                        updateStatus(
-                          request.id,
-                          e.target.value
-                        )
-                      }
-                    >
-
-                      <option value="Pending">
-                        Pending
-                      </option>
-
-                      <option value="Processing">
-                        Processing
-                      </option>
-
-                      <option value="Completed">
-                        Completed
-                      </option>
-
-                    </select>
-
-                  </td>
-
-                  <td>
-
-                    <button
-                      type="button"
-                      className="delete-service-request-btn"
-                      onClick={() =>
-                        deleteRequest(request.id)
-                      }
-                    >
-                      <i className="bi bi-trash3"></i>
-                    </button>
-
-                  </td>
-
+              <thead>
+                <tr>
+                  <th>Request</th>
+                  <th>Guest</th>
+                  <th>Room</th>
+                  <th>Service</th>
+                  <th>Priority</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Action</th>
                 </tr>
+              </thead>
 
-              ))}
+              <tbody>
 
-            </tbody>
+                {requests.length > 0 ? (
+                  requests.map((request) => (
+                    <tr key={request.id}>
 
-          </table>
+                      <td>
+                        <span className="service-request-number">
+                          {request.requestNo}
+                        </span>
+                      </td>
 
+                      <td>
+                        <strong>{request.guest}</strong>
+                      </td>
+
+                      <td>
+                        <span className="service-request-room">
+                          {request.room}
+                        </span>
+                      </td>
+
+                      <td>
+                        <span className="service-request-name">
+                          {request.service}
+                        </span>
+                      </td>
+
+                      <td>
+                        <span
+                          className={`service-request-priority ${request.priority.toLowerCase()}`}
+                        >
+                          {request.priority}
+                        </span>
+                      </td>
+
+                      <td>{request.date}</td>
+
+                      <td>
+                        <select
+                          className={`service-request-status ${request.status
+                            .toLowerCase()
+                            .replace(/\s+/g, '-')}`}
+                          value={request.status}
+                          onChange={(e) =>
+                            updateStatus(
+                              request.id,
+                              e.target.value
+                            )
+                          }
+                        >
+                          <option value="Pending">
+                            Pending
+                          </option>
+
+                          <option value="Processing">
+                            Processing
+                          </option>
+
+                          <option value="Completed">
+                            Completed
+                          </option>
+                        </select>
+                      </td>
+
+                      <td>
+                        <button
+                          type="button"
+                          className="delete-service-request-btn"
+                          onClick={() =>
+                            deleteRequest(request.id)
+                          }
+                          title="Delete Request"
+                        >
+                          <i className="bi bi-trash3"></i>
+                        </button>
+                      </td>
+
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td
+                      colSpan="8"
+                      className="service-request-empty"
+                    >
+                      <i className="bi bi-inbox"></i>
+                      <span>No service requests available</span>
+                    </td>
+                  </tr>
+                )}
+
+              </tbody>
+
+            </table>
+
+          </div>
         </div>
 
       </div>
-
-    </div>
+    </MainLayout>
   )
 }
 

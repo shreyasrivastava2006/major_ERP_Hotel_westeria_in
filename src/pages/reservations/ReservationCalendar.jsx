@@ -1,122 +1,176 @@
-import { useState } from 'react'
+import { useState } from "react";
 
 function ReservationCalendar({
   reservations,
   onSelect,
 }) {
-  const [currentDate, setCurrentDate] = useState(
-    new Date()
-  )
 
-  const year = currentDate.getFullYear()
-  const month = currentDate.getMonth()
+  const [currentDate, setCurrentDate] =
+    useState(new Date());
 
-  const monthName = currentDate.toLocaleDateString(
-    'en-IN',
-    {
-      month: 'long',
-      year: 'numeric',
-    }
-  )
+  const year =
+    currentDate.getFullYear();
 
-  const firstDay = new Date(
-    year,
-    month,
-    1
-  ).getDay()
+  const month =
+    currentDate.getMonth();
 
-  const daysInMonth = new Date(
-    year,
-    month + 1,
-    0
-  ).getDate()
+  const monthName =
+    currentDate.toLocaleDateString(
+      "en-IN",
+      {
+        month: "long",
+        year: "numeric",
+      }
+    );
+
+  const firstDay =
+    new Date(
+      year,
+      month,
+      1
+    ).getDay();
+
+  const daysInMonth =
+    new Date(
+      year,
+      month + 1,
+      0
+    ).getDate();
 
   const previousMonth = () => {
+
     setCurrentDate(
-      new Date(year, month - 1, 1)
-    )
-  }
+      new Date(
+        year,
+        month - 1,
+        1
+      )
+    );
+  };
 
   const nextMonth = () => {
-    setCurrentDate(
-      new Date(year, month + 1, 1)
-    )
-  }
 
-  const getReservationsForDate = (day) => {
-    const date = `${year}-${String(
-      month + 1
-    ).padStart(2, '0')}-${String(day).padStart(
-      2,
-      '0'
-    )}`
+    setCurrentDate(
+      new Date(
+        year,
+        month + 1,
+        1
+      )
+    );
+  };
+
+  const getReservationsForDate = (
+    day
+  ) => {
+
+    const date =
+      `${year}-${String(
+        month + 1
+      ).padStart(2, "0")}-${String(
+        day
+      ).padStart(2, "0")}`;
 
     return reservations.filter(
       (reservation) =>
         reservation.checkIn <= date &&
-        reservation.checkOut >= date
-    )
-  }
+        reservation.checkOut >= date &&
+        reservation.status !== "Cancelled"
+    );
+  };
 
-  const calendarDays = []
+  const calendarDays = [];
 
-  for (let i = 0; i < firstDay; i++) {
+  /* Empty days before month */
+
+  for (
+    let i = 0;
+    i < firstDay;
+    i++
+  ) {
+
     calendarDays.push(
       <div
         key={`empty-${i}`}
         className="calendar-empty"
       />
-    )
+    );
+
   }
+
+  /* Actual dates */
 
   for (
     let day = 1;
     day <= daysInMonth;
     day++
   ) {
+
     const dayReservations =
-      getReservationsForDate(day)
+      getReservationsForDate(day);
 
     calendarDays.push(
+
       <div
         key={day}
         className="calendar-date"
       >
+
         <span className="date-number">
           {day}
         </span>
 
-        {dayReservations.map((reservation) => (
-          <button
-            type="button"
-            key={reservation.id}
-            className={`calendar-reservation ${
-              reservation.status
-                ? reservation.status
-                    .toLowerCase()
-                    .replace(/\s+/g, '-')
-                : ''
-            }`}
-            onClick={() =>
-              onSelect(reservation)
-            }
-          >
-            {reservation.guestName ||
-              reservation.guest}
-          </button>
-        ))}
+        {dayReservations.map(
+          (reservation) => (
+
+            <button
+              type="button"
+              key={reservation.id}
+              className={`calendar-reservation ${
+                reservation.status
+                  ? reservation.status
+                      .toLowerCase()
+                      .replace(
+                        /\s+/g,
+                        "-"
+                      )
+                  : ""
+              }`}
+              onClick={() =>
+                onSelect(reservation)
+              }
+            >
+
+              {reservation.guestName ||
+                reservation.guest ||
+                "Guest"}
+
+            </button>
+
+          )
+        )}
+
       </div>
-    )
+
+    );
   }
 
   return (
     <div className="reservation-calendar">
 
+      {/* HEADER */}
+
       <div className="calendar-header">
 
         <div>
-          <h2>Reservation Calendar</h2>
-          <p>View bookings by date</p>
+
+          <h2>
+            Reservation Calendar
+          </h2>
+
+          <p>
+            View bookings by date
+          </p>
+
         </div>
 
         <div className="calendar-month">
@@ -129,7 +183,9 @@ function ReservationCalendar({
             <i className="bi bi-chevron-left"></i>
           </button>
 
-          <span>{monthName}</span>
+          <span>
+            {monthName}
+          </span>
 
           <button
             type="button"
@@ -143,23 +199,27 @@ function ReservationCalendar({
 
       </div>
 
+      {/* CALENDAR */}
+
       <div className="calendar-grid">
 
         {[
-          'Sun',
-          'Mon',
-          'Tue',
-          'Wed',
-          'Thu',
-          'Fri',
-          'Sat',
+          "Sun",
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri",
+          "Sat",
         ].map((day) => (
+
           <div
             key={day}
             className="calendar-day-name"
           >
             {day}
           </div>
+
         ))}
 
         {calendarDays}
@@ -167,7 +227,7 @@ function ReservationCalendar({
       </div>
 
     </div>
-  )
+  );
 }
 
-export default ReservationCalendar
+export default ReservationCalendar;

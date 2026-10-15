@@ -1,51 +1,77 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // =====================================================
-// BASIC
+// BASIC PAGES
 // =====================================================
+
 import Welcome from "../components/Welcome.jsx";
 import Home from "../components/Home.jsx";
 
 // =====================================================
-// AUTH
+// AUTHENTICATION
 // =====================================================
+
 import Login from "../pages/auth/Login.jsx";
+import Signup from "../pages/auth/Signup.jsx";
 import ForgotPassword from "../pages/auth/ForgotPassword.jsx";
 import ResetPassword from "../pages/auth/ResetPassword.jsx";
-import Signup from "../pages/auth/Signup.jsx";
 
 // =====================================================
 // SUPER ADMIN
 // =====================================================
+
 import SuperAdminDashboard from "../pages/superAdmin/SuperAdminDashboard.jsx";
+
+// Hotels
 import Hotels from "../pages/superAdmin/Hotels.jsx";
 import AddHotel from "../pages/superAdmin/AddHotel.jsx";
 import HotelDetails from "../pages/superAdmin/HotelDetails.jsx";
+
+// Users
 import Users from "../pages/superAdmin/Users.jsx";
+import AddUser from "../pages/superAdmin/AddUser.jsx";
+
+// Plans & Subscriptions
+import Plans from "../pages/superAdmin/Plans.jsx";
+import Subscriptions from "../pages/superAdmin/Subscriptions.jsx";
+
+// Reports
+import HotelPerformance from "../pages/superAdmin/HotelPerformance.jsx";
+import SuperAdminRevenueReport from "../pages/superAdmin/RevenueReport.jsx";
+
+// System
+import Support from "../pages/superAdmin/Support.jsx";
+import SystemSettings from "../pages/superAdmin/SystemSettings.jsx";
+import ActivityLogs from "../pages/superAdmin/ActivityLogs.jsx";
 
 // =====================================================
-// DASHBOARD
+// HOTEL ADMIN DASHBOARD
 // =====================================================
+
 import Dashboard from "../pages/dashboard/Dashboard.jsx";
 
 // =====================================================
 // ROOMS
 // =====================================================
+
 import Rooms from "../pages/rooms/Rooms.jsx";
 
 // =====================================================
 // GUESTS
 // =====================================================
+
 import Guests from "../pages/guests/Guests.jsx";
 
 // =====================================================
 // RESERVATIONS
 // =====================================================
+
 import Reservations from "../pages/reservations/Reservations.jsx";
 
 // =====================================================
 // FRONT OFFICE
 // =====================================================
+
 import FrontOffice from "../pages/frontOffice/FrontOffice.jsx";
 import CheckIn from "../pages/frontOffice/CheckIn.jsx";
 import CheckOut from "../pages/frontOffice/CheckOut.jsx";
@@ -55,6 +81,7 @@ import RoomTransfer from "../pages/frontOffice/RoomTransfer.jsx";
 // =====================================================
 // HOUSEKEEPING
 // =====================================================
+
 import Housekeeping from "../pages/housekeeping/Housekeeping.jsx";
 import CleaningSchedule from "../pages/housekeeping/CleaningSchedule.jsx";
 import RoomInspection from "../pages/housekeeping/RoomInspection.jsx";
@@ -63,6 +90,7 @@ import StaffManagement from "../pages/housekeeping/StaffManagement.jsx";
 // =====================================================
 // RESTAURANT
 // =====================================================
+
 import Restaurant from "../pages/restaurant/Restaurant.jsx";
 import Menu from "../pages/restaurant/Menu.jsx";
 import MenuManagement from "../pages/restaurant/MenuManagement.jsx";
@@ -72,6 +100,7 @@ import Orders from "../pages/restaurant/Orders.jsx";
 // =====================================================
 // SERVICES
 // =====================================================
+
 import Services from "../pages/services/Services.jsx";
 import Laundry from "../pages/services/Laundry.jsx";
 import RoomServices from "../pages/services/RoomServices.jsx";
@@ -80,6 +109,7 @@ import ServicesRequest from "../pages/services/ServicesRequest.jsx";
 // =====================================================
 // BILLING
 // =====================================================
+
 import Billing from "../pages/billing/Billing.jsx";
 import Invoices from "../pages/billing/Invoices.jsx";
 import InvoiceDetails from "../pages/billing/InvoiceDetails.jsx";
@@ -88,6 +118,7 @@ import Payments from "../pages/billing/Payments.jsx";
 // =====================================================
 // INVENTORY
 // =====================================================
+
 import Inventory from "../pages/inventory/Inventory.jsx";
 import AddItems from "../pages/inventory/AddItems.jsx";
 import StockHistory from "../pages/inventory/StockHistory.jsx";
@@ -96,6 +127,7 @@ import Suppliers from "../pages/inventory/Suppliers.jsx";
 // =====================================================
 // STAFF
 // =====================================================
+
 import Staff from "../pages/staff/Staff.jsx";
 import AddStaff from "../pages/staff/AddStaff.jsx";
 import StaffDetails from "../pages/staff/StaffDetails.jsx";
@@ -104,37 +136,98 @@ import StaffAttendance from "../pages/staff/StaffAttendance.jsx";
 // =====================================================
 // MAINTENANCE
 // =====================================================
+
 import Maintenance from "../pages/maintenance/Maintenance.jsx";
 import MaintenanceRequests from "../pages/maintenance/MaintenanceRequests.jsx";
 import Equipments from "../pages/maintenance/Equipments.jsx";
 
 // =====================================================
-// REPORTS
+// HOTEL ADMIN REPORTS
 // =====================================================
+
 import Reports from "../pages/reports/Reports.jsx";
 import BookingReport from "../pages/reports/BookingReport.jsx";
 import OccupancyReport from "../pages/reports/OccupancyReport.jsx";
-import RevenueReport from "../pages/reports/RevenueReport.jsx";
+import HotelAdminRevenueReport from "../pages/reports/RevenueReport.jsx";
 
 // =====================================================
 // SETTINGS
 // =====================================================
+
 import Settings from "../pages/settings/Settings.jsx";
-import SettingsHotelProfile from "../pages/settings/HotelProfile.jsx";
+import HotelProfile from "../pages/settings/HotelProfile.jsx";
 import UserManagement from "../pages/settings/UserManagement.jsx";
 import RolesPermissions from "../pages/settings/RolesPermissions.jsx";
 
 // =====================================================
-// APP ROUTES
+// 404 PAGE
 // =====================================================
+
+function NotFound() {
+  return (
+    <div
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        background: "#f8f4ed",
+        color: "#4b3940",
+        padding: "40px",
+        textAlign: "center",
+      }}
+    >
+      <div
+        style={{
+          width: "70px",
+          height: "70px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          marginBottom: "18px",
+          borderRadius: "50%",
+          background: "#efe4d4",
+          color: "#a47b4e",
+          fontSize: "26px",
+        }}
+      >
+        <i className="bi bi-exclamation-lg"></i>
+      </div>
+
+      <h1
+        style={{
+          fontFamily: "Georgia, serif",
+          fontWeight: 500,
+        }}
+      >
+        404 - Page Not Found
+      </h1>
+
+      <p
+        style={{
+          color: "#938579",
+          fontSize: "13px",
+        }}
+      >
+        The page you are looking for does not exist.
+      </p>
+    </div>
+  );
+}
+
+// =====================================================
+// MAIN APP ROUTES
+// =====================================================
+
 function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
 
-        {/* =====================================================
-            BASIC
-        ===================================================== */}
+        {/* =============================================
+            BASIC ROUTES
+        ============================================= */}
 
         <Route
           path="/"
@@ -146,9 +239,9 @@ function AppRoutes() {
           element={<Home />}
         />
 
-        {/* =====================================================
+        {/* =============================================
             AUTHENTICATION
-        ===================================================== */}
+        ============================================= */}
 
         <Route
           path="/login"
@@ -170,14 +263,18 @@ function AppRoutes() {
           element={<ResetPassword />}
         />
 
-        {/* =====================================================
-            SUPER ADMIN
-        ===================================================== */}
+        {/* =============================================
+            SUPER ADMIN DASHBOARD
+        ============================================= */}
 
         <Route
           path="/super-admin"
           element={<SuperAdminDashboard />}
         />
+
+        {/* =============================================
+            SUPER ADMIN - HOTELS
+        ============================================= */}
 
         <Route
           path="/super-admin/hotels"
@@ -199,149 +296,132 @@ function AppRoutes() {
           element={<HotelDetails />}
         />
 
+        {/* =============================================
+            SUPER ADMIN - USERS
+        ============================================= */}
+
         <Route
           path="/super-admin/users"
           element={<Users />}
         />
 
-        {/* =====================================================
-            SUPER ADMIN - SUBSCRIPTION
-            TEMPORARY ROUTES
-        ===================================================== */}
+        <Route
+          path="/super-admin/users/add"
+          element={<AddUser />}
+        />
+
+        {/* =============================================
+            SUPER ADMIN - PLANS
+        ============================================= */}
 
         <Route
           path="/super-admin/plans"
-          element={
-            <div className="super-admin-placeholder">
-              <h2>Subscription Plans</h2>
-              <p>
-                Super Admin subscription plans page.
-              </p>
-            </div>
-          }
+          element={<Plans />}
         />
+
+        {/* =============================================
+            SUPER ADMIN - SUBSCRIPTIONS
+        ============================================= */}
 
         <Route
           path="/super-admin/subscriptions"
-          element={
-            <div className="super-admin-placeholder">
-              <h2>Subscriptions</h2>
-              <p>
-                Super Admin subscriptions page.
-              </p>
-            </div>
-          }
+          element={<Subscriptions />}
         />
 
-        {/* =====================================================
-            SUPER ADMIN - REPORTS
-            TEMPORARY ROUTES
-        ===================================================== */}
+        {/* =============================================
+            SUPER ADMIN - HOTEL PERFORMANCE
+        ============================================= */}
 
         <Route
           path="/super-admin/reports/hotel-performance"
-          element={
-            <div className="super-admin-placeholder">
-              <h2>Hotel Performance</h2>
-              <p>
-                Super Admin hotel performance report.
-              </p>
-            </div>
-          }
+          element={<HotelPerformance />}
         />
+
+        <Route
+          path="/super-admin/hotel-performance"
+          element={<HotelPerformance />}
+        />
+
+        {/* =============================================
+            SUPER ADMIN - REVENUE REPORT
+        ============================================= */}
 
         <Route
           path="/super-admin/reports/revenue"
-          element={
-            <div className="super-admin-placeholder">
-              <h2>Revenue Report</h2>
-              <p>
-                Super Admin revenue report.
-              </p>
-            </div>
-          }
+          element={<SuperAdminRevenueReport />}
         />
 
-        {/* =====================================================
-            SUPER ADMIN - SYSTEM
-            TEMPORARY ROUTES
-        ===================================================== */}
+        <Route
+          path="/super-admin/revenue-report"
+          element={<SuperAdminRevenueReport />}
+        />
+
+        {/* =============================================
+            SUPER ADMIN - SUPPORT
+        ============================================= */}
 
         <Route
           path="/super-admin/support"
-          element={
-            <div className="super-admin-placeholder">
-              <h2>Support</h2>
-              <p>
-                Super Admin support page.
-              </p>
-            </div>
-          }
+          element={<Support />}
         />
+
+        {/* =============================================
+            SUPER ADMIN - SYSTEM SETTINGS
+        ============================================= */}
 
         <Route
           path="/super-admin/system-settings"
-          element={
-            <div className="super-admin-placeholder">
-              <h2>System Settings</h2>
-              <p>
-                Super Admin system settings page.
-              </p>
-            </div>
-          }
+          element={<SystemSettings />}
         />
+
+        {/* =============================================
+            SUPER ADMIN - ACTIVITY LOGS
+        ============================================= */}
 
         <Route
           path="/super-admin/activity-logs"
-          element={
-            <div className="super-admin-placeholder">
-              <h2>Activity Logs</h2>
-              <p>
-                Super Admin activity logs page.
-              </p>
-            </div>
-          }
+          element={<ActivityLogs />}
         />
 
-        {/* =====================================================
+        {/* =============================================
             HOTEL ADMIN DASHBOARD
-        ===================================================== */}
+        ============================================= */}
 
         <Route
           path="/dashboard"
           element={<Dashboard />}
         />
 
-        {/* =====================================================
+        {/* =============================================
             ROOMS
-        ===================================================== */}
+        ============================================= */}
 
         <Route
           path="/rooms"
           element={<Rooms />}
         />
 
-        {/* =====================================================
+        {/* =============================================
             GUESTS
-        ===================================================== */}
+        ============================================= */}
 
         <Route
           path="/guests"
           element={<Guests />}
         />
 
-        {/* =====================================================
+        {/* =============================================
             RESERVATIONS
-        ===================================================== */}
+        ============================================= */}
 
         <Route
           path="/reservations"
           element={<Reservations />}
         />
 
-        {/* =====================================================
+        {/* =============================================
             FRONT OFFICE
-        ===================================================== */}
+        ============================================= */}
 
         <Route
           path="/front-office"
@@ -368,9 +448,9 @@ function AppRoutes() {
           element={<RoomTransfer />}
         />
 
-        {/* =====================================================
+        {/* =============================================
             HOUSEKEEPING
-        ===================================================== */}
+        ============================================= */}
 
         <Route
           path="/housekeeping"
@@ -387,15 +467,14 @@ function AppRoutes() {
           element={<RoomInspection />}
         />
 
-        {/* STAFF MANAGEMENT - FIXED */}
         <Route
           path="/housekeeping/staff-management"
           element={<StaffManagement />}
         />
 
-        {/* =====================================================
+        {/* =============================================
             RESTAURANT
-        ===================================================== */}
+        ============================================= */}
 
         <Route
           path="/restaurant"
@@ -422,9 +501,9 @@ function AppRoutes() {
           element={<Orders />}
         />
 
-        {/* =====================================================
+        {/* =============================================
             SERVICES
-        ===================================================== */}
+        ============================================= */}
 
         <Route
           path="/services"
@@ -451,9 +530,9 @@ function AppRoutes() {
           element={<ServicesRequest />}
         />
 
-        {/* =====================================================
+        {/* =============================================
             BILLING
-        ===================================================== */}
+        ============================================= */}
 
         <Route
           path="/billing"
@@ -475,9 +554,9 @@ function AppRoutes() {
           element={<Payments />}
         />
 
-        {/* =====================================================
+        {/* =============================================
             INVENTORY
-        ===================================================== */}
+        ============================================= */}
 
         <Route
           path="/inventory"
@@ -499,9 +578,9 @@ function AppRoutes() {
           element={<Suppliers />}
         />
 
-        {/* =====================================================
+        {/* =============================================
             STAFF
-        ===================================================== */}
+        ============================================= */}
 
         <Route
           path="/staff"
@@ -523,9 +602,9 @@ function AppRoutes() {
           element={<StaffAttendance />}
         />
 
-        {/* =====================================================
+        {/* =============================================
             MAINTENANCE
-        ===================================================== */}
+        ============================================= */}
 
         <Route
           path="/maintenance"
@@ -542,9 +621,9 @@ function AppRoutes() {
           element={<Equipments />}
         />
 
-        {/* =====================================================
-            REPORTS
-        ===================================================== */}
+        {/* =============================================
+            HOTEL ADMIN REPORTS
+        ============================================= */}
 
         <Route
           path="/reports"
@@ -563,12 +642,12 @@ function AppRoutes() {
 
         <Route
           path="/reports/revenue"
-          element={<RevenueReport />}
+          element={<HotelAdminRevenueReport />}
         />
 
-        {/* =====================================================
-            SETTINGS
-        ===================================================== */}
+        {/* =============================================
+            HOTEL ADMIN SETTINGS
+        ============================================= */}
 
         <Route
           path="/settings"
@@ -577,7 +656,7 @@ function AppRoutes() {
 
         <Route
           path="/settings/hotel-profile"
-          element={<SettingsHotelProfile />}
+          element={<HotelProfile />}
         />
 
         <Route
@@ -590,64 +669,13 @@ function AppRoutes() {
           element={<RolesPermissions />}
         />
 
-        {/* =====================================================
-            404 - PAGE NOT FOUND
-        ===================================================== */}
+        {/* =============================================
+            PAGE NOT FOUND
+        ============================================= */}
 
         <Route
           path="*"
-          element={
-            <div
-              style={{
-                minHeight: "100vh",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                background: "#f8f4ed",
-                color: "#4b3940",
-                padding: "40px",
-                textAlign: "center",
-              }}
-            >
-              <div
-                style={{
-                  width: "70px",
-                  height: "70px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginBottom: "18px",
-                  borderRadius: "50%",
-                  background: "#efe4d4",
-                  color: "#a47b4e",
-                  fontSize: "26px",
-                }}
-              >
-                <i className="bi bi-exclamation-lg"></i>
-              </div>
-
-              <h1
-                style={{
-                  margin: "0 0 8px",
-                  fontFamily: "Georgia, serif",
-                  fontWeight: 500,
-                }}
-              >
-                404 - Page Not Found
-              </h1>
-
-              <p
-                style={{
-                  margin: 0,
-                  color: "#938579",
-                  fontSize: "13px",
-                }}
-              >
-                The page you are looking for does not exist.
-              </p>
-            </div>
-          }
+          element={<NotFound />}
         />
 
       </Routes>

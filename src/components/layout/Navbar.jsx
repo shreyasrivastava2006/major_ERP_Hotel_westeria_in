@@ -9,7 +9,12 @@ function Navbar() {
       </div>
 
       <div className="navbar-right">
-        <button className="icon-btn" title="Notifications">
+        <button
+          type="button"
+          className="icon-btn"
+          title="Notifications"
+          aria-label="Notifications"
+        >
           <i className="bi bi-bell"></i>
         </button>
 

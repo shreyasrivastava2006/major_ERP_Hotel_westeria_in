@@ -1,12 +1,16 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+
 import MainLayout from '../../layouts/MainLayout'
 import Breadcrumb from '../../components/layout/Breadcrumb'
 import PageHeader from '../../components/layout/PageHeader'
+import { useHotel } from '../../context/HotelContext'
+
 import './AddItems.css'
 
 function AddItems() {
   const navigate = useNavigate()
+  const { selectedHotel } = useHotel()
 
   const [formData, setFormData] = useState({
     itemName: '',
@@ -29,24 +33,34 @@ function AddItems() {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    alert('Inventory item added successfully!')
+    alert(
+      selectedHotel
+        ? `Inventory item added successfully to ${selectedHotel.name}!`
+        : 'Inventory item added successfully!'
+    )
 
     navigate('/inventory')
   }
 
   return (
     <MainLayout>
+
       <div className="add-items-page">
 
         <Breadcrumb
           items={['Inventory', 'Add Item']}
         />
 
+        {/* Header */}
         <div className="add-items-header">
 
           <PageHeader
             title="Add Inventory Item"
-            subtitle="Add a new item to hotel inventory"
+            subtitle={
+              selectedHotel
+                ? `Add a new inventory item for ${selectedHotel.name}`
+                : 'Add a new item to hotel inventory'
+            }
           />
 
           <button
@@ -59,6 +73,30 @@ function AddItems() {
           </button>
 
         </div>
+
+        {/* Selected Property */}
+        {selectedHotel && (
+          <div className="add-items-hotel-bar">
+
+            <div className="add-items-hotel-icon">
+              <i className="bi bi-building"></i>
+            </div>
+
+            <div className="add-items-hotel-info">
+
+              <span>ADDING INVENTORY FOR</span>
+
+              <strong>{selectedHotel.name}</strong>
+
+              <small>
+                {selectedHotel.code} • {selectedHotel.category} •{' '}
+                {selectedHotel.address.city}, {selectedHotel.address.state}
+              </small>
+
+            </div>
+
+          </div>
+        )}
 
         <div className="add-items-card">
 
@@ -73,6 +111,7 @@ function AddItems() {
               <div className="form-grid">
 
                 <div className="form-group">
+
                   <label>Item Name *</label>
 
                   <input
@@ -83,9 +122,11 @@ function AddItems() {
                     placeholder="Enter item name"
                     required
                   />
+
                 </div>
 
                 <div className="form-group">
+
                   <label>Category *</label>
 
                   <select
@@ -94,26 +135,35 @@ function AddItems() {
                     onChange={handleChange}
                     required
                   >
-                    <option value="">Select category</option>
+                    <option value="">
+                      Select category
+                    </option>
+
                     <option value="Housekeeping">
                       Housekeeping
                     </option>
+
                     <option value="Restaurant">
                       Restaurant
                     </option>
+
                     <option value="Toiletries">
                       Toiletries
                     </option>
-                    <option value="Office">
+
+                    <option value="Office Supplies">
                       Office Supplies
                     </option>
+
                     <option value="Maintenance">
                       Maintenance
                     </option>
                   </select>
+
                 </div>
 
                 <div className="form-group">
+
                   <label>Quantity *</label>
 
                   <input
@@ -125,9 +175,11 @@ function AddItems() {
                     min="0"
                     required
                   />
+
                 </div>
 
                 <div className="form-group">
+
                   <label>Unit *</label>
 
                   <select
@@ -136,17 +188,39 @@ function AddItems() {
                     onChange={handleChange}
                     required
                   >
-                    <option value="">Select unit</option>
-                    <option value="Pieces">Pieces</option>
-                    <option value="Bottles">Bottles</option>
-                    <option value="Kg">Kg</option>
-                    <option value="Litres">Litres</option>
-                    <option value="Boxes">Boxes</option>
-                    <option value="Packets">Packets</option>
+                    <option value="">
+                      Select unit
+                    </option>
+
+                    <option value="Pieces">
+                      Pieces
+                    </option>
+
+                    <option value="Bottles">
+                      Bottles
+                    </option>
+
+                    <option value="Kg">
+                      Kg
+                    </option>
+
+                    <option value="Litres">
+                      Litres
+                    </option>
+
+                    <option value="Boxes">
+                      Boxes
+                    </option>
+
+                    <option value="Packets">
+                      Packets
+                    </option>
                   </select>
+
                 </div>
 
                 <div className="form-group">
+
                   <label>Minimum Stock *</label>
 
                   <input
@@ -158,9 +232,11 @@ function AddItems() {
                     min="0"
                     required
                   />
+
                 </div>
 
                 <div className="form-group">
+
                   <label>Price per Unit *</label>
 
                   <input
@@ -170,8 +246,10 @@ function AddItems() {
                     onChange={handleChange}
                     placeholder="₹ Enter price"
                     min="0"
+                    step="0.01"
                     required
                   />
+
                 </div>
 
               </div>
@@ -264,6 +342,7 @@ function AddItems() {
         </div>
 
       </div>
+
     </MainLayout>
   )
 }
