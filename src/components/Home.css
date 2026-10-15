@@ -14,7 +14,34 @@
 
 
 /* =========================================================
-   NAVBAR
+   KEYFRAME ANIMATIONS
+========================================================= */
+
+@keyframes runningGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes cornerGlowPulse {
+  0%, 100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.1);
+  }
+}
+
+/* =========================================================
+   NAVBAR (HEADER) - LUXURY GLASSMORPHISM & RUNNING GRADIENT
 ========================================================= */
 
 .home-nav {
@@ -24,53 +51,162 @@
   width: 100%;
   z-index: 1000;
 
-  background: rgba(36, 21, 43, 0.96);
-  backdrop-filter: blur(12px);
+  background: linear-gradient(
+    135deg,
+    rgba(34, 19, 41, 0.88) 0%,
+    rgba(22, 12, 26, 0.92) 50%,
+    rgba(42, 22, 51, 0.88) 100%
+  );
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
 
-  border-bottom: 1px solid rgba(233, 201, 138, 0.15);
+  border-bottom: 1px solid rgba(233, 201, 138, 0.2);
+  box-shadow:
+    0 10px 35px -10px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+/* Corner Glassmorphism Ambient Glow (Top Left) */
+.home-nav::before {
+  content: "";
+  position: absolute;
+  top: -45px;
+  left: -45px;
+  width: 220px;
+  height: 160px;
+  background: radial-gradient(
+    circle,
+    rgba(233, 201, 138, 0.32) 0%,
+    rgba(185, 148, 112, 0.15) 35%,
+    transparent 70%
+  );
+  pointer-events: none;
+  filter: blur(12px);
+  animation: cornerGlowPulse 6s ease-in-out infinite;
+  z-index: 0;
+}
+
+/* Running Gradient Line in Tuning Shade (Bottom of Header) */
+.home-nav::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2.5px;
+  background: linear-gradient(
+    90deg,
+    #7e52a0 0%,
+    #b99470 20%,
+    #e9c98a 40%,
+    #c59b27 50%,
+    #9d65c9 70%,
+    #d4af37 85%,
+    #7e52a0 100%
+  );
+  background-size: 300% 100%;
+  animation: runningGradient 5s linear infinite;
+  box-shadow: 0 0 14px rgba(233, 201, 138, 0.6);
+  z-index: 10;
 }
 
 .home-nav-inner {
+  position: relative;
   width: min(1200px, 92%);
-  min-height: 78px;
+  min-height: 80px;
   margin: auto;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 30px;
+  z-index: 2;
 }
 
+/* Corner Glassmorphism Ambient Glow (Top Right) */
+.home-nav-inner::before {
+  content: "";
+  position: absolute;
+  top: -35px;
+  right: -35px;
+  width: 200px;
+  height: 150px;
+  background: radial-gradient(
+    circle,
+    rgba(157, 101, 201, 0.28) 0%,
+    rgba(126, 82, 160, 0.12) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  filter: blur(14px);
+  animation: cornerGlowPulse 7s ease-in-out infinite reverse;
+  z-index: -1;
+}
+
+/* Glassmorphism Corner Brand Pill */
 .brand {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 12px;
 
-  border: none;
-  background: transparent;
-  padding: 0;
+  border: 1px solid rgba(233, 201, 138, 0.25);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 6px 20px 6px 10px;
+  border-radius: 999px;
 
   color: white;
   cursor: pointer;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.18);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.brand:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(233, 201, 138, 0.55);
+  box-shadow:
+    0 6px 24px rgba(233, 201, 138, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
 }
 
 .brand-logo {
-  width: 48px;
-  height: 48px;
+  width: 46px;
+  height: 46px;
   object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
 }
 
 .brand-name {
   color: #ffffff;
   font-family: Georgia, serif;
   font-size: 22px;
-  letter-spacing: 0.4px;
+  font-weight: 500;
+  letter-spacing: 0.6px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
+/* Glassmorphism Center Navigation Bar */
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 6px;
+
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  padding: 5px 14px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 4px 15px rgba(0, 0, 0, 0.18);
 }
 
 .nav-links button,
@@ -81,13 +217,18 @@
 }
 
 .nav-links button {
+  position: relative;
   color: #e9e0e9;
-  font-size: 13px;
-  transition: color 0.25s ease;
+  font-size: 13.5px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 999px;
+  transition: all 0.25s ease;
 }
 
 .nav-links button:hover {
-  color: #e9c98a;
+  color: #f7e6be;
+  background: rgba(233, 201, 138, 0.12);
 }
 
 .nav-actions {
@@ -96,37 +237,88 @@
   gap: 15px;
 }
 
+/* Glassmorphism Corner Action Button with Shimmer & Tuning Glow */
 .nav-login-btn {
-  padding: 10px 22px;
+  position: relative;
+  padding: 10px 24px;
+  border-radius: 999px;
+  border: 1px solid rgba(233, 201, 138, 0.55);
+  background: linear-gradient(
+    135deg,
+    rgba(201, 162, 74, 0.2) 0%,
+    rgba(157, 101, 201, 0.18) 100%
+  );
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 
-  border: 1px solid #c9a24a;
-  background: transparent;
-
-  color: #e9c98a;
-
-  font-size: 13px;
+  color: #f7e6be;
+  font-size: 13.5px;
   font-weight: 600;
+  letter-spacing: 0.5px;
 
   cursor: pointer;
+  box-shadow:
+    0 4px 18px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
 
-  transition: all 0.25s ease;
+.nav-login-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.nav-login-btn:hover::before {
+  left: 100%;
 }
 
 .nav-login-btn:hover {
-  background: #c9a24a;
-  color: #24152b;
+  background: linear-gradient(
+    135deg,
+    #c9a24a 0%,
+    #9d65c9 100%
+  );
+  border-color: #f7e6be;
+  color: #1a0f21;
+  box-shadow:
+    0 6px 24px rgba(233, 201, 138, 0.45),
+    0 0 16px rgba(157, 101, 201, 0.35);
+  transform: translateY(-2px);
 }
 
 .nav-toggle {
   display: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(233, 201, 138, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 
-  border: none;
-  background: transparent;
-
-  color: #ffffff;
-
-  font-size: 22px;
+  color: #f7e6be;
+  font-size: 20px;
   cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+}
+
+.nav-toggle:hover {
+  background: rgba(233, 201, 138, 0.15);
+  border-color: rgba(233, 201, 138, 0.55);
 }
 
 
@@ -1131,136 +1323,290 @@
 
 
 /* =========================================================
-   FOOTER
+   FOOTER - LUXURY GLASSMORPHISM & RUNNING GRADIENT
 ========================================================= */
 
 .home-footer {
-  padding: 70px 7% 25px;
-
-  background: #1e1423;
-
+  position: relative;
+  padding: 85px 7% 35px;
+  background: linear-gradient(
+    180deg,
+    #180e1d 0%,
+    #110915 100%
+  );
   color: #ffffff;
+  overflow: hidden;
+}
+
+/* Running Gradient Line at Top of Footer in Tuning Shade */
+.home-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    #7e52a0 0%,
+    #b99470 20%,
+    #e9c98a 40%,
+    #c59b27 50%,
+    #9d65c9 70%,
+    #d4af37 85%,
+    #7e52a0 100%
+  );
+  background-size: 300% 100%;
+  animation: runningGradient 6s linear infinite;
+  box-shadow: 0 0 16px rgba(233, 201, 138, 0.55);
+  z-index: 5;
+}
+
+/* Corner Glassmorphism Ambient Glow in Footer (Bottom Right) */
+.home-footer::after {
+  content: "";
+  position: absolute;
+  bottom: -60px;
+  right: -60px;
+  width: 340px;
+  height: 300px;
+  background: radial-gradient(
+    circle,
+    rgba(157, 101, 201, 0.22) 0%,
+    rgba(126, 82, 160, 0.08) 50%,
+    transparent 75%
+  );
+  pointer-events: none;
+  filter: blur(25px);
+  animation: cornerGlowPulse 8s ease-in-out infinite;
+  z-index: 0;
 }
 
 .footer-top {
+  position: relative;
   max-width: 1200px;
   margin: auto;
 
   display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.1fr;
+  gap: 25px;
 
-  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  padding-bottom: 45px;
+  z-index: 2;
+}
 
-  gap: 50px;
+/* Corner Glassmorphism Ambient Glow (Top Left of Footer Top) */
+.footer-top::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  left: -40px;
+  width: 280px;
+  height: 240px;
+  background: radial-gradient(
+    circle,
+    rgba(233, 201, 138, 0.16) 0%,
+    rgba(185, 148, 112, 0.06) 50%,
+    transparent 70%
+  );
+  pointer-events: none;
+  filter: blur(20px);
+  z-index: -1;
+}
 
-  padding-bottom: 50px;
+/* Glassmorphism Cards for Footer Columns */
+.footer-brand,
+.footer-col {
+  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(233, 201, 138, 0.14);
+  border-radius: 18px;
+  padding: 28px 24px;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
 
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+/* Corner Glass Glow inside Footer Cards */
+.footer-brand::before,
+.footer-col::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 90px;
+  height: 90px;
+  background: radial-gradient(
+    circle at top right,
+    rgba(233, 201, 138, 0.16) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.footer-brand:hover,
+.footer-col:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(233, 201, 138, 0.35);
+  transform: translateY(-4px);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.45),
+    0 0 25px rgba(157, 101, 201, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.footer-brand {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(126, 82, 160, 0.09) 100%
+  );
+  border-color: rgba(233, 201, 138, 0.22);
 }
 
 .footer-logo {
-  width: 55px;
-  height: 55px;
-
+  width: 58px;
+  height: 58px;
   object-fit: contain;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  padding: 8px;
+  border-radius: 14px;
+  border: 1px solid rgba(233, 201, 138, 0.25);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
 }
 
 .footer-brand h3 {
-  margin: 15px 0 7px;
-
+  margin: 16px 0 8px;
   font-family: Georgia, serif;
-
   font-size: 24px;
-  font-weight: 400;
+  font-weight: 500;
+  color: #f7e6be;
+  letter-spacing: 0.5px;
 }
 
 .footer-brand p {
   margin: 0;
-
-  color: #aaa0ad;
-
-  font-size: 13px;
+  color: #c4b8c7;
+  font-size: 13.5px;
+  line-height: 1.6;
 }
 
 .footer-col {
   display: flex;
   flex-direction: column;
-
   align-items: flex-start;
-
   gap: 12px;
 }
 
 .footer-col h4 {
-  margin: 0 0 8px;
-
+  margin: 0 0 10px;
   color: #e9c98a;
-
   font-size: 12px;
-
-  letter-spacing: 1.5px;
-
+  font-weight: 600;
+  letter-spacing: 1.8px;
   text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-col h4::after {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 1px;
+  background: rgba(233, 201, 138, 0.5);
 }
 
 .footer-col button {
-  padding: 0;
-
-  color: #bfb5c2;
-
-  font-size: 13px;
-
-  transition: color 0.25s ease;
+  padding: 4px 0;
+  color: #cfc4d1;
+  font-size: 13.5px;
+  transition: all 0.25s ease;
+  position: relative;
 }
 
 .footer-col button:hover {
-  color: #e9c98a;
+  color: #f7e6be;
+  transform: translateX(4px);
 }
 
 .footer-socials {
   display: flex;
-
-  gap: 10px;
-
-  margin-top: 8px;
+  gap: 12px;
+  margin-top: 10px;
 }
 
 .footer-socials a {
-  width: 34px;
-  height: 34px;
-
+  width: 40px;
+  height: 40px;
   display: flex;
-
   align-items: center;
   justify-content: center;
-
-  border: 1px solid rgba(255,255,255,0.15);
-
-  color: #cfc4d1;
-
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(233, 201, 138, 0.25);
+  box-shadow:
+    0 4px 15px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  color: #e9c98a;
+  font-size: 16px;
   text-decoration: none;
-
-  transition: all 0.25s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .footer-socials a:hover {
-  color: #e9c98a;
-
-  border-color: #e9c98a;
+  background: linear-gradient(
+    135deg,
+    rgba(233, 201, 138, 0.35) 0%,
+    rgba(157, 101, 201, 0.35) 100%
+  );
+  border-color: #f7e6be;
+  color: #ffffff;
+  transform: translateY(-4px) scale(1.08);
+  box-shadow:
+    0 8px 24px rgba(233, 201, 138, 0.4),
+    0 0 15px rgba(157, 101, 201, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
+/* Glassmorphism Bottom Bar with Corner Rounded Styling */
 .footer-bottom {
+  position: relative;
   max-width: 1200px;
-
-  margin: 20px auto 0;
-
+  margin: 30px auto 0;
+  padding: 18px 28px;
   display: flex;
-
   justify-content: space-between;
-
+  align-items: center;
   gap: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  color: #9d93a1;
+  font-size: 12px;
+  letter-spacing: 0.3px;
+  z-index: 2;
+}
 
-  color: #827887;
-
+.footer-bottom span:last-child {
+  color: #e9c98a;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
   font-size: 11px;
 }
 
@@ -1273,20 +1619,21 @@
 
   .nav-links {
     position: absolute;
-
-    top: 78px;
-    left: 0;
-    right: 0;
-
+    top: 82px;
+    left: 16px;
+    right: 16px;
+    border-radius: 20px;
     display: none;
-
     flex-direction: column;
-
-    padding: 25px;
-
-    background: #24152b;
-
-    border-top: 1px solid rgba(233,201,138,0.15);
+    padding: 22px;
+    background: rgba(30, 16, 36, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(233, 201, 138, 0.25);
+    box-shadow:
+      0 20px 40px rgba(0, 0, 0, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    gap: 8px;
   }
 
   .nav-links.open {
@@ -1294,7 +1641,7 @@
   }
 
   .nav-toggle {
-    display: block;
+    display: flex;
   }
 
   .hero-bottom {

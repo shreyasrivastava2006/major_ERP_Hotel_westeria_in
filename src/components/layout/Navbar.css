@@ -1,23 +1,106 @@
-/* ================================
-   NAVBAR
-================================ */
+/* =========================================================
+   KEYFRAME ANIMATIONS
+========================================================= */
+
+@keyframes runningGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes cornerGlowPulse {
+  0%, 100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.1);
+  }
+}
+
+/* =========================================================
+   NAVBAR - LUXURY GLASSMORPHISM & RUNNING GRADIENT
+========================================================= */
 
 .navbar {
-  height: 70px;
+  position: relative;
+  height: 72px;
 
-  background: #1c1c1c;
+  background: linear-gradient(
+    135deg,
+    rgba(28, 22, 32, 0.92) 0%,
+    rgba(20, 16, 22, 0.95) 50%,
+    rgba(34, 24, 38, 0.92) 100%
+  );
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  padding: 0 25px;
+  padding: 0 30px;
 
-  border-bottom: 1px solid #b99470;
+  border-bottom: 1px solid rgba(185, 148, 112, 0.22);
+  box-shadow:
+    0 10px 30px -10px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 
   color: #ffffff;
-
   font-family: "Montserrat", sans-serif;
+  overflow: hidden;
+  z-index: 100;
+}
+
+/* Corner Glassmorphism Ambient Glow (Top Left) */
+.navbar::before {
+  content: "";
+  position: absolute;
+  top: -35px;
+  left: -35px;
+  width: 180px;
+  height: 140px;
+  background: radial-gradient(
+    circle,
+    rgba(233, 201, 138, 0.28) 0%,
+    rgba(185, 148, 112, 0.1) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  filter: blur(10px);
+  animation: cornerGlowPulse 6s ease-in-out infinite;
+  z-index: 0;
+}
+
+/* Running Gradient Line in Tuning Shade (Bottom Edge) */
+.navbar::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2.5px;
+  background: linear-gradient(
+    90deg,
+    #7e52a0 0%,
+    #b99470 20%,
+    #e9c98a 40%,
+    #c59b27 50%,
+    #9d65c9 70%,
+    #d4af37 85%,
+    #7e52a0 100%
+  );
+  background-size: 300% 100%;
+  animation: runningGradient 5s linear infinite;
+  box-shadow: 0 0 12px rgba(233, 201, 138, 0.55);
+  z-index: 10;
 }
 
 /* ================================
@@ -25,30 +108,37 @@
 ================================ */
 
 .navbar-left {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
+  z-index: 2;
 }
 
 .navbar-left h2 {
   margin: 0;
 
   font-family: "Cormorant Garamond", serif;
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 600;
 
   color: #ffffff;
-
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
 }
 
 .navbar-left span {
-  color: #b99470;
+  display: inline-block;
+  color: #e9c98a;
+  background: rgba(233, 201, 138, 0.1);
+  border: 1px solid rgba(233, 201, 138, 0.25);
+  border-radius: 999px;
+  padding: 3px 12px;
 
-  font-size: 13px;
-  font-weight: 500;
-
-  letter-spacing: 0.3px;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
 }
 
 /* ================================
@@ -56,71 +146,104 @@
 ================================ */
 
 .navbar-right {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 18px;
+  z-index: 2;
 }
 
 /* ================================
-   ICON BUTTON
+   ICON BUTTON - GLASSMORPHISM
 ================================ */
 
 .icon-btn {
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  background: transparent;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 
-  border: 1px solid transparent;
+  border: 1px solid rgba(185, 148, 112, 0.25);
   border-radius: 50%;
 
   color: #e8e5e1;
-
   font-size: 18px;
 
   cursor: pointer;
+  box-shadow:
+    0 4px 15px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
 
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .icon-btn:hover {
-  color: #b99470;
-
-  background: rgba(185, 148, 112, 0.08);
-
-  border-color: rgba(185, 148, 112, 0.25);
+  color: #e9c98a;
+  background: linear-gradient(
+    135deg,
+    rgba(233, 201, 138, 0.25) 0%,
+    rgba(157, 101, 201, 0.25) 100%
+  );
+  border-color: rgba(233, 201, 138, 0.55);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow:
+    0 6px 20px rgba(233, 201, 138, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 /* ================================
-   PROFILE
+   PROFILE - GLASSMORPHISM PILL
 ================================ */
 
 .profile {
+  position: relative;
   display: flex;
   align-items: center;
+  gap: 10px;
 
-  gap: 9px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border: 1px solid rgba(185, 148, 112, 0.25);
+  border-radius: 999px;
+  padding: 6px 16px 6px 8px;
 
   color: #ffffff;
-
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 500;
+
+  box-shadow:
+    0 4px 18px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
 }
 
 .profile i {
-  font-size: 25px;
-
-  color: #b99470;
-
+  font-size: 26px;
+  color: #e9c98a;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
   transition: color 0.3s ease;
 }
 
+.profile:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(233, 201, 138, 0.55);
+  transform: translateY(-1px);
+  box-shadow:
+    0 6px 22px rgba(233, 201, 138, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
 .profile:hover i {
-  color: #c19b76;
+  color: #f7e6be;
 }
 
 /* ================================
@@ -128,15 +251,13 @@
 ================================ */
 
 @media (max-width: 600px) {
-
   .navbar {
     height: 65px;
-
-    padding: 0 15px;
+    padding: 0 16px;
   }
 
   .navbar-left {
-    gap: 6px;
+    gap: 8px;
   }
 
   .navbar-left h2 {
@@ -152,18 +273,18 @@
   }
 
   .icon-btn {
-    width: 34px;
-    height: 34px;
-
-    font-size: 17px;
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
   }
 
   .profile {
     gap: 6px;
-    font-size: 13px;
+    font-size: 12.5px;
+    padding: 4px 12px 4px 6px;
   }
 
   .profile i {
-    font-size: 23px;
+    font-size: 22px;
   }
 }
